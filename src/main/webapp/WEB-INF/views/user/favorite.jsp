@@ -2,11 +2,11 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashMap"%>
-<%@page import="com.happyhouse.favorites.FavoritesDTO"%>
-<%@page import="com.happyhouse.account.AccountDTO"%>
+<%@page import="com.ssafy.happyhouse.model.FavoriteDto"%>
+<%@page import="com.ssafy.happyhouse.model.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/View/template/header.jsp" %>
+<%@ include file="/WEB-INF/views/template/header.jsp" %>
 <!DOCTYPE html>
 <%
 // 매매가격 데이터 가져오기
@@ -27,7 +27,7 @@ List<String> favlist = (List<String>)request.getAttribute("favorite");
 		</div>
 		<div id="selection">
 			<div class="select" style="font-size:40px;text-align:center;color:white;">
-				${user.getName()}님의 즐겨 찾기 목록
+				${memberDto.memberName}님의 즐겨 찾기 목록
 			</div>
 		</div>
 
@@ -50,18 +50,19 @@ List<String> favlist = (List<String>)request.getAttribute("favorite");
 			    	<td><%=++count %></td>
 			    	<td><%=it %></td>
 			    	<td><a href="${root }/shop?address=<%=it %>">상권 보기</a></td>
+			    	<td><a href="${root }">삭제</a></td>
 			    <tr>
 			 <% } %>
 		</table>
 		<% } %>
 		
 		<div style="text-align:center;font-size:30px;">
-			<a href="${root }/favorite?action=showFavoriteHouse" style="text-decoration:none;padding:2%">즐겨찾기 지역 정보 페이지로</a>
+			<a href="${root }/favorite/${memberDto.memberId}/houses" style="text-decoration:none;padding:2%">즐겨찾기 지역 정보 페이지로</a>
 		</div>
 		
 		<div style="clear:both;"></div>
 		
-	  	<%@ include file="/View/template/footer.jsp" %>
+	  	<%@ include file="/WEB-INF/views/template/footer.jsp" %>
 	  	<%-- <script type="text/javascript" src="${root }/source/js/read_data.js"></script> --%>
 	</body>
 </html>

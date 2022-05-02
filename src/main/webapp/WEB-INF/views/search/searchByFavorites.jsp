@@ -2,15 +2,15 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashMap"%>
-<%@page import="com.happyhouse.house.FavoriteHouseDTO"%>
-<%@page import="com.happyhouse.account.AccountDTO"%>
+<%@page import="com.ssafy.happyhouse.model.AptDto"%>
+<%@page import="com.ssafy.happyhouse.model.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/View/template/header.jsp" %>
+<%@ include file="/WEB-INF/views/template/header.jsp" %>
 <!DOCTYPE html>
 <%
 // 매매가격 데이터 가져오기
-List<FavoriteHouseDTO> houselist = (List<FavoriteHouseDTO>)request.getAttribute("houselist");
+List<AptDto> houselist = (List<AptDto>)request.getAttribute("houselist");
 %>
 <html>
 	<head>
@@ -27,7 +27,7 @@ List<FavoriteHouseDTO> houselist = (List<FavoriteHouseDTO>)request.getAttribute(
 		</div>
 		<div id="selection">
 			<div class="select" style="font-size:40px;text-align:center;color:white;">
-				${user.getName()}님의 즐겨 찾기 주소의 거래 정보
+				${memberDto.memberName}님의 즐겨 찾기 주소의 거래 정보
 			</div>
 		</div>
 
@@ -47,7 +47,7 @@ List<FavoriteHouseDTO> houselist = (List<FavoriteHouseDTO>)request.getAttribute(
 			    <td>층</td>
 			    <td>주소</td>
 			</tr>
-			<%for(FavoriteHouseDTO it : houselist){ %>
+			<%for(AptDto it : houselist){ %>
 			    <tr>
 			    	<td><%=it.getAptName() %></td>
 			    	<td><%=it.getDealAmount() %>만원</td>
@@ -61,12 +61,12 @@ List<FavoriteHouseDTO> houselist = (List<FavoriteHouseDTO>)request.getAttribute(
 		<% } %>
 		
 		<div style="text-align:center;font-size:30px;">
-			<a href="${root }/favorite?action=showFavorite" style="text-decoration:none;padding:2%">즐겨찾기 관리 페이지로</a>
+			<a href="${root }/favorite/${memberDto.memberId}" style="text-decoration:none;padding:2%">즐겨찾기 관리 페이지로</a>
 		</div>
 		
 		<div style="clear:both;"></div>
 		
-	  	<%@ include file="/View/template/footer.jsp" %>
+	  	<%@ include file="/WEB-INF/views/template/footer.jsp" %>
 	  	<%-- <script type="text/javascript" src="${root }/source/js/read_data.js"></script> --%>
 	</body>
 </html>

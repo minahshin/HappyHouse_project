@@ -17,13 +17,13 @@
 	
 	    	<ul class="nav col-md-4 justify-content-end">
 	      		<li class="nav-item"><a href="${root}/main" class="nav-link px-2 text-muted">Home</a></li>
-	      		<li class="nav-item"><a href="${root}/house?act=searchByAptName" class="nav-link px-2 text-muted">시세 검색</a></li>
-	      		<c:if test="${!empty user }">
-	      			<li class="nav-item"><a href="${root}/favorite?action=showFavoriteHouse" class="nav-link px-2 text-muted">즐겨찾기 지역 정보</a></li>
+	      		<li class="nav-item"><a href="${root}/house/search" class="nav-link px-2 text-muted">시세 검색</a></li>
+	      		<c:if test="${!empty memberDto }">
+	      			<li class="nav-item"><a href="${root}/favorite/${memberDto.memberId }/houses" class="nav-link px-2 text-muted">즐겨찾기 지역 정보</a></li>
 	      		</c:if>
-	      		<li class="nav-item"><a href="${root}/shop?action=searchShop" class="nav-link px-2 text-muted">상권 검색</a></li>
-	      		<li class="nav-item"><a href="${root}/main?action=aboutus" class="nav-link px-2 text-muted">About Us</a></li>
-	      		<li class="nav-item"><a href="${root}/main?action=sitemap" class="nav-link px-2 text-muted">Site Map</a></li>
+	      		<li class="nav-item"><a href="${root}/shop" class="nav-link px-2 text-muted">상권 검색</a></li>
+	      		<li class="nav-item"><a href="${root}/aboutUs" class="nav-link px-2 text-muted">About Us</a></li>
+	      		<li class="nav-item"><a href="${root}/siteMap" class="nav-link px-2 text-muted">Site Map</a></li>
 	    	</ul>
 	  	</footer>
 </body>

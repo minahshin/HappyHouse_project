@@ -1,6 +1,6 @@
 package com.ssafy.happyhouse.model;
 
-public class favoriteDto {
+public class FavoriteDto {
 
 	private String memberId;
 	private String dongCode;
@@ -8,21 +8,21 @@ public class favoriteDto {
 	private String storeType;
 	private String storeName;
 
-	public favoriteDto() {
+	public FavoriteDto() {
 	}
 
-	public favoriteDto(String memberId) {
+	public FavoriteDto(String memberId) {
 		super();
 		this.memberId = memberId;
 	}
 
-	public favoriteDto(String memberId, String dongName) {
+	public FavoriteDto(String memberId, String dongName) {
 		super();
 		this.memberId = memberId;
 		this.dongName = dongName;
 	}
 
-	public favoriteDto(String memberId, String dongCode, String dongName, String storeType, String storeName) {
+	public FavoriteDto(String memberId, String dongCode, String dongName, String storeType, String storeName) {
 		super();
 		this.memberId = memberId;
 		this.dongCode = dongCode;

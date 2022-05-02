@@ -2,14 +2,14 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashMap"%>
-<%@page import="com.happyhouse.house.HouseDto"%>
+<%@page import="com.ssafy.happyhouse.model.AptDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/View/template/header.jsp" %>
+<%@ include file="/WEB-INF/views/template/header.jsp" %>
 <!DOCTYPE html>
 <%
 // 매매가격 데이터 가져오기
-List<HouseDto> houselist = (List<HouseDto>)request.getAttribute("houselist");
+List<AptDto> houselist = (List<AptDto>)request.getAttribute("aptList");
 %>
 <html>
 	<head>
@@ -54,7 +54,7 @@ List<HouseDto> houselist = (List<HouseDto>)request.getAttribute("houselist");
 			    <td>경도</td>
 			</tr>
 			
-			<%for(HouseDto it : houselist){ %>
+			<%for(AptDto it : houselist){ %>
 			    <tr>
 			    	<td><%=it.getAptName() %></td>
 			    	<td><%=it.getDealAmount() %>만원</td>
@@ -62,13 +62,6 @@ List<HouseDto> houselist = (List<HouseDto>)request.getAttribute("houselist");
 			    	<td><%=it.getArea() %>m²</td>
 			    	<td><%=it.getFloor() %>층</td>
 			    	<td><%=it.getType() %></td>
-			    	<td>
-			    		<% if(it.getRentMoney() != null) { %>
-			    			<%=it.getRentMoney() %>만원
-			    		<%} else { %>
-			    			정보 없음
-			    		<% } %>
-			    	</td>
 			    	<td><%=request.getParameter("selectGu") %> <%=it.getDongName() %> <%=it.getJibun() %></td>
 			    	<td><%=it.getBuildYear() %>년</td>
 			    	<td><%=it.getLat() %></td>
@@ -80,12 +73,12 @@ List<HouseDto> houselist = (List<HouseDto>)request.getAttribute("houselist");
 		
 		<div style="text-align:center;font-size:30px;">
 			<a href="${root }/main" style="text-decoration:none;color:green;padding:2%;">다른 동네 검색하기</a>
-			<a href="${root }/house?act=searchByAptName" style="text-decoration:none;padding:2%">아파트 명으로 검색하기</a>
+			<a href="${root }/house/search" style="text-decoration:none;padding:2%">아파트 명으로 검색하기</a>
 		</div>
 		
 		<div style="clear:both;"></div>
 		
-	  	<%@ include file="/View/template/footer.jsp" %>
+	  	<%@ include file="/WEB-INF/views/template/footer.jsp" %>
 	  	<%-- <script type="text/javascript" src="${root }/source/js/read_data.js"></script> --%>
 	</body>
 </html>

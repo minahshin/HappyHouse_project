@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/View/template/signup_header.jsp" %>
+<%@ include file="/WEB-INF/views/template/signup_header.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -19,9 +19,9 @@
 					<input type="hidden" id="action" name="action" value="signup">
 					<div class="row">
 						<div class="mb-3">
-							<label for="email">이메일(ID로 사용됩니다)</label>
-							<input type="email" class="form-control" name="id" id="email" placeholder="you@example.com" required>
-							<div class="invalid-feedback">이메일을 입력해주세요.</div>
+							<label for="id">ID</label>
+							<input type="text" class="form-control" name="id" id="id" placeholder="" required>
+							<div class="invalid-feedback">아이디를 입력해주세요.</div>
 						</div>
 						<div class="mb-3">
 							<label for="password">비밀번호</label>
@@ -45,7 +45,7 @@
 						<div class="invalid-feedback">주소를 입력해주세요.</div>
 					</div>
 					<div class="mb-4"></div>
-					<button class="btn btn-primary btn-lg btn-block" type="button" onclick="location.href='${root}/user?view=login'">로그인</button>
+					<button class="btn btn-primary btn-lg btn-block" type="button" onclick="location.href='${root}/user/login'">로그인</button>
 					<button class="btn btn-primary btn-lg btn-block" type="button" onclick="register()" style="float:right;">가입 완료</button>
 				</form>
 			</div>

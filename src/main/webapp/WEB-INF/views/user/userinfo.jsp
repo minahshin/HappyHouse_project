@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.happyhouse.account.AccountDTO"%>
-<%@ include file="/View/template/signup_header.jsp" %>
+    pageEncoding="UTF-8" import="com.ssafy.happyhouse.model.MemberDto"%>
+<%@ include file="/WEB-INF/views/template/signup_header.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -35,7 +35,7 @@
 							<div class="invalid-feedback">이름을 입력해주세요.</div>
 						</div>
 						<div class="col-md-6 mb-3">
-							<label for="nickname">별명</label>
+							<label for="nickname">전화번호</label>
 							<input type="text" class="form-control" name="nickname" id="nickname" value="${user.nickname}" required>
 							<div class="invalid-feedback">별명을 입력해주세요.</div>
 						</div>

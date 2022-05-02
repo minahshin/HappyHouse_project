@@ -1,14 +1,14 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.happyhouse.shop.ShopDTO"%>
+<%@page import="com.ssafy.happyhouse.model.StoreDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/View/template/header.jsp" %>
+<%@ include file="/WEB-INF/views/template/header.jsp" %>
 <!DOCTYPE html>
 <%
 // 매매가격 데이터 가져오기
-List<ShopDTO> shoplist = (List<ShopDTO>)request.getAttribute("shoplist");
+List<StoreDto> shoplist = (List<StoreDto>)request.getAttribute("shoplist");
 %>
 <html>
 	<head>
@@ -63,7 +63,7 @@ List<ShopDTO> shoplist = (List<ShopDTO>)request.getAttribute("shoplist");
 			    <td>도로명 주소</td>
 			    <td>우편번호</td>
 			</tr>
-			<%for(ShopDTO it : shoplist){ %>
+			<%for(StoreDto it : shoplist){ %>
 			    <tr>
 			    	<td><%=++count %></td>
 			    	<td><%=it.getName()%></td>
@@ -78,7 +78,7 @@ List<ShopDTO> shoplist = (List<ShopDTO>)request.getAttribute("shoplist");
 		
 		<div style="clear:both;"></div>
 		
-	  	<%@ include file="/View/template/footer.jsp" %>
+	  	<%@ include file="/WEB-INF/views/template/footer.jsp" %>
 	  	<%-- <script type="text/javascript" src="${root }/source/js/read_data.js"></script> --%>
 	</body>
 </html>

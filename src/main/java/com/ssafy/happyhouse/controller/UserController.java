@@ -2,7 +2,6 @@ package com.ssafy.happyhouse.controller;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,24 +17,41 @@ public class UserController {
 	//@Autowired
 	
 	@GetMapping("/login")
+	public String viewLogin() {
+		return "/user/login";
+	}
+	
+	@GetMapping("/signup")
+	public String viewSignUp() {
+		return "/user/signup";
+	}
+	
+	@GetMapping("/searchpwd")
+	public String viewSearchpwd() {
+		return "/user/searchpwd";
+	}
+	
+	@GetMapping("/{userid}/userinfo")
+	public String showinfo(@PathVariable String userid) {
+		return "/user/userinfo";
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/main";
+	}
+	
+	
+	
+	@PostMapping("/login")
 	public String login() {
-		
-		return null;
+		return "redirect:/main";
 	}
 	
 	@PostMapping("/signup")
 	public String signup() {
-		return null;
-	}
-	
-	@GetMapping("/searchpwd")
-	public String serchpwd() {
-		return null;
-	}
-	
-	@GetMapping("/userinfo")
-	public String showinfo() {
-		return null;
+		return "/user/signup";
 	}
 	
 	@PutMapping("/userinfo")
@@ -43,15 +59,8 @@ public class UserController {
 		return null;
 	}
 	
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:/";
-	}
-	
-	@DeleteMapping("/userinfo")
-	public String deleteUser() {
-		
+	@DeleteMapping("/{userid}/userinfo")
+	public String deleteUser(@PathVariable String userid) {
 		return null;
 	}
 	

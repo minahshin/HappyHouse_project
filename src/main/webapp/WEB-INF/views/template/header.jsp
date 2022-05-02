@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.happyhouse.account.AccountDTO"%>
+	pageEncoding="UTF-8" import="com.ssafy.happyhouse.model.MemberDto"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath}" />
 <c:if test="${msg ne null}">
@@ -37,28 +37,28 @@
 			<ul
 				class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
 				<li><a href="${root}/main" class="nav-link px-2 text-white">Home</a></li>
-				<li><a href="${root}/house?act=searchByAptName" id="searchLink" class="nav-link px-2 text-white">시세 검색</a></li>
-				<c:if test="${!empty user }">
-					<li><a href="${root}/favorite?action=showFavoriteHouse" class="nav-link px-2 text-white">즐겨찾기 지역 정보</a></li>
+				<li><a href="${root}/house/search" id="searchLink" class="nav-link px-2 text-white">시세 검색</a></li>
+				<c:if test="${!empty memberDto }">
+					<li><a href="${root}/favorite/${memberDto.memberId }/houses" class="nav-link px-2 text-white">즐겨찾기 지역 정보</a></li>
 				</c:if>
-				<li><a href="${root}/shop?action=searchShop" class="nav-link px-2 text-white">상권 검색</a></li>
-				<li><a href="${root}/main?action=aboutus" class="nav-link px-2 text-white">About Us</a></li>
-				<li><a href="${root}/main?action=sitemap" class="nav-link px-2 text-white">Site Map</a></li>
+				<li><a href="${root}/shop" class="nav-link px-2 text-white">상권 검색</a></li>
+				<li><a href="${root}/aboutUs" class="nav-link px-2 text-white">About Us</a></li>
+				<li><a href="${root}/siteMap" class="nav-link px-2 text-white">Site Map</a></li>
 			</ul>
 
-			<c:if test="${!empty user }">
+			<c:if test="${!empty memberDto }">
 				<div class="text-end" id="userbar">
-					반갑습니다! ${user.getName()}님!!&nbsp;&nbsp;
-					<button type="button" class="btn btn-outline-light me-2" onclick="location.href = '${root}/user?view=logout'">Logout</button>
-					<button type="button" class="btn btn-warning" onclick="location.href = '${root}/user?view=userinfo'">회원 정보</button>
+					반갑습니다! ${memberDto.memberName}님!!&nbsp;&nbsp;
+					<button type="button" class="btn btn-outline-light me-2" onclick="location.href = '${root}/user/logout'">Logout</button>
+					<button type="button" class="btn btn-warning" onclick="location.href = '${root}/user/${memberDto.memberId}/userinfo'">회원 정보</button>
 					<button type="button" style="background-color:pink;" class="btn" 
 						onclick="location.href = '${root}/favorite?action=showFavorite'">즐찾 관리</button>
 				</div>
 			</c:if>
-			<c:if test="${empty user }">
+			<c:if test="${empty memberDto }">
 				<div class="text-end" id="userbar">
-					<button type="button" class="btn btn-outline-light me-2" onclick="location.href = '${root}/user?view=login'">Login</button>
-					<button type="button" class="btn btn-warning" onclick="location.href = '${root}/user?view=signup'">Sign	up</button>
+					<button type="button" class="btn btn-outline-light me-2" onclick="location.href = '${root}/user/login'">Login</button>
+					<button type="button" class="btn btn-warning" onclick="location.href = '${root}/user/signup'">Sign up</button>
 				</div>
 			</c:if>
 

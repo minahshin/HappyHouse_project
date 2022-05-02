@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/View/template/login_header.jsp" %>
+<%@ include file="/WEB-INF/views/template/login_header.jsp" %>
 
 <c:if test="${msg ne null}">
 	<script>
@@ -18,8 +18,8 @@
 		
 		<input type="hidden" id="action" name="action" value="login">
     	<div class="form-floating">
-      		<input type="email" name="id" class="form-control" id="floatingInput" placeholder="name@example.com" value="" required>
-      		<label for="floatingInput">이메일</label>
+      		<input type="email" name="id" class="form-control" id="floatingInput" placeholder="happyhouse_id" value="" required>
+      		<label for="floatingInput">아이디</label>
     	</div>
     	<div class="form-floating">
       		<input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" value="" required>
@@ -27,8 +27,8 @@
     	</div>
     	<br>
     	<button class="w-100 btn btn-lg btn-primary" type="button" onclick="login()">Sign in</button>
-    	<button class="w-100 btn btn-lg btn-primary" type="button" onclick="location.href='${root}/user?view=signup'" style="margin-top:10px;">Sign up</button>
-    	<button class="w-100 btn btn-lg btn-primary" type="button" onclick="location.href='${root}/user?view=searchpwd'" style="margin-top:10px;">비밀번호 찾기</button>
+    	<button class="w-100 btn btn-lg btn-primary" type="button" onclick="location.href='${root}/user/signup'" style="margin-top:10px;">Sign up</button>
+    	<button class="w-100 btn btn-lg btn-primary" type="button" onclick="location.href='${root}/user/searchpwd'" style="margin-top:10px;">비밀번호 찾기</button>
     	<p class="mt-5 mb-3 text-muted">© 2022 Happy House</p>
  		</form>
 	</div>
