@@ -7,7 +7,9 @@ public class MemberDto {
 	private String memberName;
 	private String memberEmail;
 	private String memberTel;
+	private String isManager;
 	
+
 
 	public MemberDto() {
 	}
@@ -21,6 +23,14 @@ public class MemberDto {
 		this.memberTel = memberTel;
 	}
 
+	public String getIsManager() {
+		return isManager;
+	}
+	
+	public void setIsManager(String isManager) {
+		this.isManager = isManager;
+	}
+	
 	public String getMemberId() {
 		return memberId;
 	}
