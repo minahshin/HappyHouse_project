@@ -1,6 +1,6 @@
 package com.ssafy.happyhouse.model;
 
-public class ShopDto {
+public class StoreDto {
 	private int id;
 	private String name;
 	private String category;
@@ -9,7 +9,7 @@ public class ShopDto {
 	private String doroAddress;
 	private String zipCode;
 	
-	public ShopDto(int id, String name, String category, String dongCode, String jibunAddress, String doroAddress,
+	public StoreDto(int id, String name, String category, String dongCode, String jibunAddress, String doroAddress,
 			String zipCode) {
 		super();
 		this.id = id;
