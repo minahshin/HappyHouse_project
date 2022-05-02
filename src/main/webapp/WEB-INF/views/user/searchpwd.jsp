@@ -18,12 +18,12 @@
 	    	<h1 class="h3 mb-3 fw-normal">비밀번호 찾기</h1>
 	
 	    	<div class="form-floating">
-	      		<input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com" value="" required>
-	      		<label for="floatingInput">이메일</label>
+	      		<input type="text" class="form-control" id="floatingInput" name="memberId" placeholder="name@example.com" value="" required>
+	      		<label for="floatingInput">아이디</label>
 	    	</div>
 	    	<div class="form-floating">
-	      		<input type="text" class="form-control" id="floatingName" name="name" placeholder="이름" value="" required>
-	      		<label for="floatingName">이름</label>
+	      		<input type="email" class="form-control" id="floatingName" name="memberEmail" placeholder="이름" value="" required>
+	      		<label for="floatingName">이메일</label>
 	    	</div>
 	    	
 	    	<button class="w-100 btn btn-lg btn-primary" type="button" onclick="findpwd()" >찾기</button>

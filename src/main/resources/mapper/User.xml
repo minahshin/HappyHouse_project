@@ -13,8 +13,8 @@
 	</select>
 	
 	<insert id="registerMember" parameterType="MemberDto">
-		insert into member(memberId, memberPw, memberName, memberEmail, memberTel,isManager)
-		values (#{memberId}, #{memberPw}, #{memberName}, #{memberEmail}, #{memberTel}, #{isManager})
+		insert into member(memberId, memberPw, memberName, memberEmail, memberTel)
+		values (#{memberId}, #{memberPw}, #{memberName}, #{memberEmail}, #{memberTel})
 	</insert>
 	
 	<select id="searchPw" parameterType="map" resultType="String">
@@ -25,9 +25,9 @@
 	
 	
 	<select id="login" parameterType="map" resultType="MemberDto">
-		select memberName, memberId, memberPw,memberEmail,memberTel, isManget
+		select memberName, memberId, memberPw, memberEmail,memberTel, isManager
 		from member
-		where memberId = #{memberId} and memberPw = #{memberPd}
+		where memberId = #{memberId} and memberPw = #{memberPw}
 	</select>
 	
 	<update id="updateMember" parameterType="MemberDto">

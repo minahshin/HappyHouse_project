@@ -51,7 +51,7 @@
 		var gu = $('#gu').val();
 		var dong = $('#dong').val();
 		
-		$("#select_district").attr("action", "${root}/address/" + gu + " " + dong).submit();
+		$("#select_district").attr("action", "${root}/house/search/address/" + gu + " " + dong).submit();
 	}
 	
 	
@@ -64,7 +64,7 @@
 		</div>
 		<div id="selection">
 			<div class="select">
-				<form id="select_district" method = "post" action="">
+				<form id="select_district" method = "get" action="">
 					<select id="gu" onchange="guSelect(this.value)" name="selectGu">
 					   <option>행정구</option>
 					   <%

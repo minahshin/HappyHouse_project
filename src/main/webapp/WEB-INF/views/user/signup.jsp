@@ -19,28 +19,28 @@
 					<div class="row">
 						<div class="mb-3">
 							<label for="id">ID</label>
-							<input type="text" class="form-control" name="id" id="id" placeholder="" required>
+							<input type="text" class="form-control" name="memberId" id="memberId" placeholder="" required>
 							<div class="invalid-feedback">아이디를 입력해주세요.</div>
 						</div>
 						<div class="mb-3">
 							<label for="password">비밀번호</label>
-							<input type="password" class="form-control" name="password" id="password" placeholder="" required>
+							<input type="password" class="form-control" name="memberPw" id="memberPw" placeholder="" required>
 							<div class="invalid-feedback">비밀번호를 입력해주세요.</div>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="name">이름</label>
-							<input type="text" class="form-control" name="name" id="name" placeholder="" value="" required>
+							<input type="text" class="form-control" name="memberName" id="memberName" placeholder="" value="" required>
 							<div class="invalid-feedback">이름을 입력해주세요.</div>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="phoneNumber">전화 번호</label>
-							<input type="text" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="010-0000-0000" value="" required>
+							<input type="text" class="form-control" name="memberTel" id="memberTel" placeholder="010-0000-0000" value="" required>
 							<div class="invalid-feedback">전화번호를 입력해주세요.</div>
 						</div>
 					</div>
 					<div class="mb-3">
 						<label for="email">이메일</label>
-						<input type="email" class="form-control" name="email" id="email" placeholder="ssafy@happyhouse.com" required>
+						<input type="email" class="form-control" name="memberEmail" id="memberEmail" placeholder="ssafy@happyhouse.com" required>
 						<div class="invalid-feedback">이메일을 입력해주세요.</div>
 					</div>
 					<div class="mb-4"></div>
