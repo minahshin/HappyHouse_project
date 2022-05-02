@@ -21,7 +21,7 @@
 		
 	</select>
 <!-- 	아파트 목록 전체 받기 -->
-	<select id="listMember" resultType="AptDto">
+	<select id="listApt" resultType="AptDto">
 		select d.no, d.aptCode, i.aptName, i.dongName, i.jibun, i.buildYear,
 			   d.dealAmount, d.dealYear, d.dealMonth, d.dealDay, d.area, d.aptCode,
 			   d.floor, d.type, i.lat, i.lng
