@@ -4,7 +4,7 @@
 
 <mapper namespace="com.ssafy.happyhouse.model.mapper.HousedealMapper">
 <!-- 	검색 -->
-	<select id="searchByDong" parameterType="String" resultType="List<AptDto>">
+	<select id="searchByDong" parameterType="String" resultType="AptDto">
 		select d.no, d.aptCode, i.aptName, i.dongName, i.jibun, i.buildYear,
 			   d.dealAmount, d.dealYear, d.dealMonth, d.dealDay, d.area, d.aptCode,
 			   d.floor, d.type, i.lat, i.lng 
@@ -12,7 +12,7 @@
 		where i.dongName like CONCAT('%',#{dongName},'%')
 		
 	</select>
-	<select id="searchByAptName" parameterType="String" resultType="List<AptDto>">
+	<select id="searchByAptName" parameterType="String" resultType="AptDto">
 		select d.no, d.aptCode, i.aptName, i.dongName, i.jibun, i.buildYear,
 			   d.dealAmount, d.dealYear, d.dealMonth, d.dealDay, d.area, d.aptCode,
 			   d.floor, d.type, i.lat, i.lng 
@@ -21,7 +21,7 @@
 		
 	</select>
 <!-- 	아파트 목록 전체 받기 -->
-	<select id="listMember" resultType="List<AptDto>">
+	<select id="listMember" resultType="AptDto">
 		select d.no, d.aptCode, i.aptName, i.dongName, i.jibun, i.buildYear,
 			   d.dealAmount, d.dealYear, d.dealMonth, d.dealDay, d.area, d.aptCode,
 			   d.floor, d.type, i.lat, i.lng

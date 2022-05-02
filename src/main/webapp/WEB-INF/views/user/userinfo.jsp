@@ -18,32 +18,28 @@
 			<a href="${root }/main"><img src="${root }/source/img/header-house.png" title="홈으로 가기"></a>
 				<h4 class="mb-3">회원정보 수정</h4>
 				<form class="validation-form" method="post" id="updateForm" action="" novalidate>
-					<input type="hidden" id="action" name="action" value="userinfo">
+				
 					<div class="row">
 						<div class="mb-3">
-							<label for="email">이메일(ID)</label>
-							<input type="email" class="form-control" name="id" id="id" value="${user.email }" readonly>
+							<label for="id">ID</label>
+							<input type="text" class="form-control" name="id" id="id" value="${memberDto.memberId}" readonly>
 						</div>
 						<div class="mb-3">
 							<label for="password">비밀번호</label>
-							<input type="text" class="form-control" name="password" id="password" value="${user.password }" required>
-							<div class="invalid-feedback">비밀번호를 입력해주세요.</div>
+							<input type="text" class="form-control" name="password" id="password" value="${memberDto.memberPw }">
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="name">이름</label>
-							<input type="text" class="form-control" name="name" id="name" value="${user.name }" required>
-							<div class="invalid-feedback">이름을 입력해주세요.</div>
+							<input type="text" class="form-control" name="name" id="name" value="${memberDto.memberName}">
 						</div>
 						<div class="col-md-6 mb-3">
-							<label for="nickname">전화번호</label>
-							<input type="text" class="form-control" name="nickname" id="nickname" value="${user.nickname}" required>
-							<div class="invalid-feedback">별명을 입력해주세요.</div>
+							<label for="phoneNumber">전화번호</label>
+							<input type="text" class="form-control" name="phoneNumber" id="phoneNumber" value="${memberDto.memberTel}">
 						</div>
 					</div>
 					<div class="mb-3">
-						<label for="address">주소</label>
-						<input type="text" class="form-control" name="address" id="address" value="${user.address }" required>
-						<div class="invalid-feedback">주소를 입력해주세요.</div>
+						<label for="email">이메일</label>
+						<input type="email" class="form-control" name="email" id="email" value="${memberDto.memberEmail}">
 					</div>
 					<div class="mb-4"></div>
 					<button class="btn btn-primary btn-lg" type="button" onclick="deleteInfo()">회원 탈퇴</button>

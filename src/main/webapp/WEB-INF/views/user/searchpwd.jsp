@@ -17,7 +17,6 @@
  					<img class="mb-4" src="${root}/source/img/header-house.png" alt="" width="50" height="50" title="홈으로 가기"></a>
 	    	<h1 class="h3 mb-3 fw-normal">비밀번호 찾기</h1>
 	
-			<input type="hidden" id="action" name="action" value="searchpwd">
 	    	<div class="form-floating">
 	      		<input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com" value="" required>
 	      		<label for="floatingInput">이메일</label>

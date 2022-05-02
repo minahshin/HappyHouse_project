@@ -3,7 +3,7 @@ function findpwd() {
 	let name = $("#floatingName").val();
 	
 	if(id && name) {
-		$("#searchPwdForm").attr("action", "user").submit();
+		$("#searchPwdForm").attr("action", "/user/searchpwd").submit();
 	} else {
 		alert("정보를 기입해주시기 바랍니다.");
 	}
@@ -15,7 +15,7 @@ function login() {
 	let pwd = $("#floatingPassword").val();
 	
 	if(id && pwd) {
-		 $("#loginForm").attr("action", "user").submit();
+		 $("#loginForm").attr("action", "/user/login").submit();
 	} else {
 		alert("id나 password를 입력해주세요.");
 	}
@@ -33,7 +33,7 @@ function register() {
 	    alert("필수 항목을 모두 기입해주세요.");
 	    return;
     } else {
-    	$("#signupForm").attr("action", "user").submit();
+    	$("#signupForm").attr("action", "/user/signup").submit();
     }
 }
 
@@ -48,7 +48,7 @@ function updateInfo() {
 	    alert("필수 항목을 모두 기입해주세요.");
 	    return;
     } else {
-    	$("#updateForm").attr("action", "user").submit();
+    	$("#updateForm").attr("action", "/user/userinfo").submit();
     }
     		
 }
@@ -57,6 +57,6 @@ function deleteInfo() {
 	if(confirm("정말 탈퇴하시겠습니까?") == true) {
 		let id = $("#id").val();
 		$("#action").val("deleteUser");
-		$("#updateForm").attr("action", "user").submit();
+		$("#updateForm").attr("action", "/user/" + id + "/userinfo").submit();
 	}
 }

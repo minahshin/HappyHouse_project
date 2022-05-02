@@ -43,7 +43,6 @@ public class UserController {
 	}
 	
 	
-	
 	@PostMapping("/login")
 	public String login() {
 		return "redirect:/main";
@@ -52,6 +51,11 @@ public class UserController {
 	@PostMapping("/signup")
 	public String signup() {
 		return "/user/signup";
+	}
+	
+	@PostMapping("/searchpwd")
+	public String searchPwd() {
+		return "/user/searchpwd";
 	}
 	
 	@PutMapping("/userinfo")

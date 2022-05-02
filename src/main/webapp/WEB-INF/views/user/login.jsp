@@ -16,7 +16,6 @@
 					<img class="mb-4" src="${root}/source/img/header-house.png" alt="" width="50" height="50" title="홈으로 가기"></a>
     	<h1 class="h3 mb-3 fw-normal">로그인 해주세요</h1>
 		
-		<input type="hidden" id="action" name="action" value="login">
     	<div class="form-floating">
       		<input type="email" name="id" class="form-control" id="floatingInput" placeholder="happyhouse_id" value="" required>
       		<label for="floatingInput">아이디</label>
