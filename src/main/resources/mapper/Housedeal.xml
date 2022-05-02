@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.mapper.HousedealMapper">
+<!-- 	검색 -->
+	<select id="searchByDong" parameterType="String" resultType="List<AptDto>">
+		select d.no, d.aptCode, i.aptName, i.dongName, i.jibun, i.buildYear,
+			   d.dealAmount, d.dealYear, d.dealMonth, d.dealDay, d.area, d.aptCode,
+			   d.floor, d.type, i.lat, i.lng 
+		from houseinfo i join housedeal d on i.aptCode = d.aptCode
+		where i.dongName like CONCAT('%',#{dongName},'%')
+		
+	</select>
+	<select id="searchByAptName" parameterType="String" resultType="List<AptDto>">
+		select d.no, d.aptCode, i.aptName, i.dongName, i.jibun, i.buildYear,
+			   d.dealAmount, d.dealYear, d.dealMonth, d.dealDay, d.area, d.aptCode,
+			   d.floor, d.type, i.lat, i.lng 
+		from houseinfo i join housedeal d on i.aptCode = d.aptCode
+		where i.aptName like CONCAT('%',#{aptName},'%')
+		
+	</select>
+<!-- 	아파트 목록 전체 받기 -->
+	<select id="listMember" resultType="List<AptDto>">
+		select d.no, d.aptCode, i.aptName, i.dongName, i.jibun, i.buildYear,
+			   d.dealAmount, d.dealYear, d.dealMonth, d.dealDay, d.area, d.aptCode,
+			   d.floor, d.type, i.lat, i.lng
+		from houseinfo i join housedeal d on i.aptCode = d.aptCode
+		limit 100		
+	</select>
+
+
+</mapper>

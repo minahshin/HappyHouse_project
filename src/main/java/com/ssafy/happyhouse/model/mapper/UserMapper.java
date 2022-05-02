@@ -7,10 +7,12 @@ import com.ssafy.happyhouse.model.MemberDto;
 
 @Mapper
 public interface UserMapper {
-	MemberDto logins(Map<String,String> map) throws Exception;
+	
+	String searchPw(Map<String,String> map) throws Exception;
+	int idCheck(String memberId) throws Exception;
 	void registerMember(MemberDto memberDto) throws Exception;
-	MemberDto getMember(String userId) throws Exception;
-	void updateUser(MemberDto memberDto) throws Exception;
-	void deleteUser(String userId) throws Exception;
+	MemberDto login(Map<String,String> map) throws Exception;
+	void updateMember(MemberDto memberDto) throws Exception;
+	void deleteMember(String memberId) throws Exception;
 
 }

@@ -4,4 +4,50 @@
 
 <mapper namespace="com.ssafy.happyhouse.model.mapper.UserMapper">
 	
+	
+	
+	<select id="idCheck" parameterType="string" resultType="int">
+		select count(memberId)
+		from member
+		where memberId = #{memberId}
+	</select>
+	
+	<insert id="registerMember" parameterType="MemberDto">
+		insert into member(memberId, memberPw, memberName, memberEmail, memberTel,isManager)
+		values (#{memberId}, #{memberPw}, #{memberName}, #{memberEmail}, #{memberTel}, #{isManager})
+	</insert>
+	
+	<select id="searchPw" parameterType="map" resultType="String">
+		select memberPw
+		from member
+		where memberId = #{memberId} and memberEmail = #{memberEmail}
+	</select>
+	
+	
+	<select id="login" parameterType="map" resultType="MemberDto">
+		select memberName, memberId, memberPw,memberEmail,memberTel, isManget
+		from member
+		where memberId = #{memberId} and memberPw = #{memberPd}
+	</select>
+	
+	<update id="updateMember" parameterType="MemberDto">
+		update member
+		<trim prefix="set" suffixOverrides=",">
+			<if test="memberPw != null">memberPw = #{memberPw},</if>
+			<if test="memberEmail != null">memberEmail = #{memberEmail},</if>
+			<if test="memberName != null">memberName = #{memberName},</if>
+			<if test="memberTel != null">memberTel = #{memberTel},</if>
+			<if test="isManager != null">isManager = #{isManager},</if>
+		</trim>
+		where memberId = #{memberId}
+	</update>
+	
+	<delete id="deleteMember" parameterType="String">
+		delete from member
+		where memberId = #{memberId}
+	</delete>
+	
+	
+	
+	
 </mapper>
