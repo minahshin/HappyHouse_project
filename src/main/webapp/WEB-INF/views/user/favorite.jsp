@@ -50,7 +50,7 @@ List<String> favlist = (List<String>)request.getAttribute("favorite");
 			    	<td><%=++count %></td>
 			    	<td><%=it %></td>
 			    	<td><a href="${root }/shop?address=<%=it %>">상권 보기</a></td>
-			    	<td><a href="${root }">삭제</a></td>
+			    	<td><a data-method="delete" href="${root }/favorite/${memberDto.memberId}">삭제</a></td>
 			    <tr>
 			 <% } %>
 		</table>

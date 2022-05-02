@@ -1,15 +1,26 @@
 package com.ssafy.happyhouse.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.ssafy.happyhouse.handler.MainPageHandler;
 
 @Controller
 public class MainController {
 	
+	@Autowired
+	MainPageHandler main;
+	
 	@GetMapping(value = {"/", "/index", "/main"})
-	public String showMain() {
-		// TODO : 구, 동을 동적으로 가져오는 코드 및 request에 설정
-		return "index";
+	public ModelAndView showMain() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("index");
+		
+		mv.addObject("donglist", main.pageInit());
+
+		return mv;
 	}
 	
 	@GetMapping("/aboutUs")

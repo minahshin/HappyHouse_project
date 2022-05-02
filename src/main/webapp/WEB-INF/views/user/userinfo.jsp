@@ -19,6 +19,8 @@
 				<h4 class="mb-3">회원정보 수정</h4>
 				<form class="validation-form" method="post" id="updateForm" action="" novalidate>
 				
+				<input type="hidden" name="_method" id="action" value="put"/>
+					
 					<div class="row">
 						<div class="mb-3">
 							<label for="id">ID</label>

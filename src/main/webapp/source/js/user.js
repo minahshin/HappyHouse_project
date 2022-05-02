@@ -56,7 +56,7 @@ function updateInfo() {
 function deleteInfo() {
 	if(confirm("정말 탈퇴하시겠습니까?") == true) {
 		let id = $("#id").val();
-		$("#action").val("deleteUser");
+		$("#action").val("delete");
 		$("#updateForm").attr("action", "/user/" + id + "/userinfo").submit();
 	}
 }
