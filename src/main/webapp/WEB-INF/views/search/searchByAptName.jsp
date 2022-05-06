@@ -58,8 +58,7 @@
 							    <td>거래 가격</td>
 							    <td>거래 일자</td>
 							    <td>면적</td>
-							    <td>층</td>
-							    <td>거래 타입</td>
+							    <td>층</td>						
 							    <td>주소</td>
 							    <td>건축년도</td>
 							    <td>상권 정보</td>
@@ -71,8 +70,7 @@
 							    	<td>${aptDto.dealAmount }만원</td>
 							    	<td>${aptDto.dealYear}년 ${aptDto.dealMonth}월 ${aptDto.dealDay}일</td>
 							    	<td>${aptDto.area}m²</td>
-							    	<td>${aptDto.floor}층</td>
-							    	<td>${aptDto.type}</td>
+							    	<td>${aptDto.floor}층</td>						
 							    	<td>${aptDto.dongName} ${aptDto.jibun}</td>
 							    	<td>${aptDto.buildYear}년</td>
 							    	<td><a href="/shop/around?aptName=${aptDto.aptName}&lat=${aptDto.lat}&lng=${aptDto.lng}">상권</a></td>
