@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -86,20 +85,21 @@ public class UserController {
 	public String searchPwd(@RequestParam Map<String, String> map,Model model,HttpSession session) throws Exception {
 	
 		MemberDto memberDto = userService.searchPw(map);
+		System.out.println(map.toString());
+		System.out.println(memberDto);
 		if(memberDto == null) {
 			model.addAttribute("msg", "일치하는 사용자가 없습니다!");
 			return "user/searchpwd";
 		}
 		
-		session.setAttribute("memberDto",memberDto);
+		session.setAttribute("memberDto", memberDto);
 		
-		return "redirect:/user" + memberDto.getMemberId() + "/userinfo";
+		return "redirect:/user/" + memberDto.getMemberId() + "/userinfo";
 	}
 	
 	
 	@PostMapping("/userinfo")
 	public String updateUser( MemberDto memberDto) throws Exception {
-		String id = memberDto.getMemberId();
 		
 		String encryPassword = UserSha256.encrypt(memberDto.getMemberPw());
 		memberDto.setMemberPw(encryPassword);

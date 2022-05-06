@@ -71,4 +71,10 @@ public class MemberDto {
 		this.memberTel = memberTel;
 	}
 
+	@Override
+	public String toString() {
+		return "MemberDto [memberId=" + memberId + ", memberPw=" + memberPw + ", memberName=" + memberName
+				+ ", memberEmail=" + memberEmail + ", memberTel=" + memberTel + ", isManager=" + isManager + "]";
+	}
+	
 }

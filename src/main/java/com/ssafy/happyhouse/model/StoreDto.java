@@ -3,18 +3,21 @@ package com.ssafy.happyhouse.model;
 public class StoreDto {
 	private int id;
 	private String name;
-	private String category;
+	private String bigType;
+	private String mediumType;
+	private String storeType;
 	private String dongCode;
 	private String jibunAddress;
 	private String doroAddress;
 	private String zipCode;
-	
-	public StoreDto(int id, String name, String category, String dongCode, String jibunAddress, String doroAddress,
-			String zipCode) {
-		super();
+
+	public StoreDto(int id, String name, String bigType, String mediumType, String storeType, String dongCode,
+			String jibunAddress, String doroAddress, String zipCode) {
 		this.id = id;
 		this.name = name;
-		this.category = category;
+		this.bigType = bigType;
+		this.mediumType = mediumType;
+		this.storeType = storeType;
 		this.dongCode = dongCode;
 		this.jibunAddress = jibunAddress;
 		this.doroAddress = doroAddress;
@@ -29,8 +32,16 @@ public class StoreDto {
 		return name;
 	}
 
-	public String getCategory() {
-		return category;
+	public String getBigType() {
+		return bigType;
+	}
+
+	public String getMediumType() {
+		return mediumType;
+	}
+
+	public String getStoreType() {
+		return storeType;
 	}
 
 	public String getDongCode() {
@@ -47,13 +58,6 @@ public class StoreDto {
 
 	public String getZipCode() {
 		return zipCode;
-	}
-
-	@Override
-	public String toString() {
-		return id + "\t " + name + "\t " + category + "\t " + dongCode + "\t " + jibunAddress + "\t "
-				+ doroAddress + " \t " + zipCode;
-	}
-	
+	}	
 	
 }
