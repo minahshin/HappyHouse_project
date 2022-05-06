@@ -16,7 +16,7 @@ public class UserServiceDao implements UserService{
 	private UserMapper userMapper;
 
 	@Override
-	public String searchPw(Map<String, String> map) throws Exception {
+	public MemberDto searchPw(Map<String, String> map) throws Exception {
 
 		return userMapper.searchPw(map);
 	}

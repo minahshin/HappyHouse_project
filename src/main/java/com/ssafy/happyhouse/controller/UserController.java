@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ssafy.happyhouse.model.MemberDto;
 import com.ssafy.happyhouse.model.service.UserService;
+import com.ssafy.happyhouse.model.service.UserSha256;
 
 
 @Controller
@@ -54,6 +55,9 @@ public class UserController {
 	
 	@PostMapping("/login")
 	public String login(@RequestParam Map<String, String> map, Model model,HttpSession session) throws Exception{
+		String encryPassword = UserSha256.encrypt(map.get("memberPw"));
+		map.put("memberPw", encryPassword);
+	
 		MemberDto memberDto = userService.login(map);
 		if(memberDto != null) {
 			session.setAttribute("memberDto", memberDto);
@@ -66,6 +70,9 @@ public class UserController {
 	
 	@PostMapping("/signup")
 	public ModelAndView signup(MemberDto memberDto) throws Exception {
+		
+		String encryPassword = UserSha256.encrypt(memberDto.getMemberPw());
+		memberDto.setMemberPw(encryPassword);
 		userService.registerMember(memberDto);
 		
 		ModelAndView mv = new ModelAndView();
@@ -76,20 +83,31 @@ public class UserController {
 	}
 	
 	@PostMapping("/searchpwd")
-	public String searchPwd(@RequestParam Map<String, String> map,Model model) throws Exception {
-		String pw = userService.searchPw(map);
-		model.addAttribute("msg", "비밀번호는 "+pw+" 입니다.");
+	public String searchPwd(@RequestParam Map<String, String> map,Model model,HttpSession session) throws Exception {
+	
+		MemberDto memberDto = userService.searchPw(map);
+		if(memberDto == null) {
+			model.addAttribute("msg", "일치하는 사용자가 없습니다!");
+			return "user/searchpwd";
+		}
 		
-		return "/user/searchpwd";
+		session.setAttribute("memberDto",memberDto);
+		
+		return "redirect:/user" + memberDto.getMemberId() + "/userinfo";
 	}
 	
 	
 	@PostMapping("/userinfo")
-	public String updateUser(@RequestBody MemberDto memberDto) throws Exception {
+	public String updateUser( MemberDto memberDto) throws Exception {
 		String id = memberDto.getMemberId();
+		
+		String encryPassword = UserSha256.encrypt(memberDto.getMemberPw());
+		memberDto.setMemberPw(encryPassword);
+		
 		userService.updateMember(memberDto);
 		
-		return "redirect:/" + id + "/userinfo";
+		
+		return "redirect:/main" ;
 	}
 	
 	@GetMapping("/{userid}/delete")

@@ -3,7 +3,7 @@ function findpwd() {
 	let name = $("#floatingName").val();
 	
 	if(id && name) {
-		$("#searchPwdForm").attr("action", "/user/searchpwd").submit();
+		$("#searchPwdForm").attr("action", "/user/"+id+"/userinfo").submit();
 	} else {
 		alert("정보를 기입해주시기 바랍니다.");
 	}

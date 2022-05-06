@@ -12,7 +12,7 @@
   
 <body class="text-center">  
 	<div class="form-signin">
- 			<form id="searchPwdForm" method="post" action="">
+ 			<form id="searchPwdForm" method="get" action="">
  				<a href="${root}/main">
  					<img class="mb-4" src="${root}/source/img/header-house.png" alt="" width="50" height="50" title="홈으로 가기"></a>
 	    	<h1 class="h3 mb-3 fw-normal">비밀번호 찾기</h1>
