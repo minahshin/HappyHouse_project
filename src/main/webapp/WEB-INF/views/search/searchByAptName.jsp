@@ -47,34 +47,41 @@
 				아파트 이름을 포함한 키워드로 검색해주세요.
 			</div>
 		</c:if>
-		
-		<c:if test="${!empty houselist }">
-			<table class="table" style="margin:2%;width:96%;">
-				<tr style="text-align:center;font-weight:bold;">
-					<td>아파트 이름</td>
-				    <td>거래 가격</td>
-				    <td>거래 일자</td>
-				    <td>면적</td>
-				    <td>층</td>
-				    <td>거래 타입</td>
-				    <td>주소</td>
-				    <td>건축년도</td>
-				</tr>
-				
-				<c:forEach var="aptDto" items="${houselist }">
-					<tr>
-				    	<td>${aptDto.aptName}</td>
-				    	<td>${aptDto.dealAmount }만원</td>
-				    	<td>${aptDto.dealYear}년 ${aptDto.dealMonth}월 ${aptDto.dealDay}일</td>
-				    	<td>${aptDto.area}m²</td>
-				    	<td>${aptDto.floor}층</td>
-				    	<td>${aptDto.type}</td>
-				    	<td>${aptDto.dongName} ${aptDto.jibun}</td>
-				    	<td>${aptDto.buildYear}년</td>
-			    	<tr>
-				</c:forEach>
-			</table>
-		</c:if>
+		<div class="col-sm-6 justify-center">
+			<div style="overflow: auto; height: 500px">
+			<c:if test="${!empty houselist }">
+				<div class="justify-center" style="font-size: 12px">
+					<table class="table" >
+						<tr style="text-align:center;font-weight:bold;">
+							<td>아파트 이름</td>
+						    <td>거래 가격</td>
+						    <td>거래 일자</td>
+						    <td>면적</td>
+						    <td>층</td>
+						    <td>거래 타입</td>
+						    <td>주소</td>
+						    <td>건축년도</td>
+						    <td>상권 정보</td>
+						</tr>
+						
+						<c:forEach var="aptDto" items="${houselist }">
+							<tr>
+						    	<td>${aptDto.aptName}</td>
+						    	<td>${aptDto.dealAmount }만원</td>
+						    	<td>${aptDto.dealYear}년 ${aptDto.dealMonth}월 ${aptDto.dealDay}일</td>
+						    	<td>${aptDto.area}m²</td>
+						    	<td>${aptDto.floor}층</td>
+						    	<td>${aptDto.type}</td>
+						    	<td>${aptDto.dongName} ${aptDto.jibun}</td>
+						    	<td>${aptDto.buildYear}년</td>
+						    	<td><a href="/shop/around?aptName=${aptDto.aptName}&lat=${aptDto.lat}&lng=${aptDto.lng}">상권</a></td>
+					    	<tr>
+						</c:forEach>
+					</table>
+				</div>
+			</c:if>
+			</div>
+		</div>
 		
 		<div style="text-align:center;font-size:30px;">
 			<a href="${root }/house/search" style="text-decoration:none;padding:2%">다른 아파트 명으로 검색하기</a>
