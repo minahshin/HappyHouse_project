@@ -47,47 +47,50 @@
 				아파트 이름을 포함한 키워드로 검색해주세요.
 			</div>
 		</c:if>
-		<div class="row" style="padding-left: 10%;padding-right: 10%">
-			<div class="col-sm-6 justify-center">
-				<div style="overflow: auto; height: 500px">
-				<c:if test="${!empty houselist }">
-					<div class="justify-center" style="font-size:12px;">
-						<table class="table"  >
-							<tr style="text-align:center;font-weight:bold;">
-								<td>아파트 이름</td>
-							    <td>거래 가격</td>
-							    <td>거래 일자</td>
-							    <td>면적</td>
-							    <td>층</td>						
-							    <td>주소</td>
-							    <td>건축년도</td>
-							    <td>상권 정보</td>
-							</tr>
-							
-							<c:forEach var="aptDto" items="${houselist }">
-								<tr>
-							    	<td><a href="javascript:myMapFocus(${aptDto.lat}, ${aptDto.lng}, '${aptDto.aptName}')">${aptDto.aptName}</a></td>
-							    	<td>${aptDto.dealAmount }만원</td>
-							    	<td>${aptDto.dealYear}년 ${aptDto.dealMonth}월 ${aptDto.dealDay}일</td>
-							    	<td>${aptDto.area}m²</td>
-							    	<td>${aptDto.floor}층</td>						
-							    	<td>${aptDto.dongName} ${aptDto.jibun}</td>
-							    	<td>${aptDto.buildYear}년</td>
-							    	<td><a href="/shop/around?aptName=${aptDto.aptName}&lat=${aptDto.lat}&lng=${aptDto.lng}">상권</a></td>
-						    	<tr>
-							</c:forEach>
-						</table>
+		<c:if test="${!empty houselist }">
+			<div class="row" style="padding-left: 10%;padding-right: 10%">
+				<div class="col-sm-6 justify-center">
+					<div style="overflow: auto; height: 500px">
+					<c:if test="${!empty houselist }">
+						<div class="justify-center" style="font-size:12px;">
+							<table class="table"  >
+								<tr style="text-align:center;font-weight:bold;">
+									<td>아파트 이름</td>
+								    <td>거래 가격</td>
+								    <td>거래 일자</td>
+								    <td>면적</td>
+								    <td>층</td>						
+								    <td>주소</td>
+								    <td>건축년도</td>
+								    <td>상권 정보</td>
+								</tr>
+								
+								<c:forEach var="aptDto" items="${houselist }">
+									<tr>
+								    	<td><a href="javascript:myMapFocus(${aptDto.lat}, ${aptDto.lng}, '${aptDto.aptName}')">${aptDto.aptName}</a></td>
+								    	<td>${aptDto.dealAmount }만원</td>
+								    	<td>${aptDto.dealYear}년 ${aptDto.dealMonth}월 ${aptDto.dealDay}일</td>
+								    	<td>${aptDto.area}m²</td>
+								    	<td>${aptDto.floor}층</td>						
+								    	<td>${aptDto.dongName} ${aptDto.jibun}</td>
+								    	<td>${aptDto.buildYear}년</td>
+								    	<td><a href="/shop/around?aptName=${aptDto.aptName}&lat=${aptDto.lat}&lng=${aptDto.lng}">상권</a></td>
+							    	<tr>
+								</c:forEach>
+							  </table>
+							</div>
+					</c:if>
 					</div>
-				</c:if>
+				</div>
+				<div class="col-sm-6 text-light mx-auto justify-center">
+						<!-- 왼쪽에서 선택한 아파트 맵 정보 -->
+						<div id="map" class="mx-auto mt-6" style="width:600px;height:500px"></div>
+						<!-- -------------------- -->
 				</div>
 			</div>
-			<div class="col-sm-6 text-light mx-auto justify-center">
-					<!-- 왼쪽에서 선택한 아파트 맵 정보 -->
-					<div id="map" class="mx-auto mt-6" style="width:600px;height:500px"></div>
-					<!-- -------------------- -->
-				</div>
+		</c:if>
 				
-		</div>
+		
 <script>
 	
 	var mapContainer = document.getElementById('map'), //지도를 담을 영역의 DOM 레퍼런스
