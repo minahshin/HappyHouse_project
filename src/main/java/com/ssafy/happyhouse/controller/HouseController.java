@@ -22,7 +22,8 @@ public class HouseController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/search");
 		
-		mv.addObject("houselist", house.searchByDong(address.split(" ")[1]));
+		if(address.contains(" "))
+			mv.addObject("houselist", house.searchByDong(address.split(" ")[1]));
 		
 		return mv;
 	}

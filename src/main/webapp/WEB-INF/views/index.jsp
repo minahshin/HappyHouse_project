@@ -66,7 +66,7 @@
 			<div class="select">
 				<form id="select_district" method = "get" action="">
 					<select id="gu" onchange="guSelect(this.value)" name="selectGu">
-					   <option>행정구</option>
+					   <option value="">행정구</option>
 					   <%
 					   if(donglist != null){
 						   Iterator<String> donglist_keys = donglist.keySet().iterator();
