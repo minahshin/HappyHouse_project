@@ -5,8 +5,9 @@ public class QuestionDto {
 	private String category;
 	private String subject;
 	private String content;
-	private String write;
+	private String writer;
 	private String regDate;
+	private String isSecret;
 	
 	public int getQno() {
 		return qno;
@@ -20,10 +21,14 @@ public class QuestionDto {
 	public String getContent() {
 		return content;
 	}
-	public String getWrite() {
-		return write;
+	public String getWriter() {
+		return writer;
 	}
 	public String getRegDate() {
 		return regDate;
 	}
+	public String getIsSecret() {
+		return isSecret;
+	}
+	
 }

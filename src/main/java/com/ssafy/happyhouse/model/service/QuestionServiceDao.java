@@ -16,6 +16,11 @@ public class QuestionServiceDao implements QuestionService{
 	private QuestionMapper questionMapper;
 
 	@Override
+	public QuestionDto viewQuestion(int qno) throws Exception {
+		return questionMapper.viewQuestion(qno);
+	}
+	
+	@Override
 	public void registerQuestion(QuestionDto questionDto) throws Exception {
 		
 		questionMapper.registerQuestion(questionDto);
@@ -28,9 +33,8 @@ public class QuestionServiceDao implements QuestionService{
 	}
 
 	@Override
-	public void deleteQuestion(String memberId, String qno) throws Exception {
+	public void deleteQuestion(int qno) throws Exception {
 		
-		questionMapper.deleteQuestion(memberId, qno);
+		questionMapper.deleteQuestion(qno);
 	}
-
 }

@@ -4,7 +4,7 @@
 
 <mapper namespace="com.ssafy.happyhouse.model.mapper.StoreMapper">
 	
-	<select id="getAroundShop" parameterType="com.ssafy.happyhouse.model.StoreSearch" resultType="StoreDtoDistance">
+	<select id="getAroundShop" parameterType="com.ssafy.happyhouse.model.search.StoreSearch" resultType="StoreDtoDistance">
     	SELECT storeId, storeName, bigType, mediumType, storeType, dongCode, jibunAddress, doroAddress, zipCode,	
     	TRUNCATE((6371 * Acos(Cos(Radians(${lat})) * Cos(Radians(lat)) * Cos(Radians(lng) - Radians(${lng})) + Sin(Radians(${lat})) * Sin(Radians(lat)))), 3) AS distance
 		FROM store

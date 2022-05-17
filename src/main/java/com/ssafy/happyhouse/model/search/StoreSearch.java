@@ -1,4 +1,4 @@
-package com.ssafy.happyhouse.model;
+package com.ssafy.happyhouse.model.search;
 
 import java.util.Arrays;
 import java.util.List;

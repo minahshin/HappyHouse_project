@@ -5,7 +5,8 @@ import com.ssafy.happyhouse.model.QuestionDto;
 
 @Service
 public interface QuestionService {
+	QuestionDto viewQuestion(int qno) throws Exception;
 	void registerQuestion(QuestionDto questionDto) throws Exception;
 	void updateQuestion(QuestionDto questionDto) throws Exception;
-	void deleteQuestion(String memberId,String qno) throws Exception;
+	void deleteQuestion(int qno) throws Exception;
 }

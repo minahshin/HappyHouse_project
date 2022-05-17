@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssafy.happyhouse.model.StoreDtoDistance;
-import com.ssafy.happyhouse.model.StoreSearch;
 import com.ssafy.happyhouse.model.mapper.StoreMapper;
+import com.ssafy.happyhouse.model.search.StoreSearch;
 
 @Repository
 public class StoreServiceDao implements StoreService{

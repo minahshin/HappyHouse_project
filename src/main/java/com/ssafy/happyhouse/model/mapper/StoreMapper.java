@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ssafy.happyhouse.model.StoreDtoDistance;
-import com.ssafy.happyhouse.model.StoreSearch;
+import com.ssafy.happyhouse.model.search.StoreSearch;
 
 @Mapper
 public interface StoreMapper {

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.happyhouse.model.StoreDtoDistance;
-import com.ssafy.happyhouse.model.StoreSearch;
+import com.ssafy.happyhouse.model.search.StoreSearch;
 
 @Service
 public interface StoreService {
