@@ -4,4 +4,24 @@
 
 <mapper namespace="com.ssafy.happyhouse.model.mapper.QuestionMapper">
 	
+	<insert id="registerQuestion" parameterType="QuestionDto">
+		insert into member(memberId, memberPw, memberName, memberEmail, memberTel)
+		values (#{memberId}, #{memberPw}, #{memberName}, #{memberEmail}, #{memberTel})
+	</insert>
+	
+	<update id="updateQuestion" parameterType="QuestionDto">
+		update question
+		<trim prefix="set" suffixOverrides=",">
+			<if test="category != null">category = #{category},</if>
+			<if test="subject != null">subject = #{subject},</if>
+			<if test="content != null">content = #{content},</if>
+		
+		</trim>
+		where qno = #{qno} and writer = #{memberId}
+	</update>
+	
+	<delete id="deleteQuestion" parameterType="String">
+		delete from question
+		where qno = #{qno} and writer = #{memberId}
+	</delete>
 </mapper>
