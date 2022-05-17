@@ -7,14 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ssafy.happyhouse.model.MemberDto;
 import com.ssafy.happyhouse.model.QuestionDto;
 import com.ssafy.happyhouse.model.service.QuestionService;
-import com.ssafy.happyhouse.model.service.UserSha256;
 
 @Controller
 @RequestMapping("/question")
@@ -38,7 +36,7 @@ public class QuestionController {
 	}
 	
 	//수정
-	@PostMapping("/questioninfo")
+	@PutMapping
 	public String updateQuestion(QuestionDto questionDto) throws Exception {
 			
 		questionService.updateQuestion(questionDto);
@@ -48,7 +46,7 @@ public class QuestionController {
 	
 	//삭제 qno어케 받아오지..?
 	@GetMapping("/{userid}/delete")
-	public String deleteQuestion(@PathVariable String userid,@RequestParam("qno") String qno, HttpSession session) throws Exception {
+	public String deleteQuestion(@PathVariable String userid, String qno, HttpSession session) throws Exception {
 		
 		questionService.deleteQuestion(userid, qno);
 		
