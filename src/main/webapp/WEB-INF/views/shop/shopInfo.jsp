@@ -67,7 +67,7 @@ List<StoreDto> shoplist = (List<StoreDto>)request.getAttribute("shoplist");
 			    <tr>
 			    	<td><%=++count %></td>
 			    	<td><%=it.getName()%></td>
-			    	<td><%=it.getCategory() %></td>
+			    	<td><%=it.getStoreType() %></td>
 			    	<td><%=it.getJibunAddress() %></td>
 			    	<td><%=it.getDoroAddress() %></td>
 			    	<td><%=it.getZipCode() %></td>
