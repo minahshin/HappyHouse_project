@@ -21,4 +21,8 @@ public class QNAInfo {
 	public List<AnswerDto> getAnswer() {
 		return answer;
 	}
+	
+	public boolean isEmpty() {
+		return question == null;
+	}
 }
