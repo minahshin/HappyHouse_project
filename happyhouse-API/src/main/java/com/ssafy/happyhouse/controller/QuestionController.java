@@ -27,7 +27,7 @@ public class QuestionController {
 	@Autowired
 	private QuestionService questionService;
 	
-	@GetMapping("/search")
+	@GetMapping
 	public ResponseEntity<?> viewQuestionSearchList(QuestionSearch search) throws Exception {
 		return new ResponseEntity<List<QuestionDto>>(questionService.viewQuestionList(search), HttpStatus.OK);
 	}
@@ -62,7 +62,7 @@ public class QuestionController {
 		return new ResponseEntity<String>("작성 완료!", HttpStatus.OK);
 	}
 	
-	@PutMapping
+	@PutMapping("/update")
 	public ResponseEntity<String> updateQuestion(QuestionDto questionDto, HttpSession session) throws Exception {	
 		
 		MemberDto loginUser = (MemberDto) session.getAttribute("memberDto");
