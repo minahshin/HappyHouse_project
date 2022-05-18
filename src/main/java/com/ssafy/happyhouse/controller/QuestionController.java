@@ -76,8 +76,8 @@ public class QuestionController {
 		return new ResponseEntity<String>("수정 완료!", HttpStatus.OK);
 	}
 	
-	@GetMapping("/delete")
-	public ResponseEntity<String> deleteQuestion(String qno, HttpSession session) throws Exception {
+	@GetMapping("/delete/{qno}")
+	public ResponseEntity<String> deleteQuestion(@PathVariable String qno, HttpSession session) throws Exception {
 		
 		MemberDto loginUser = (MemberDto) session.getAttribute("memberDto");
 		
