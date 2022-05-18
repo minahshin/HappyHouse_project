@@ -42,7 +42,7 @@
             ></b-nav-item
           >
           <b-nav-item href="#" class="qna"
-            ><router-link :to="{ name: 'questionView' }" class="link">
+            ><router-link :to="{ name: 'questionList' }" class="link">
               QNA</router-link
             ></b-nav-item
           >
@@ -77,6 +77,19 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
+    <div id="box2-1" class="page-header">
+      <span class="mask bg-gradient-dark opacity-5"></span>
+      <div class="container">
+        <div class="row">
+          <div
+            class="col-lg-6 col-md-7 d-flex justify-content-center flex-column"
+          >
+            <h1 class="text-black mb-4">Happy House</h1>
+            <p class="text-black opacity-8 lead pe-5 me-5">해피하우스</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -86,4 +99,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#box2-1 {
+  width: 100%;
+  height: 300px;
+  background-image: url("@/assets/주택.jpg");
+  background-size: contain;
+}
+</style>
