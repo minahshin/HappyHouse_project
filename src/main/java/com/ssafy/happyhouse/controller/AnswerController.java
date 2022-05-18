@@ -2,6 +2,7 @@ package com.ssafy.happyhouse.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,7 +28,7 @@ public class AnswerController {
 	public void writeAnswer() {
 		
 	}
-	
+	@Autowired
 	private AnswerService answerService;
 	
 	//추가
@@ -36,7 +37,7 @@ public class AnswerController {
 		
 		MemberDto loginUser = (MemberDto) session.getAttribute("memberDto");
 		
-		if(loginUser == null || loginUser.getIsManager()=="N") {
+		if(loginUser == null || loginUser.getIsManager().equals("N")) {
 			return new ResponseEntity<String>("접근 권한이 없습니다.", HttpStatus.BAD_REQUEST);
 		}
 		
@@ -50,7 +51,7 @@ public class AnswerController {
 		
 		MemberDto loginUser = (MemberDto) session.getAttribute("memberDto");
 		
-		if(loginUser == null || loginUser.getIsManager()=="N") {
+		if(loginUser == null || loginUser.getIsManager().equals("N")) {
 			return new ResponseEntity<String>("접근 권한이 없습니다.", HttpStatus.BAD_REQUEST);
 		}
 		
@@ -66,7 +67,7 @@ public class AnswerController {
 		
 		MemberDto loginUser = (MemberDto) session.getAttribute("memberDto");
 		
-		if(loginUser == null || loginUser.getIsManager()=="N") {
+		if(loginUser == null || loginUser.getIsManager().equals("N")) {
 			return new ResponseEntity<String>("접근 권한이 없습니다.", HttpStatus.BAD_REQUEST);
 		}
 		
