@@ -27,7 +27,7 @@ const routes = [
         component: () => import("@/components/qna/QuestionDetailView.vue"),
       },
       {
-        path: "update",
+        path: ":qno/update",
         name: "questionUpdate",
         component: () => import("@/components/qna/QuestionUpdateView.vue"),
       },
