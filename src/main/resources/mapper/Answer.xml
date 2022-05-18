@@ -4,5 +4,22 @@
 
 <mapper namespace="com.ssafy.happyhouse.model.mapper.AnswerMapper">
 	
+	<insert id="registerAnswer" parameterType="AnswerDto">
+		insert into answer(content, writer)
+		values ( #{content}, #{writer})
+	</insert>
+	
+	<update id="updateAnswer" parameterType="AnswerDto">
+		update answer
+		<trim prefix="set" suffixOverrides=",">
+			<if test="content != null">content = #{content},</if>
+		</trim>
+		where ano = ${ano} 
+	</update>
+	
+	<delete id="deleteAnswer" parameterType="int">
+		delete from answer
+		where ano = ${ano}
+	</delete>
 
 </mapper>
