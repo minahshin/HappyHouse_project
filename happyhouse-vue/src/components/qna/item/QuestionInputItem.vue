@@ -3,18 +3,33 @@
     <b-col style="text-align: left">
       <b-form @submit="onSubmit" @reset="onReset">
         <b-form-group
-          id="userid-group"
+          id="writer-group"
           label="작성자:"
-          label-for="userid"
+          label-for="writer"
           description="작성자를 입력하세요."
         >
           <b-form-input
-            id="userid"
-            :disabled="isUserid"
-            v-model="article.userid"
+            id="writer"
+            :disabled="isWriter"
+            v-model="article.writer"
             type="text"
             required
             placeholder="작성자 입력..."
+          ></b-form-input>
+        </b-form-group>
+
+        <b-form-group
+          id="category-group"
+          label="카테고리:"
+          label-for="category"
+          description="카테고리를 입력하세요."
+        >
+          <b-form-input
+            id="category"
+            v-model="article.category"
+            type="text"
+            required
+            placeholder="카테고리 입력..."
           ></b-form-input>
         </b-form-group>
 
@@ -63,16 +78,18 @@
 import http from "@/api/http";
 
 export default {
-  name: "BoardInputItem",
+  name: "QuestionInputItem",
   data() {
     return {
       article: {
-        articleno: 0,
-        userid: "",
+        qno: 0,
+        category: "",
+        writer: "",
         subject: "",
         content: "",
+        isSecret: "N",
       },
-      isUserid: false,
+      isWriter: false,
     };
   },
   props: {
@@ -80,14 +97,10 @@ export default {
   },
   created() {
     if (this.type === "modify") {
-      http.get(`/board/${this.$route.params.articleno}`).then(({ data }) => {
-        // this.article.articleno = data.article.articleno;
-        // this.article.userid = data.article.userid;
-        // this.article.subject = data.article.subject;
-        // this.article.content = data.article.content;
+      http.get(`/question/${this.$route.params.qno}`).then(({ data }) => {
         this.article = data;
       });
-      this.isUserid = true;
+      this.isWriter = true;
     }
   },
   methods: {
@@ -96,10 +109,10 @@ export default {
 
       let err = true;
       let msg = "";
-      !this.article.userid &&
+      !this.article.writer &&
         ((msg = "작성자 입력해주세요"),
         (err = false),
-        this.$refs.userid.focus());
+        this.$refs.writer.focus());
       err &&
         !this.article.subject &&
         ((msg = "제목 입력해주세요"),
@@ -117,17 +130,20 @@ export default {
     },
     onReset(event) {
       event.preventDefault();
-      this.article.articleno = 0;
+      this.article.qno = 0;
+      this.article.category = "";
       this.article.subject = "";
       this.article.content = "";
-      this.$router.push({ name: "boardList" });
+      this.$router.push({ name: "questionList" });
     },
     registArticle() {
       http
-        .post(`/board`, {
-          userid: this.article.userid,
+        .post(`/question/regist`, {
+          category: this.article.category,
+          writer: this.article.writer,
           subject: this.article.subject,
           content: this.article.content,
+          isSecret: "N",
         })
         .then(({ data }) => {
           let msg = "등록 처리시 문제가 발생했습니다.";
@@ -140,11 +156,12 @@ export default {
     },
     modifyArticle() {
       http
-        .put(`/board/${this.article.articleno}`, {
-          articleno: this.article.articleno,
-          userid: this.article.userid,
+        .put(`/question/update/${this.article.qno}`, {
+          qno: this.article.qno,
+          writer: this.article.writer,
           subject: this.article.subject,
           content: this.article.content,
+          category: this.article.category,
         })
         .then(({ data }) => {
           let msg = "수정 처리시 문제가 발생했습니다.";
@@ -153,11 +170,11 @@ export default {
           }
           alert(msg);
           // 현재 route를 /list로 변경.
-          this.$router.push({ name: "boardList" });
+          this.$router.push({ name: "questionList" });
         });
     },
     moveList() {
-      this.$router.push({ name: "boardList" });
+      this.$router.push({ name: "questionList" });
     },
   },
 };

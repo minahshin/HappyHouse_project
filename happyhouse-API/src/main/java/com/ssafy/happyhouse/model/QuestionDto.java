@@ -30,5 +30,9 @@ public class QuestionDto {
 	public String getIsSecret() {
 		return isSecret;
 	}
-	
+	@Override
+	public String toString() {
+		return "QuestionDto [qno=" + qno + ", category=" + category + ", subject=" + subject + ", content=" + content
+				+ ", writer=" + writer + ", regDate=" + regDate + ", isSecret=" + isSecret + "]";
+	}
 }
