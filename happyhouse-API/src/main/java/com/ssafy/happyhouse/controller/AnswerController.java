@@ -46,7 +46,7 @@ public class AnswerController {
 	}
 	
 	//수정
-	@PutMapping
+	@PutMapping("/update")
 	public ResponseEntity<String> updateAnswer(AnswerDto answerDto, HttpSession session) throws Exception{
 		
 		MemberDto loginUser = (MemberDto) session.getAttribute("memberDto");
