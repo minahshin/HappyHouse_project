@@ -11,14 +11,20 @@ const routes = [
     component: HomeView,
   },
   {
-    path: "/question",
-    name: "question",
-    component: () => import("@/views/QuestionListView.vue"),
+    path: "/qna",
+    name: "qna",
+    component: () => import("@/views/QuestionView.vue"),
+    redirect: "/qna/list",
     children: [
+      {
+        path: "list",
+        name: "questionList",
+        component: () => import("@/components/qna/QuestionListView.vue"),
+      },
       {
         path: ":qno",
         name: "questionView",
-        component: () => import("@/components/qna/QuestionView.vue"),
+        component: () => import("@/components/qna/QuestionDetailView.vue"),
       },
       {
         path: "update",
