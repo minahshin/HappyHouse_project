@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.mapper.QuestionMapper">
+	<select id="getWriter" parameterType = "String" resultType="String">
+		SELECT writer
+		FROM question
+		WHERE qno = ${qno}
+	</select>
+	
+	<select id="viewQuestionList" parameterType="com.ssafy.happyhouse.model.search.QuestionSearch" resultType="QuestionDto">
+		SELECT qno, category, subject, writer, regDate
+		FROM question 
+		WHERE writer = #{userid} OR isSecret = 'N'
+			<if test="@com.ssafy.happyhouse.handler.CommonUtilHandler@empty(categories) == false">
+			AND category IN (
+				<foreach collection="categories" item="item" separator=",">
+					#{item}
+				</foreach>
+			)</if>
+			<if test="@com.ssafy.happyhouse.handler.CommonUtilHandler@empty(keyword) == false"> 
+				AND subject LIKE '%${keyword}%' OR content LIKE '%${keyword}%' </if>
+			<if test="@com.ssafy.happyhouse.handler.CommonUtilHandler@empty(writer) == false"> 
+				AND writer = #{writer} </if>
+			
+	</select>
+	
+	<select id="viewQuestion" parameterType="String" resultType="QuestionDto">
+		SELECT qno, category, subject, content, writer, regDate, isSecret
+		FROM question
+		WHERE qno = ${qno} AND (isSecret = 'N' OR writer = #{userid})
+	</select>
+	
+	<insert id="registerQuestion" parameterType="QuestionDto">
+		insert into question(category, subject, content, writer, isSecret)
+		values (#{category}, #{subject}, #{content}, #{writer}, #{isSecret})
+	</insert>
+	
+	<update id="updateQuestion" parameterType="QuestionDto">
+		update question
+		<trim prefix="set" suffixOverrides=",">
+			<if test="category != null">category = #{category},</if>
+			<if test="subject != null">subject = #{subject},</if>
+			<if test="content != null">content = #{content},</if>
+			<if test="isSecret != null">isSecret = #{isSecret},</if>
+		</trim>
+		where qno = ${qno} and writer = #{memberId}
+	</update>
+	
+	<delete id="deleteQuestion" parameterType="_int">
+		delete from question
+		where qno = ${qno}
+	</delete>
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.mapper.StoreMapper">
+	
+	<select id="getAroundShop" parameterType="com.ssafy.happyhouse.model.search.StoreSearch" resultType="StoreDtoDistance">
+    	SELECT storeId, storeName, bigType, mediumType, storeType, dongCode, jibunAddress, doroAddress, zipCode,	
+    	TRUNCATE((6371 * Acos(Cos(Radians(${lat})) * Cos(Radians(lat)) * Cos(Radians(lng) - Radians(${lng})) + Sin(Radians(${lat})) * Sin(Radians(lat)))), 3) AS distance
+		FROM store
+		WHERE bigType IN (
+			<foreach collection="categories" item="item" separator=",">
+				#{item}
+			</foreach>
+		)
+		<if test="@com.ssafy.happyhouse.handler.CommonUtilHandler@empty(keyword) == false">
+			AND storeName LIKE '%${keyword}%'</if>
+		<if test="@com.ssafy.happyhouse.handler.CommonUtilHandler@empty(isKidsSafe) == false">
+			AND mediumType NOT IN ('경마/경륜/성인오락', '유흥주점', '모텔/여관/여인숙')
+			AND storeType NOT IN('나이트클럽', '무도유흥주점-종합', '무도장', '극장식유흥주점', '한국식유흥주점')</if>
+		HAVING distance <![CDATA[ <= ]]> #{distance}
+		ORDER BY distance ASC;
+    </select>
+</mapper>
