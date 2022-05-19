@@ -52,12 +52,12 @@
             ></b-nav-item
           >
           <b-nav-item href="#"
-            ><router-link :to="{ name: '' }" class="link">
+            ><router-link :to="{ name: 'about' }" class="link">
               About Us</router-link
             ></b-nav-item
           >
           <b-nav-item href="#"
-            ><router-link :to="{ name: '' }" class="link"
+            ><router-link :to="{ name: 'siteMap' }" class="link"
               >Site Map</router-link
             ></b-nav-item
           >
@@ -90,7 +90,7 @@
             class="col-lg-6 col-md-7 d-flex justify-content-center flex-column"
           >
             <h1 class="text-black mb-4">Happy House</h1>
-            <p class="text-black opacity-8 lead pe-5 me-5">해피하우스</p>
+            <p class="text-black opacity-8 lead pe-5 me-5">행복한 우리집</p>
           </div>
         </div>
       </div>
