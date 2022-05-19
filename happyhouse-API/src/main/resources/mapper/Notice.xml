@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.mapper.NoticeMapper">
+	
+	<select id="viewNoticeList" resultType="NoticeDto">
+		SELECT nno, category, subject, writer, regDate
+		FROM question 
+			
+	</select>
+	
+	<select id="viewNotice" parameterType="String" resultType="NoticeDto">
+		SELECT nno, category, subject, content, writer, regDate
+		FROM notice
+		WHERE nno = ${nno} 
+	</select>
+	
+	<insert id="registerNotice" parameterType="NoticeDto">
+		insert into notice(category, subject, content, writer)
+		values (#{category}, #{subject}, #{content}, #{writer})
+	</insert>
+	
+	<update id="updateNotice" parameterType="NoticeDto">
+		update notice
+		<trim prefix="set" suffixOverrides=",">
+			<if test="category != null">category = #{category},</if>
+			<if test="subject != null">subject = #{subject},</if>
+			<if test="content != null">content = #{content},</if>
+			
+		</trim>
+		where nno = ${nno}
+	</update>
+	
+	<delete id="deleteNotice" parameterType="_int">
+		delete from question
+		where nno = ${nno}
+	</delete>
+</mapper>
