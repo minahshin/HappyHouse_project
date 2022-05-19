@@ -13,7 +13,7 @@
           text-variant="dark"
           border-variant="dark"
         >
-          <template #header>SSAFY Home</template>
+          <template #header>공지사항</template>
           <NoticeListView />
         </b-jumbotron>
       </b-col>
