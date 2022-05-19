@@ -41,6 +41,11 @@
               상권검색</router-link
             ></b-nav-item
           >
+          <b-nav-item href="#" class="notice"
+            ><router-link :to="{ name: 'noticeList' }" class="link">
+              공지사항</router-link
+            ></b-nav-item
+          >
           <b-nav-item href="#" class="qna"
             ><router-link :to="{ name: 'questionList' }" class="link">
               QNA</router-link

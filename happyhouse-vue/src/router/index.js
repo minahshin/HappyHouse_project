@@ -11,6 +11,28 @@ const routes = [
     component: HomeView,
   },
   {
+    path: "/user",
+    name: "user",
+    component: () => import("@/views/MemberView.vue"),
+    children: [
+      {
+        path: "singin",
+        name: "signIn",
+        component: () => import("@/components/user/MemberLogin.vue"),
+      },
+      {
+        path: "singup",
+        name: "signUp",
+        component: () => import("@/components/user/MemberRegister.vue"),
+      },
+      {
+        path: "mypage",
+        name: "mypage",
+        component: () => import("@/components/user/MemberMyPage.vue"),
+      },
+    ],
+  },
+  {
     path: "/qna",
     name: "qna",
     component: () => import("@/views/QuestionView.vue"),
@@ -35,6 +57,34 @@ const routes = [
         path: "regist",
         name: "questionRegist",
         component: () => import("@/components/qna/QuestionRegistView.vue"),
+      },
+    ],
+  },
+  {
+    path: "/notice",
+    name: "notice",
+    component: () => import("@/views/NoticeView.vue"),
+    redirect: "/notice/list",
+    children: [
+      {
+        path: "list",
+        name: "noticeList",
+        component: () => import("@/components/notice/NoticeListView.vue"),
+      },
+      {
+        path: ":notice",
+        name: "noticeView",
+        component: () => import("@/components/notice/NoticeDetailView.vue"),
+      },
+      {
+        path: ":notice/update",
+        name: "noticeUpdate",
+        component: () => import("@/components/notice/NoticeUpdateView.vue"),
+      },
+      {
+        path: "regist",
+        name: "noticeRegist",
+        component: () => import("@/components/notice/NoticeRegistView.vue"),
       },
     ],
   },
