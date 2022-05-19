@@ -27,7 +27,7 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 	
-	@GetMapping("/list")
+	@GetMapping
 	public ResponseEntity<?> viewNoticeList() throws Exception{	
 		return new ResponseEntity<List<NoticeDto>>(noticeService.viewNoticeList(), HttpStatus.OK);	
 	}
