@@ -6,7 +6,7 @@
 	
 	<select id="viewNoticeList" resultType="NoticeDto">
 		SELECT nno, category, subject, writer, regDate
-		FROM question 
+		FROM notice 
 			
 	</select>
 	
