@@ -1,5 +1,45 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <b-container class="bv-example-row mt-3 text-center">
+    <div class="underline-hotpink">About Us</div>
+    <br />
+    Happy House를 소개합니다!
+    <hr />
+
+    <b-row>
+      <b-col>
+        <img src="@/assets/류피.png" />
+      </b-col>
+      <b-col align-self="stretch">
+        <h5>Happy House는 좋은 집을 소개해드립니다.</h5>
+        <hr />
+        의식주 중 가장 중요한 "주"에 관한 고민은 모두가 하실 것입니다. 저희
+        Happy House는 고객님들의 고민을 줄여드리고자 시세 거래 서비스를
+        오픈했습니다. 많은 이용 부탁드립니다.
+        <br /><br /><br />
+        <h5>Happy House 정보</h5>
+        <hr />
+        대표 : 루싸피 위치 : 서울특별시 동대문구 싸피동 123-1 Tel : 02-1234-5678
+        Email : ssafy@happyhouse.com
+        <br />
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
+
+<script>
+export default {
+  name: "AboutView",
+};
+</script>
+
+<style scoped>
+.underline-hotpink {
+  display: inline-block;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(231, 27, 139, 0.3) 30%
+  );
+  font-size: 40px;
+}
+</style>
