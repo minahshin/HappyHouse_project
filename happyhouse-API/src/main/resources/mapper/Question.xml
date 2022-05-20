@@ -45,7 +45,7 @@
 			<if test="content != null">content = #{content},</if>
 			<if test="isSecret != null">isSecret = #{isSecret},</if>
 		</trim>
-		where qno = ${qno} and writer = #{memberId}
+		where qno = ${qno}
 	</update>
 	
 	<delete id="deleteQuestion" parameterType="_int">

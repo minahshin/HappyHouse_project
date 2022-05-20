@@ -63,8 +63,8 @@ public class QuestionController {
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
 	
-	@PutMapping("/{qno}/update")
-	public ResponseEntity<String> updateQuestion(@PathVariable String qno, QuestionDto questionDto, HttpSession session) throws Exception {	
+	@PutMapping("/update")
+	public ResponseEntity<String> updateQuestion(@RequestBody QuestionDto questionDto, HttpSession session) throws Exception {	
 		
 //		MemberDto loginUser = (MemberDto) session.getAttribute("memberDto");
 //		
