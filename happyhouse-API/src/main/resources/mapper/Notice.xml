@@ -33,7 +33,7 @@
 	</update>
 	
 	<delete id="deleteNotice" parameterType="_int">
-		delete from question
+		delete from notice
 		where nno = ${nno}
 	</delete>
 </mapper>

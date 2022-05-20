@@ -39,7 +39,7 @@ public class NoticeController {
 	}
 	
 	@PostMapping("/regist")
-	public ResponseEntity<String> registerQuestion(@RequestBody NoticeDto article, HttpSession session) throws Exception {
+	public ResponseEntity<String> registerNotice(@RequestBody NoticeDto article, HttpSession session) throws Exception {
 		
 //		MemberDto loginUser = (MemberDto) session.getAttribute("memberDto");
 //		
@@ -51,8 +51,8 @@ public class NoticeController {
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
 	
-	@PutMapping("/{nno}/update")
-	public ResponseEntity<String> updateQuestion(@PathVariable String qno, NoticeDto noticeDto, HttpSession session) throws Exception {	
+	@PutMapping("/update")
+	public ResponseEntity<String> updateNotice(@RequestBody NoticeDto noticeDto, HttpSession session) throws Exception {	
 		
 //		MemberDto loginUser = (MemberDto) session.getAttribute("memberDto");
 //		
@@ -66,7 +66,7 @@ public class NoticeController {
 	}
 	
 	@DeleteMapping("/delete/{nno}")
-	public ResponseEntity<String> deleteQuestion(@PathVariable String nno, HttpSession session) throws Exception {
+	public ResponseEntity<String> deleteNotice(@PathVariable String nno, HttpSession session) throws Exception {
 		
 //		MemberDto loginUser = (MemberDto) session.getAttribute("memberDto");
 //		

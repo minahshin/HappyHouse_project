@@ -48,4 +48,10 @@ public class UserServiceDao implements UserService{
 		userMapper.deleteMember(memberId);
 	}
 
+	@Override
+	public MemberDto showInfo(String memberId) throws Exception {
+		
+		return userMapper.showInfo(memberId);
+	}
+
 }
