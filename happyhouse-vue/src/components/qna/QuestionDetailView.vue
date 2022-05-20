@@ -15,10 +15,10 @@
           size="sm"
           @click="moveModifyArticle"
           class="mr-2"
-          >글수정</b-button
+          >글 수정</b-button
         >
         <b-button variant="outline-danger" size="sm" @click="deleteArticle"
-          >글삭제</b-button
+          >글 삭제</b-button
         >
       </b-col>
     </b-row>

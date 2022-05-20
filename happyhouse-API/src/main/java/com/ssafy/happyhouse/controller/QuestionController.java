@@ -65,7 +65,7 @@ public class QuestionController {
 //		if(session.getAttribute("memberDto") == null) {
 //			return new ResponseEntity<String>("로그인 후 이용해주세요", HttpStatus.BAD_REQUEST);
 //		}
-		System.out.println(article);
+		logger.debug(article.toString());
 		questionService.registerQuestion(article);
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}

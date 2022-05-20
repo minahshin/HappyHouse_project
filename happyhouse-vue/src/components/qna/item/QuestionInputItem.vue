@@ -23,7 +23,7 @@
           label="카테고리:"
           label-for="category"
         >
-          <select v-model="article.category">
+          <b-select v-model="article.category">
             <option disabled value="">카테고리를 선택하세요</option>
             <option
               v-for="cate in cateList"
@@ -33,7 +33,7 @@
             >
               {{ cate.text }}
             </option>
-          </select>
+          </b-select>
         </b-form-group>
 
         <b-form-group
@@ -60,6 +60,16 @@
             max-rows="15"
           ></b-form-textarea>
         </b-form-group>
+
+        <b-form-group id="secret-group" label="" label-for="secret">
+          <b-form-checkbox
+            id="secret"
+            v-model="article.isSecret"
+            value="Y"
+            unchecked-value="N"
+            >비밀글 설정</b-form-checkbox
+          ></b-form-group
+        >
 
         <b-button
           type="submit"
@@ -90,7 +100,7 @@ export default {
         writer: "",
         subject: "",
         content: "",
-        isSecret: "N",
+        isSecret: "",
       },
       isWriter: false,
       cateList: [
@@ -158,6 +168,7 @@ export default {
       this.article.category = "";
       this.article.subject = "";
       this.article.content = "";
+      this.article.isSecret = "N";
       this.$router.push({ name: "questionList" });
     },
     registArticle() {
@@ -167,7 +178,7 @@ export default {
           writer: this.article.writer,
           subject: this.article.subject,
           content: this.article.content,
-          isSecret: "N",
+          isSecret: this.article.isSecret,
         })
         .then(({ data }) => {
           let msg = "등록 처리시 문제가 발생했습니다.";
@@ -186,6 +197,7 @@ export default {
           subject: this.article.subject,
           content: this.article.content,
           category: this.article.category,
+          isSecret: this.article.isSecret,
         })
         .then(({ data }) => {
           let msg = "수정 처리시 문제가 발생했습니다.";
