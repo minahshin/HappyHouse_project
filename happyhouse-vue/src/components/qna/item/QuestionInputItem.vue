@@ -98,7 +98,7 @@ export default {
   created() {
     if (this.type === "modify") {
       http.get(`/question/${this.$route.params.qno}`).then(({ data }) => {
-        this.article = data;
+        this.article = data.question;
       });
       this.isWriter = true;
     }
@@ -156,7 +156,7 @@ export default {
     },
     modifyArticle() {
       http
-        .put(`/question/update/${this.article.qno}`, {
+        .put(`/question/update`, {
           qno: this.article.qno,
           writer: this.article.writer,
           subject: this.article.subject,

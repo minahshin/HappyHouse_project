@@ -60,7 +60,7 @@ const routes = [
         component: () => import("@/components/qna/QuestionDetailView.vue"),
       },
       {
-        path: ":qno/update",
+        path: "update",
         name: "questionUpdate",
         component: () => import("@/components/qna/QuestionUpdateView.vue"),
       },
@@ -88,7 +88,7 @@ const routes = [
         component: () => import("@/components/notice/NoticeDetailView.vue"),
       },
       {
-        path: ":nno/update",
+        path: "update",
         name: "noticeUpdate",
         component: () => import("@/components/notice/NoticeUpdateView.vue"),
       },
