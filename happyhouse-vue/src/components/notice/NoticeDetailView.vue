@@ -82,8 +82,9 @@ export default {
       //   this.$router.push({ path: `/board/modify/${this.article.articleno}` });
     },
     deleteArticle() {
-      if (confirm("정말로 삭제?")) {
+      if (confirm("삭제하시겠습니까?")) {
         http.delete(`/notice/delete/${this.$route.params.nno}`);
+        alert("삭제되었습니다.");
         this.$router.push({ name: "noticeList" });
       }
     },

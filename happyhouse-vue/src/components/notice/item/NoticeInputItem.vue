@@ -154,8 +154,8 @@ export default {
     },
     modifyArticle() {
       http
-        .put(`/notice/update/${this.article.nno}`, {
-          qno: this.article.nno,
+        .put(`/notice/update`, {
+          nno: this.article.nno,
           writer: this.article.writer,
           subject: this.article.subject,
           content: this.article.content,

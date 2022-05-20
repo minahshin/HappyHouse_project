@@ -22,18 +22,13 @@
             </router-link></b-nav-item
           >
           <b-nav-item href="#"
-            ><router-link :to="{ name: '' }" class="link">
+            ><router-link :to="{ name: 'house' }" class="link">
               시세검색</router-link
             ></b-nav-item
           >
           <b-nav-item href="#"
             ><router-link :to="{ name: '' }" class="link">
               즐겨찾기</router-link
-            ></b-nav-item
-          >
-          <b-nav-item href="#"
-            ><router-link :to="{ name: '' }" class="link">
-              지역정보</router-link
             ></b-nav-item
           >
           <b-nav-item href="#"

@@ -22,6 +22,11 @@ const routes = [
     component: () => import("@/views/SiteMap.vue"),
   },
   {
+    path: "/house",
+    name: "house",
+    component: () => import("@/views/HouseView.vue"),
+  },
+  {
     path: "/user",
     name: "user",
     component: () => import("@/views/MemberView.vue"),
