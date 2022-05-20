@@ -2,16 +2,19 @@
   <div id="app">
     <navi-bar />
     <router-view />
+    <main-footer />
   </div>
 </template>
 
 <script>
 import NaviBar from "@/components/layout/HeaderNaviBar.vue";
+import MainFooter from "@/components/layout/MainFooter.vue";
 
 export default {
   name: "App",
   components: {
     NaviBar,
+    MainFooter,
   },
 };
 </script>
