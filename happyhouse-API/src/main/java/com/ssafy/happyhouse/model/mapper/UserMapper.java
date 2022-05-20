@@ -16,4 +16,5 @@ public interface UserMapper {
 	void updateMember(MemberDto memberDto) throws Exception;
 	void deleteMember(String memberId) throws Exception;
 
+	
 }

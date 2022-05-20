@@ -45,6 +45,7 @@ public class UserServiceDao implements UserService{
 
 	@Override
 	public void deleteMember(String memberId) throws Exception {
+		
 		userMapper.deleteMember(memberId);
 	}
 
