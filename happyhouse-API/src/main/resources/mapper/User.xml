@@ -21,8 +21,13 @@
 		where memberId = #{memberId} and memberEmail = #{memberEmail}
 	</select>
 	
+	<select id="showInfo" parameterType="map" resultType="MemberDto">
+		select memberName, memberId, memberPw, memberEmail,memberTel, isManager
+		from member
+		where memberId = #{memberId}
+	</select>
 	
-	<select id="login" parameterType="map" resultType="MemberDto">
+	<select id="login" parameterType="memberDto" resultType="MemberDto">
 		select memberName, memberId, memberPw, memberEmail,memberTel, isManager
 		from member
 		where memberId = #{memberId} and memberPw = #{memberPw}
