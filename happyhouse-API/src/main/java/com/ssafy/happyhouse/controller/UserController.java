@@ -22,12 +22,12 @@ import com.ssafy.happyhouse.model.NoticeDto;
 import com.ssafy.happyhouse.model.service.UserService;
 import com.ssafy.happyhouse.model.service.UserSha256;
 
-
 @RestController
 @RequestMapping("/user")
 public class UserController {
 	@Autowired
 	private UserService userService;
+	
 	
 	//모르겠음
 	@GetMapping("/{userid}/userinfo")
