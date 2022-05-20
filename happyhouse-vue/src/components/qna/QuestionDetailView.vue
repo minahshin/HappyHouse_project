@@ -15,10 +15,10 @@
           size="sm"
           @click="moveModifyArticle"
           class="mr-2"
-          >글수정</b-button
+          >글 수정</b-button
         >
         <b-button variant="outline-danger" size="sm" @click="deleteArticle"
-          >글삭제</b-button
+          >글 삭제</b-button
         >
       </b-col>
     </b-row>
@@ -26,7 +26,7 @@
       <b-col>
         <b-card
           :header-html="`<h3>${article.qno}.
-          [${article.category}] ${article.subject}</h3><div><h6>${article.writer}</div><div>${article.regtime}</h6></div>`"
+          [${article.category}] ${article.subject}</h3><div><h6>작성자 : ${article.writer}</div><div>등록 시간 : ${article.regDate}</h6></div>`"
           class="mb-2"
           border-variant="dark"
           no-body
@@ -48,14 +48,7 @@ export default {
   name: "QuestionDetail",
   data() {
     return {
-      article: {
-        qno: 0,
-        category: "",
-        writer: "",
-        subject: "",
-        content: "",
-        isSecret: "N",
-      },
+      article: {},
     };
   },
   computed: {
@@ -67,7 +60,7 @@ export default {
   },
   created() {
     http.get(`/question/${this.$route.params.qno}`).then(({ data }) => {
-      this.article = data;
+      this.article = data.question;
     });
   },
   methods: {
@@ -82,8 +75,9 @@ export default {
       //   this.$router.push({ path: `/board/modify/${this.article.articleno}` });
     },
     deleteArticle() {
-      if (confirm("정말로 삭제?")) {
+      if (confirm("삭제하시겠습니까?")) {
         http.delete(`/question/delete/${this.$route.params.qno}`);
+        alert("삭제되었습니다.");
         this.$router.push({ name: "questionList" });
       }
     },

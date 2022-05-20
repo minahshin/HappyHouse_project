@@ -22,6 +22,11 @@ const routes = [
     component: () => import("@/views/SiteMap.vue"),
   },
   {
+    path: "/house",
+    name: "house",
+    component: () => import("@/views/HouseView.vue"),
+  },
+  {
     path: "/user",
     name: "user",
     component: () => import("@/views/MemberView.vue"),
@@ -55,12 +60,7 @@ const routes = [
         component: () => import("@/components/qna/QuestionListView.vue"),
       },
       {
-        path: ":qno",
-        name: "questionView",
-        component: () => import("@/components/qna/QuestionDetailView.vue"),
-      },
-      {
-        path: ":qno/update",
+        path: "update",
         name: "questionUpdate",
         component: () => import("@/components/qna/QuestionUpdateView.vue"),
       },
@@ -68,6 +68,11 @@ const routes = [
         path: "regist",
         name: "questionRegist",
         component: () => import("@/components/qna/QuestionRegistView.vue"),
+      },
+      {
+        path: ":qno",
+        name: "questionView",
+        component: () => import("@/components/qna/QuestionDetailView.vue"),
       },
     ],
   },
@@ -88,7 +93,7 @@ const routes = [
         component: () => import("@/components/notice/NoticeDetailView.vue"),
       },
       {
-        path: ":nno/update",
+        path: "update",
         name: "noticeUpdate",
         component: () => import("@/components/notice/NoticeUpdateView.vue"),
       },
