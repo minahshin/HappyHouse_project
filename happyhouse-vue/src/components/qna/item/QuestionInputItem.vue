@@ -22,15 +22,18 @@
           id="category-group"
           label="카테고리:"
           label-for="category"
-          description="카테고리를 입력하세요."
         >
-          <b-form-input
-            id="category"
-            v-model="article.category"
-            type="text"
-            required
-            placeholder="카테고리 입력..."
-          ></b-form-input>
+          <select v-model="article.category">
+            <option disabled value="">카테고리를 선택하세요</option>
+            <option
+              v-for="cate in cateList"
+              :value="cate.value"
+              :key="cate.text"
+              required
+            >
+              {{ cate.text }}
+            </option>
+          </select>
         </b-form-group>
 
         <b-form-group
@@ -90,6 +93,24 @@ export default {
         isSecret: "N",
       },
       isWriter: false,
+      cateList: [
+        {
+          text: "회원 관련 문의",
+          value: "회원",
+        },
+        {
+          text: "사이트 이용 관련 문의",
+          value: "사이트 이용",
+        },
+        {
+          text: "부적절한 사용자 및 컨텐츠 신고",
+          value: "신고",
+        },
+        {
+          text: "기타 문의",
+          value: "기타",
+        },
+      ],
     };
   },
   props: {
@@ -113,6 +134,9 @@ export default {
         ((msg = "작성자 입력해주세요"),
         (err = false),
         this.$refs.writer.focus());
+      err &&
+        !this.article.category &&
+        ((msg = "카테고리를 선택해주세요"), (err = false));
       err &&
         !this.article.subject &&
         ((msg = "제목 입력해주세요"),

@@ -55,11 +55,6 @@ const routes = [
         component: () => import("@/components/qna/QuestionListView.vue"),
       },
       {
-        path: ":qno",
-        name: "questionView",
-        component: () => import("@/components/qna/QuestionDetailView.vue"),
-      },
-      {
         path: "update",
         name: "questionUpdate",
         component: () => import("@/components/qna/QuestionUpdateView.vue"),
@@ -68,6 +63,11 @@ const routes = [
         path: "regist",
         name: "questionRegist",
         component: () => import("@/components/qna/QuestionRegistView.vue"),
+      },
+      {
+        path: ":qno",
+        name: "questionView",
+        component: () => import("@/components/qna/QuestionDetailView.vue"),
       },
     ],
   },
