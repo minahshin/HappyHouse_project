@@ -33,9 +33,9 @@ public class UserServiceDao implements UserService{
 	}
 
 	@Override
-	public MemberDto login(Map<String, String> map) throws Exception {
+	public MemberDto login(MemberDto memberDto) throws Exception {
 		
-		return userMapper.login(map);
+		return userMapper.login(memberDto);
 	}
 
 	@Override
