@@ -30,4 +30,10 @@ public class QuestionSearch {
 	public String getWriter() {
 		return writer;
 	}
+
+	@Override
+	public String toString() {
+		return "QuestionSearch [userid=" + userid + ", categories=" + categories + ", keyword=" + keyword + ", writer="
+				+ writer + "]";
+	}
 }
