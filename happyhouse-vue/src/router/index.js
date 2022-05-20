@@ -83,12 +83,12 @@ const routes = [
         component: () => import("@/components/notice/NoticeListView.vue"),
       },
       {
-        path: ":notice",
+        path: ":nno",
         name: "noticeView",
         component: () => import("@/components/notice/NoticeDetailView.vue"),
       },
       {
-        path: ":notice/update",
+        path: ":nno/update",
         name: "noticeUpdate",
         component: () => import("@/components/notice/NoticeUpdateView.vue"),
       },

@@ -1,12 +1,12 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="dark">
+    <b-navbar toggleable="lg" type="dark" variant="dark" fixed="top">
       <b-navbar-brand href="#">
         <router-link to="/">
           <img
             src="@/assets/류피.png"
             class="d-inline-block align-middle"
-            width="80px"
+            width="70px"
             alt="ssafy"
           />
         </router-link>
