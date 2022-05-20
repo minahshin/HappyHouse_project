@@ -16,7 +16,7 @@
             <b-form-group label="아이디:" label-for="userid">
               <b-form-input
                 id="userid"
-                v-model="user.userid"
+                v-model="memberDto.memberId"
                 required
                 placeholder="아이디 입력...."
                 @keyup.enter="confirm"
@@ -26,7 +26,7 @@
               <b-form-input
                 type="password"
                 id="userpwd"
-                v-model="user.userpwd"
+                v-model="memberDto.memberPw"
                 required
                 placeholder="비밀번호 입력...."
                 @keyup.enter="confirm"
@@ -63,9 +63,9 @@ export default {
   name: "MemberLogin",
   data() {
     return {
-      user: {
-        userid: null,
-        userpwd: null,
+      memberDto: {
+        memberId: null,
+        memberPw: null,
       },
     };
   },
@@ -75,7 +75,7 @@ export default {
   methods: {
     ...mapActions(memberStore, ["userConfirm", "getUserInfo"]),
     async confirm() {
-      await this.userConfirm(this.user);
+      await this.userConfirm(this.memberDto);
       let token = sessionStorage.getItem("access-token");
       if (this.isLogin) {
         await this.getUserInfo(token);
