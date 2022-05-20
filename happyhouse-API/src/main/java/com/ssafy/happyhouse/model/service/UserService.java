@@ -10,6 +10,7 @@ public interface UserService {
 	int idCheck(String memberId) throws Exception;
 	void registerMember(MemberDto memberDto) throws Exception;
 	MemberDto login(Map<String,String> map) throws Exception;
+	MemberDto showInfo(String memberId) throws Exception;
 	void updateMember(MemberDto memberDto) throws Exception;
 	void deleteMember(String memberId) throws Exception;
 
