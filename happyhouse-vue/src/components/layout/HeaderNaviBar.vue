@@ -64,12 +64,10 @@
               variant="primary"
               v-text="userInfo ? userInfo.memberId.charAt(0).toUpperCase() : ''"
             ></b-avatar
-            >{{ userInfo.memberName }}님 환영합니다.</b-nav-item
+            >{{ userInfo.memberId }}님 환영합니다.</b-nav-item
           >
           <b-nav-item class="align-self-center"
-            ><router-link
-              :to="{ name: 'mypage' }"
-              class="link align-self-center"
+            ><router-link :to="{ name: '' }" class="link align-self-center"
               >즐겨찾기</router-link
             ></b-nav-item
           >
@@ -97,7 +95,7 @@
               ></b-dropdown-item
             >
             <b-dropdown-item href="#"
-              ><router-link :to="{ name: 'login' }" class="link"
+              ><router-link :to="{ name: 'signIn' }" class="link"
                 ><b-icon icon="key"></b-icon> 로그인</router-link
               ></b-dropdown-item
             >

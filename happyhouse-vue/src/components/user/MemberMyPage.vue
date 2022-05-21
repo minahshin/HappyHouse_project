@@ -58,9 +58,7 @@
             ></b-button
           >
           <b-button variant="danger" href="#"
-            ><router-link
-              :to="{ name: 'mypage' }"
-              class="link align-self-center"
+            ><router-link :to="{ name: '' }" class="link align-self-center"
               >회원탈퇴</router-link
             ></b-button
           >
