@@ -19,36 +19,51 @@
             <b-row>
               <b-col cols="2"></b-col>
               <b-col cols="2" align-self="end">아이디</b-col
-              ><b-col cols="4" align-self="start">{{ userInfo.userid }}</b-col>
+              ><b-col cols="4" align-self="start">{{
+                userInfo.memberId
+              }}</b-col>
               <b-col cols="2"></b-col>
             </b-row>
             <b-row>
               <b-col cols="2"></b-col>
               <b-col cols="2" align-self="end">이름</b-col
               ><b-col cols="4" align-self="start">{{
-                userInfo.username
+                userInfo.memberName
               }}</b-col>
               <b-col cols="2"></b-col>
             </b-row>
             <b-row>
               <b-col cols="2"></b-col>
               <b-col cols="2" align-self="end">이메일</b-col
-              ><b-col cols="4" align-self="start">{{ userInfo.email }}</b-col>
+              ><b-col cols="4" align-self="start">{{
+                userInfo.memberEmail
+              }}</b-col>
               <b-col cols="2"></b-col>
             </b-row>
             <b-row>
               <b-col cols="2"></b-col>
-              <b-col cols="2" align-self="end">가입일</b-col
+              <b-col cols="2" align-self="end">전화번호</b-col
               ><b-col cols="4" align-self="start">{{
-                userInfo.joindate
+                userInfo.memberTel
               }}</b-col>
               <b-col cols="2"></b-col>
             </b-row>
           </b-container>
           <hr class="my-4" />
-
-          <b-button variant="primary" href="#" class="mr-1">정보수정</b-button>
-          <b-button variant="danger" href="#">회원탈퇴</b-button>
+          <b-button variant="primary" href="#" class="mr-1"
+            ><router-link
+              :to="{ name: 'memberUpdate' }"
+              class="link align-self-center"
+              >정보수정</router-link
+            ></b-button
+          >
+          <b-button variant="danger" href="#"
+            ><router-link
+              :to="{ name: 'mypage' }"
+              class="link align-self-center"
+              >회원탈퇴</router-link
+            ></b-button
+          >
         </b-jumbotron>
       </b-col>
       <b-col></b-col>
@@ -58,6 +73,7 @@
 
 <script>
 import { mapState } from "vuex";
+import http from "@/api/http";
 
 const memberStore = "memberStore";
 
@@ -66,6 +82,23 @@ export default {
   components: {},
   computed: {
     ...mapState(memberStore, ["userInfo"]),
+  },
+
+  methods: {
+    moveModifyArticle() {
+      this.$router.replace({
+        name: "memberUpdate",
+        params: { nno: this.$route.params.memberId },
+      });
+      //   this.$router.push({ path: `/board/modify/${this.article.articleno}` });
+    },
+    deleteArticle() {
+      if (confirm("삭제하시겠습니까?")) {
+        http.delete(`/notice/delete/${this.$route.params.nno}`);
+        alert("삭제되었습니다.");
+        this.$router.push({ name: "noticeList" });
+      }
+    },
   },
 };
 </script>
