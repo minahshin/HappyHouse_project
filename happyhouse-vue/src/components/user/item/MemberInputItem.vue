@@ -4,7 +4,7 @@
     <b-col cols="8">
       <b-card class="text-center mt-3" style="max-width: 40rem" align="left">
         <b-form class="text-left" @submit="onSubmit" @reset="onReset">
-          <b-form-group id="writer-group" label="아이디:" label-for="memberId">
+          <b-form-group label="아이디:" label-for="memberId">
             <b-form-input
               id="memberId"
               :disabled="isWriter"
@@ -58,7 +58,7 @@
             >가입완료</b-button
           >
           <b-button type="submit" variant="primary" class="m-1" v-else
-            >수정 완료</b-button
+            >회원정보수정</b-button
           >
         </b-form>
       </b-card>
@@ -89,9 +89,11 @@ export default {
   },
   created() {
     if (this.type === "modify") {
-      http.get(`/user/info/${this.$route.params.memberId}`).then(({ data }) => {
-        this.memberDto = data;
-      });
+      http
+        .get(`/notice/userinfo/${this.$route.params.memberId}`)
+        .then(({ data }) => {
+          this.memberDto = data;
+        });
       this.isWriter = true;
     }
   },
@@ -154,12 +156,12 @@ export default {
     },
     modifyArticle() {
       http
-        .get(`/user/update`, {
-          memberId: this.memberDto.memberId,
-          memberPw: this.memberDto.memberPw,
-          memberName: this.memberDto.memberName,
-          memberEmail: this.memberDto.memberEmail,
-          memberTel: this.memberDto.memberTel,
+        .get(`/user/userinfo`, {
+          nno: this.article.nno,
+          writer: this.article.writer,
+          subject: this.article.subject,
+          content: this.article.content,
+          category: this.article.category,
         })
         .then(({ data }) => {
           let msg = "수정 처리시 문제가 발생했습니다.";
@@ -168,11 +170,11 @@ export default {
           }
           alert(msg);
           // 현재 route를 /list로 변경.
-          this.$router.push({ name: "mypage" });
+          this.$router.push({ name: "home" });
         });
     },
     moveList() {
-      this.$router.push({ name: "login" });
+      this.$router.push({ name: "signIn" });
     },
   },
 };
