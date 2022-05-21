@@ -27,12 +27,7 @@
             ></b-nav-item
           >
           <b-nav-item href="#"
-            ><router-link :to="{ name: '' }" class="link">
-              즐겨찾기</router-link
-            ></b-nav-item
-          >
-          <b-nav-item href="#"
-            ><router-link :to="{ name: '' }" class="link">
+            ><router-link :to="{ name: 'store' }" class="link">
               상권검색</router-link
             ></b-nav-item
           >
@@ -67,7 +62,9 @@
             >{{ userInfo.memberId }}님 환영합니다.</b-nav-item
           >
           <b-nav-item class="align-self-center"
-            ><router-link :to="{ name: '' }" class="link align-self-center"
+            ><router-link
+              :to="{ name: 'favorite' }"
+              class="link align-self-center"
               >즐겨찾기</router-link
             ></b-nav-item
           >

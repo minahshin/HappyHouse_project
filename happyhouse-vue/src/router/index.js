@@ -38,9 +38,19 @@ const routes = [
     component: AboutView,
   },
   {
-    path: "siteMap",
+    path: "/siteMap",
     name: "siteMap",
     component: () => import("@/views/SiteMap.vue"),
+  },
+  {
+    path: "/favorite",
+    name: "favorite",
+    component: () => import("@/views/FavoriteView.vue"),
+  },
+  {
+    path: "/store",
+    name: "store",
+    component: () => import("@/views/StoreView.vue"),
   },
   {
     path: "/house",
