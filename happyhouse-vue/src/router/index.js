@@ -87,6 +87,7 @@ const routes = [
       {
         path: "update",
         name: "memberUpdate",
+        beforeEnter: onlyAuthUser,
         component: () => import("@/components/user/MemberUpdate.vue"),
       },
     ],
@@ -143,6 +144,7 @@ const routes = [
       {
         path: "regist",
         name: "noticeRegist",
+        beforeEnter: onlyAuthUser,
         component: () => import("@/components/notice/NoticeRegistView.vue"),
       },
     ],

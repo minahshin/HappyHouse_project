@@ -60,6 +60,7 @@
           <b-button type="submit" variant="primary" class="m-1" v-else
             >회원정보수정</b-button
           >
+          <b-button type="reset" variant="danger" class="m-1">초기화</b-button>
         </b-form>
       </b-card>
     </b-col>
@@ -68,7 +69,10 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
 import http from "@/api/http";
+
+const memberStore = "memberStore";
 
 export default {
   name: "MemberInputItem",
@@ -87,22 +91,26 @@ export default {
   props: {
     type: { type: String },
   },
+  computed: {
+    ...mapState(memberStore, ["userInfo"]),
+  },
   created() {
     if (this.type === "modify") {
-      http
-        .get(`/notice/userinfo/${this.$route.params.memberId}`)
-        .then(({ data }) => {
-          this.memberDto = data;
-        });
+      http.get(`/user/${this.userInfo.memberId}`).then(({ data }) => {
+        this.memberDto = data;
+        this.memberDto.memberPw = "";
+      });
       this.isWriter = true;
     }
   },
   methods: {
+    ...mapMutations(memberStore, ["SET_IS_LOGIN", "SET_USER_INFO"]),
     onSubmit(event) {
       event.preventDefault();
 
       let err = true;
       let msg = "";
+
       !this.memberDto.memberId &&
         ((msg = "아이디를 입력해주세요"),
         (err = false),
@@ -134,7 +142,6 @@ export default {
       this.memberDto.memberName = "";
       this.memberDto.memberEmail = "";
       this.memberDto.memberTel = "";
-      this.$router.push({ name: "home" });
     },
     registArticle() {
       http
@@ -156,21 +163,24 @@ export default {
     },
     modifyArticle() {
       http
-        .get(`/user/userinfo`, {
-          nno: this.article.nno,
-          writer: this.article.writer,
-          subject: this.article.subject,
-          content: this.article.content,
-          category: this.article.category,
+        .put(`/user/update`, {
+          memberId: this.memberDto.memberId,
+          memberPw: this.memberDto.memberPw,
+          memberName: this.memberDto.memberName,
+          memberEmail: this.memberDto.memberEmail,
+          memberTel: this.memberDto.memberTel,
         })
         .then(({ data }) => {
           let msg = "수정 처리시 문제가 발생했습니다.";
           if (data === "success") {
-            msg = "수정이 완료되었습니다.";
+            msg = "수정이 완료되었습니다. 다시 로그인해주세요.";
           }
           alert(msg);
           // 현재 route를 /list로 변경.
-          this.$router.push({ name: "home" });
+          this.SET_IS_LOGIN(false);
+          this.SET_USER_INFO(null);
+          sessionStorage.removeItem("access-token");
+          this.$router.push({ name: "signIn" });
         });
     },
     moveList() {
