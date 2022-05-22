@@ -5,15 +5,21 @@ import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+import memberStore from "@/store/modules/memberStore.js";
+
+const store = new Vuex.Store({
   state: {},
   getters: {},
   mutations: {},
   actions: {},
-  modules: {},
+  modules: {
+    memberStore,
+  },
   plugins: [
     createPersistedState({
       storage: sessionStorage,
     }),
   ],
 });
+
+export default store;
