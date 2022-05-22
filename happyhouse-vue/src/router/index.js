@@ -38,9 +38,19 @@ const routes = [
     component: AboutView,
   },
   {
-    path: "siteMap",
+    path: "/siteMap",
     name: "siteMap",
     component: () => import("@/views/SiteMap.vue"),
+  },
+  {
+    path: "/favorite",
+    name: "favorite",
+    component: () => import("@/views/FavoriteView.vue"),
+  },
+  {
+    path: "/store",
+    name: "store",
+    component: () => import("@/views/StoreView.vue"),
   },
   {
     path: "/house",
@@ -53,12 +63,18 @@ const routes = [
     component: () => import("@/views/MemberView.vue"),
     children: [
       {
-        path: "login",
-        name: "login",
+        path: "mypage",
+        name: "mypage",
+        beforeEnter: onlyAuthUser,
+        component: () => import("@/components/user/MemberMyPage.vue"),
+      },
+      {
+        path: "signin",
+        name: "signIn",
         component: () => import("@/components/user/MemberLogin.vue"),
       },
       {
-        path: "singup",
+        path: "signup",
         name: "signUp",
         component: () => import("@/components/user/MemberRegister.vue"),
       },
@@ -67,6 +83,12 @@ const routes = [
         name: "userinfo",
         beforeEnter: onlyAuthUser,
         component: () => import("@/components/user/MemberMyPage.vue"),
+      },
+      {
+        path: "update",
+        name: "memberUpdate",
+        beforeEnter: onlyAuthUser,
+        component: () => import("@/components/user/MemberUpdate.vue"),
       },
     ],
   },
@@ -127,6 +149,7 @@ const routes = [
       {
         path: "regist",
         name: "noticeRegist",
+        beforeEnter: onlyAuthUser,
         component: () => import("@/components/notice/NoticeRegistView.vue"),
       },
     ],

@@ -10,7 +10,7 @@
         >
           <b-form-input
             id="writer"
-            :disabled="isWriter"
+            :disabled="true"
             v-model="article.writer"
             type="text"
             required
@@ -68,27 +68,29 @@
         <b-button type="submit" variant="primary" class="m-1" v-else
           >글수정</b-button
         >
-        <b-button type="reset" variant="danger" class="m-1">초기화</b-button>
+        <b-button type="reset" variant="danger" class="m-1">취소</b-button>
       </b-form>
     </b-col>
   </b-row>
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
 import http from "@/api/http";
+
+const memberStore = "memberStore";
 
 export default {
   name: "NoticeInputItem",
   data() {
     return {
       article: {
-        qno: 0,
+        nno: 0,
         category: "",
         writer: "",
         subject: "",
         content: "",
       },
-      isWriter: false,
     };
   },
   props: {
@@ -99,10 +101,15 @@ export default {
       http.get(`/notice/${this.$route.params.nno}`).then(({ data }) => {
         this.article = data;
       });
-      this.isWriter = true;
     }
+    this.article.writer = this.userInfo.memberId;
+  },
+
+  computed: {
+    ...mapState(memberStore, ["userInfo"]),
   },
   methods: {
+    ...mapMutations(memberStore, ["SET_USER_INFO"]),
     onSubmit(event) {
       event.preventDefault();
 
@@ -129,10 +136,7 @@ export default {
     },
     onReset(event) {
       event.preventDefault();
-      this.article.nno = 0;
-      this.article.category = "";
-      this.article.subject = "";
-      this.article.content = "";
+
       this.$router.push({ name: "noticeList" });
     },
     registArticle() {

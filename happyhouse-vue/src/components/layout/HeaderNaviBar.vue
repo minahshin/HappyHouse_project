@@ -27,12 +27,7 @@
             ></b-nav-item
           >
           <b-nav-item href="#"
-            ><router-link :to="{ name: '' }" class="link">
-              즐겨찾기</router-link
-            ></b-nav-item
-          >
-          <b-nav-item href="#"
-            ><router-link :to="{ name: '' }" class="link">
+            ><router-link :to="{ name: 'store' }" class="link">
               상권검색</router-link
             ></b-nav-item
           >
@@ -62,10 +57,16 @@
           <b-nav-item class="align-self-center"
             ><b-avatar
               variant="primary"
-              v-text="userInfo ? userInfo.userid.charAt(0).toUpperCase() : ''"
+              v-text="userInfo ? userInfo.memberId.charAt(0).toUpperCase() : ''"
             ></b-avatar
-            >{{ userInfo.username }}({{ userInfo.userid }})님
-            환영합니다.</b-nav-item
+            >{{ userInfo.memberId }}님 환영합니다.</b-nav-item
+          >
+          <b-nav-item class="align-self-center"
+            ><router-link
+              :to="{ name: 'favorite' }"
+              class="link align-self-center"
+              >즐겨찾기</router-link
+            ></b-nav-item
           >
           <b-nav-item class="align-self-center"
             ><router-link
@@ -91,7 +92,7 @@
               ></b-dropdown-item
             >
             <b-dropdown-item href="#"
-              ><router-link :to="{ name: 'login' }" class="link"
+              ><router-link :to="{ name: 'signIn' }" class="link"
                 ><b-icon icon="key"></b-icon> 로그인</router-link
               ></b-dropdown-item
             >
