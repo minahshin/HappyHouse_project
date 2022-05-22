@@ -15,7 +15,7 @@
 		WHERE <!-- writer = #{userid} OR--> isSecret = 'N'
 			<if test="@com.ssafy.happyhouse.handler.CommonUtilHandler@empty(categories) == false">
 			AND category IN (
-				<foreach collection="categories" item="item" separator=",">
+				<foreach collection="categoryList" item="item" separator=",">
 					#{item}
 				</foreach>
 			)</if>
