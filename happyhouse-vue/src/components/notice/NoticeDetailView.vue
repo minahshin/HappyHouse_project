@@ -15,9 +15,14 @@
           size="sm"
           @click="moveModifyArticle"
           class="mr-2"
+          v-show="islogin"
           >글수정</b-button
         >
-        <b-button variant="outline-danger" size="sm" @click="deleteArticle"
+        <b-button
+          variant="outline-danger"
+          size="sm"
+          @click="deleteArticle"
+          v-show="islogin"
           >글삭제</b-button
         >
       </b-col>
@@ -43,6 +48,9 @@
 <script>
 // import moment from "moment";
 import http from "@/api/http";
+import { mapState, mapMutations } from "vuex";
+
+const memberStore = "memberStore";
 
 export default {
   name: "NoticeDetail",
@@ -56,9 +64,11 @@ export default {
         content: "",
         regDate: "",
       },
+      islogin: false,
     };
   },
   computed: {
+    ...mapState(memberStore, ["userInfo"]),
     message() {
       if (this.article.content)
         return this.article.content.split("\n").join("<br>");
@@ -68,9 +78,11 @@ export default {
   created() {
     http.get(`/notice/${this.$route.params.nno}`).then(({ data }) => {
       this.article = data;
+      if (this.article.writer == this.userInfo.memberId) this.islogin = true;
     });
   },
   methods: {
+    ...mapMutations(memberStore, ["SET_USER_INFO"]),
     listArticle() {
       this.$router.push({ name: "noticeList" });
     },

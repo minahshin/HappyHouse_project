@@ -50,18 +50,17 @@
             </b-row>
           </b-container>
           <hr class="my-4" />
-          <b-button variant="primary" href="#" class="mr-1"
-            ><router-link
-              :to="{ name: 'memberUpdate' }"
-              class="link align-self-center"
-              >정보수정</router-link
-            ></b-button
+          <b-button
+            variant="primary"
+            href="#"
+            class="mr-1"
+            @click="moveModifyMember"
           >
-          <b-button variant="danger" href="#"
-            ><router-link :to="{ name: '' }" class="link align-self-center"
-              >회원탈퇴</router-link
-            ></b-button
-          >
+            정보수정
+          </b-button>
+          <b-button variant="danger" href="#" @click="deleteMember"
+            >회원탈퇴
+          </b-button>
         </b-jumbotron>
       </b-col>
       <b-col></b-col>
@@ -70,7 +69,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 import http from "@/api/http";
 
 const memberStore = "memberStore";
@@ -83,18 +82,19 @@ export default {
   },
 
   methods: {
-    moveModifyArticle() {
-      this.$router.replace({
-        name: "memberUpdate",
-        params: { nno: this.$route.params.memberId },
-      });
+    ...mapMutations(memberStore, ["SET_IS_LOGIN", "SET_USER_INFO"]),
+    moveModifyMember() {
+      this.$router.push({ name: "memberUpdate" });
       //   this.$router.push({ path: `/board/modify/${this.article.articleno}` });
     },
-    deleteArticle() {
+    deleteMember() {
       if (confirm("삭제하시겠습니까?")) {
-        http.delete(`/notice/delete/${this.$route.params.nno}`);
+        http.delete(`/user/delete/${this.userInfo.memberId}`);
         alert("삭제되었습니다.");
-        this.$router.push({ name: "noticeList" });
+        this.SET_IS_LOGIN(false);
+        this.SET_USER_INFO(null);
+        sessionStorage.removeItem("access-token");
+        this.$router.push({ name: "home" });
       }
     },
   },
