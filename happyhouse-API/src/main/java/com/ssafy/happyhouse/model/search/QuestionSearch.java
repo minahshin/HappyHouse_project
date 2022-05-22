@@ -40,6 +40,26 @@ public class QuestionSearch {
 	public List<String> getCategoryList() {
 		return categoryList;
 	}
+	
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public void setCategories(String categories) {
+		this.categories = categories;
+	}
+
+	public void setCategoryList(List<String> categoryList) {
+		this.categoryList = categoryList;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
 
 	@Override
 	public String toString() {
