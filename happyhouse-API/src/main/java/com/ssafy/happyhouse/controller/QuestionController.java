@@ -35,9 +35,17 @@ public class QuestionController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@GetMapping
-	public ResponseEntity<?> viewQuestionSearchList(@ModelAttribute QuestionSearch search, BindingResult error) throws Exception {
+	public ResponseEntity<?> viewQuestionSearchList(@ModelAttribute QuestionSearch search) throws Exception {
+		
 		logger.debug(search.toString());
-		return new ResponseEntity<List<QuestionDto>>(questionService.viewQuestionList(search), HttpStatus.OK);
+		
+		List<QuestionDto> questionList = questionService.viewQuestionList(search);
+		
+		if(questionList.size() == 0) {
+			return new ResponseEntity<String>("no_result", HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<List<QuestionDto>>(questionList, HttpStatus.OK);
 	}
 	
 	// 열람
