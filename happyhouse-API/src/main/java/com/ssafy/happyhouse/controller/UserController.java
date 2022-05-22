@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.happyhouse.model.MemberDto;
+import com.ssafy.happyhouse.model.NoticeDto;
 import com.ssafy.happyhouse.model.service.JwtServiceImpl;
 import com.ssafy.happyhouse.model.service.UserService;
 import com.ssafy.happyhouse.model.service.UserSha256;
@@ -44,11 +46,12 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-//	@GetMapping("/{userid}/userinfo")
-//	public ResponseEntity<?> showinfo(@PathVariable String userid, HttpSession session) throws Exception{
-//		
-//		return new ResponseEntity<MemberDto>(userService.showInfo(userid), HttpStatus.OK);	
-//	}
+	@GetMapping("/{userid}")
+	public ResponseEntity<?> showinfo(@PathVariable String userid, HttpSession session) throws Exception{
+		
+		return new ResponseEntity<MemberDto>(userService.showInfo(userid), HttpStatus.OK);	
+	}
+	
 
 	@GetMapping("/info/{userid}")
 	public ResponseEntity<Map<String, Object>> getInfo( @PathVariable("userid") String userid,HttpServletRequest request) {
@@ -125,7 +128,7 @@ public class UserController {
 		String encryPassword = UserSha256.encrypt(memberDto.getMemberPw());
 		memberDto.setMemberPw(encryPassword);
 		userService.registerMember(memberDto);
-		//아이디 중복 체크가 있어야 할 것 같음
+		//아이디 중복 체크가 있어야 할 것 같음-
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
 	
@@ -146,7 +149,7 @@ public class UserController {
 	}
 	
 	
-	@PutMapping("/userinfo")
+	@PutMapping("/update")
 	public ResponseEntity<String> updateUser(@RequestBody MemberDto memberDto) throws Exception {
 		
 		String encryPassword = UserSha256.encrypt(memberDto.getMemberPw());
@@ -156,7 +159,7 @@ public class UserController {
 		return  new ResponseEntity<String>("success", HttpStatus.OK);
 	}
 	
-	@GetMapping("/{userid}/delete")
+	@DeleteMapping("/delete/{userid}")
 	public ResponseEntity<String> deleteUser(@PathVariable String userid, HttpSession session) throws Exception {
 		userService.deleteMember(userid);
 		session.invalidate();
