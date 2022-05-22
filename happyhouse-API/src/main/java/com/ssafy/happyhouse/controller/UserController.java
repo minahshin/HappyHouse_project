@@ -53,7 +53,6 @@ public class UserController {
 	}
 	
 
-
 	@GetMapping("/info/{userid}")
 	public ResponseEntity<Map<String, Object>> getInfo( @PathVariable("userid") String userid,HttpServletRequest request) {
 //		logger.debug("userid : {} ", userid);
