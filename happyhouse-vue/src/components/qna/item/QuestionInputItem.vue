@@ -10,7 +10,7 @@
         >
           <b-form-input
             id="writer"
-            :disabled="isWriter"
+            :disabled="true"
             v-model="article.writer"
             type="text"
             required
@@ -90,7 +90,10 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
 import http from "@/api/http";
+
+const memberStore = "memberStore";
 
 export default {
   name: "QuestionInputItem",
@@ -104,7 +107,6 @@ export default {
         content: "",
         isSecret: "N",
       },
-      isWriter: false,
       cateList: [
         {
           text: "회원 관련 문의",
@@ -133,10 +135,14 @@ export default {
       http.get(`/question/${this.$route.params.qno}`).then(({ data }) => {
         this.article = data.question;
       });
-      this.isWriter = true;
     }
+    this.article.writer = this.userInfo.memberId;
+  },
+  computed: {
+    ...mapState(memberStore, ["userInfo"]),
   },
   methods: {
+    ...mapMutations(memberStore, ["SET_USER_INFO"]),
     onSubmit(event) {
       event.preventDefault();
 

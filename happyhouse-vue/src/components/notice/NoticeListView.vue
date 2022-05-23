@@ -7,7 +7,10 @@
     </b-row>
     <b-row class="mb-1">
       <b-col class="text-right">
-        <b-button variant="outline-primary" @click="moveWrite()"
+        <b-button
+          variant="outline-primary"
+          @click="moveWrite()"
+          v-show="isManager"
           >글쓰기</b-button
         >
       </b-col>
@@ -40,23 +43,32 @@
 <script>
 import http from "@/api/http";
 import NoticeListItem from "@/components/notice/item/NoticeListItem";
+import { mapState, mapMutations } from "vuex";
+
+const memberStore = "memberStore";
 
 export default {
   name: "NoticeList",
   components: {
     NoticeListItem,
   },
+  computed: {
+    ...mapState(memberStore, ["userInfo"]),
+  },
   data() {
     return {
       articles: [],
+      isManager: false,
     };
   },
   created() {
     http.get(`/notice`).then(({ data }) => {
       this.articles = data;
+      if (this.userInfo.isManager == "Y") this.isManager = true;
     });
   },
   methods: {
+    ...mapMutations(memberStore, ["SET_USER_INFO"]),
     moveWrite() {
       this.$router.push({ name: "noticeRegist" });
     },
