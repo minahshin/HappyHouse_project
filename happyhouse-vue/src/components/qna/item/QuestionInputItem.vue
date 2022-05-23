@@ -10,7 +10,7 @@
         >
           <b-form-input
             id="writer"
-            :disabled="isWriter"
+            :disabled="true"
             v-model="article.writer"
             type="text"
             required
@@ -71,24 +71,29 @@
           ></b-form-group
         >
 
-        <b-button
-          type="submit"
-          variant="primary"
-          class="m-1"
-          v-if="this.type === 'register'"
-          >글작성</b-button
-        >
-        <b-button type="submit" variant="primary" class="m-1" v-else
-          >글수정</b-button
-        >
-        <b-button type="reset" variant="danger" class="m-1">초기화</b-button>
+        <b-col class="text-right">
+          <b-button
+            type="submit"
+            variant="primary"
+            class="m-1"
+            v-if="this.type === 'register'"
+            >글작성</b-button
+          >
+          <b-button type="submit" variant="primary" class="m-1" v-else
+            >글수정</b-button
+          >
+          <b-button type="reset" variant="danger" class="m-1">초기화</b-button>
+        </b-col>
       </b-form>
     </b-col>
   </b-row>
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
 import http from "@/api/http";
+
+const memberStore = "memberStore";
 
 export default {
   name: "QuestionInputItem",
@@ -100,9 +105,8 @@ export default {
         writer: "",
         subject: "",
         content: "",
-        isSecret: "",
+        isSecret: "N",
       },
-      isWriter: false,
       cateList: [
         {
           text: "회원 관련 문의",
@@ -131,10 +135,14 @@ export default {
       http.get(`/question/${this.$route.params.qno}`).then(({ data }) => {
         this.article = data.question;
       });
-      this.isWriter = true;
     }
+    this.article.writer = this.userInfo.memberId;
+  },
+  computed: {
+    ...mapState(memberStore, ["userInfo"]),
   },
   methods: {
+    ...mapMutations(memberStore, ["SET_USER_INFO"]),
     onSubmit(event) {
       event.preventDefault();
 
@@ -169,7 +177,6 @@ export default {
       this.article.subject = "";
       this.article.content = "";
       this.article.isSecret = "N";
-      this.$router.push({ name: "questionList" });
     },
     registArticle() {
       http
@@ -181,7 +188,7 @@ export default {
           isSecret: this.article.isSecret,
         })
         .then(({ data }) => {
-          let msg = "등록 처리시 문제가 발생했습니다.";
+          let msg = "등록 처리 중 문제가 발생했습니다.";
           if (data === "success") {
             msg = "등록이 완료되었습니다.";
           }
@@ -200,7 +207,7 @@ export default {
           isSecret: this.article.isSecret,
         })
         .then(({ data }) => {
-          let msg = "수정 처리시 문제가 발생했습니다.";
+          let msg = "수정 처리 중 문제가 발생했습니다.";
           if (data === "success") {
             msg = "수정이 완료되었습니다.";
           }

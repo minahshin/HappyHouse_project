@@ -133,7 +133,7 @@ export default {
       this.SET_IS_LOGIN(false);
       this.SET_USER_INFO(null);
       sessionStorage.removeItem("access-token");
-      if (this.$route.path != "/") this.$router.push({ name: "home" });
+      this.$router.push({ name: "home" });
     },
   },
 };

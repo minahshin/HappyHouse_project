@@ -1,5 +1,5 @@
 <template>
-  <b-tr>
+  <b-tr v-if="this.isSecret === 'N' || this.writer == userInfo.memberId">
     <b-td>{{ qno }}</b-td>
     <b-td>{{ category }}</b-td>
     <b-th class="text-left">
@@ -15,6 +15,10 @@
 <script>
 import moment from "moment";
 
+import { mapState, mapMutations } from "vuex";
+
+const memberStore = "memberStore";
+
 export default {
   name: "QuestionListItem",
   props: {
@@ -23,7 +27,15 @@ export default {
     category: String,
     subject: String,
     regDate: String,
+    isSecret: String,
   },
+  computed: {
+    ...mapState(memberStore, ["userInfo"]),
+  },
+  methods: {
+    ...mapMutations(memberStore, ["SET_USER_INFO"]),
+  },
+
   filters: {
     dateFormat(regDate) {
       return moment(new Date(regDate)).format("YY.MM.DD");
