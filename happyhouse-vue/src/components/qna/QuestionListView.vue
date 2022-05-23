@@ -68,6 +68,7 @@ export default {
           writer: this.$route.params.writer,
           categories: this.$route.params.categories,
           keyword: this.$route.params.keyword,
+          userid: this.$route.params.userid, // to be replaced
         },
       })
       .then(({ data }) => {

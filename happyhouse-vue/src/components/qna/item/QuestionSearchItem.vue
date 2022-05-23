@@ -83,6 +83,7 @@ export default {
         category: [],
         writer: "",
         keyword: "",
+        userid: "", // to be replaced
       },
       show: false,
       searchOpener: "▼ 검색 하기 ▼",
@@ -108,6 +109,7 @@ export default {
             writer: this.search.writer,
             categories: this.search.category.join(","),
             keyword: this.search.keyword,
+            userid: "", // to be replaced
           },
         });
       } else {
@@ -117,6 +119,7 @@ export default {
             writer: this.search.writer,
             categories: this.search.category.join(","),
             keyword: this.search.keyword,
+            userid: "", // to be replaced
           },
         });
       }
