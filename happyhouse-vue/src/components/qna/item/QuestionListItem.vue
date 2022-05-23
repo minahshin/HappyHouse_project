@@ -1,5 +1,5 @@
 <template>
-  <b-tr v-if="this.isSecret === 'N' || this.writer == userInfo.memberId">
+  <b-tr>
     <b-td>{{ qno }}</b-td>
     <b-td>{{ category }}</b-td>
     <b-th class="text-left">

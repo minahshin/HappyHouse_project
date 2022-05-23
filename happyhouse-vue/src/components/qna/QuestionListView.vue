@@ -46,6 +46,9 @@
 import http from "@/api/http";
 import QuestionListItem from "@/components/qna/item/QuestionListItem";
 import QuestionSearchItem from "@/components/qna/item/QuestionSearchItem.vue";
+import { mapState, mapMutations } from "vuex";
+
+const memberStore = "memberStore";
 
 export default {
   name: "QuestionList",
@@ -61,14 +64,22 @@ export default {
   props: {
     type: { type: String },
   },
+  computed: {
+    ...mapState(memberStore, ["userInfo"]),
+  },
   created() {
+    let useridValue = "";
+    if (this.userInfo != null) {
+      useridValue = this.userInfo.memberId;
+    }
+
     http
       .get(`/question`, {
         params: {
           writer: this.$route.params.writer,
           categories: this.$route.params.categories,
           keyword: this.$route.params.keyword,
-          userid: this.$route.params.userid, // to be replaced
+          userid: useridValue,
         },
       })
       .then(({ data }) => {
@@ -80,6 +91,7 @@ export default {
       });
   },
   methods: {
+    ...mapMutations(memberStore, ["SET_USER_INFO"]),
     moveWrite() {
       this.$router.push({ name: "questionRegist" });
     },

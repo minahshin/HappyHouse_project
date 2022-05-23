@@ -23,6 +23,7 @@ import com.ssafy.happyhouse.model.QNAInfo;
 import com.ssafy.happyhouse.model.QuestionDto;
 import com.ssafy.happyhouse.model.search.QuestionSearch;
 import com.ssafy.happyhouse.model.service.QuestionService;
+import com.ssafy.happyhouse.model.service.UserService;
 
 @RestController
 @RequestMapping("/question")
@@ -31,12 +32,20 @@ public class QuestionController {
 	@Autowired
 	private QuestionService questionService;
 	
+	@Autowired
+	private UserService userService;
+	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@GetMapping
-	public ResponseEntity<?> viewQuestionSearchList(@ModelAttribute QuestionSearch search) throws Exception {
+	public ResponseEntity<?> viewQuestionSearchList(@ModelAttribute QuestionSearch search) throws Exception {	
+		
+//		if(member == null) {
+//			return new ResponseEntity<String>("no_result", HttpStatus.OK);
+//		}
 		
 		logger.debug(search.toString());
+		search.setIsManager("Y".equals(userService.showInfo(search.getUserid()).getIsManager()));
 		
 		List<QuestionDto> questionList = questionService.viewQuestionList(search);
 		
@@ -49,17 +58,13 @@ public class QuestionController {
 	
 	// 열람
 	@GetMapping("/{qno}")
-	public ResponseEntity<?> viewQuestion(@PathVariable String qno, HttpSession session) throws Exception{
+	public ResponseEntity<?> viewQuestion(@PathVariable String qno, String userid) throws Exception{
+		QNAInfo qna = new QNAInfo(questionService.viewQuestion(qno, userid, userService.showInfo(userid).getIsManager()));
 		
-//		if(session.getAttribute("memberDto") == null) {
-//			return new ResponseEntity<String>("로그인 후 이용해주세요", HttpStatus.BAD_REQUEST);
-//		}		
-		
-//		MemberDto loginUser = (MemberDto) session.getAttribute("memberDto");
-		QNAInfo qna = new QNAInfo(questionService.viewQuestion(qno, /*loginUser.getMemberId()*/ null));
+		logger.debug(qna.toString());
 		
 		if(qna.isEmpty()) {
-			return new ResponseEntity<String>("접근 권한이 없습니다.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("fail", HttpStatus.OK);
 		}
 		
 		return new ResponseEntity<QNAInfo>(qna, HttpStatus.OK);
