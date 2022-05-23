@@ -13,7 +13,7 @@
 	<select id="viewQuestionList" parameterType="com.ssafy.happyhouse.model.search.QuestionSearch" resultType="QuestionDto">
 		SELECT qno, category, subject, writer, regDate,isSecret
 		FROM question 
-		WHERE <!-- writer = #{userid} OR --> isSecret = 'N'
+		WHERE writer = #{userid} OR isSecret = 'N' 
 			<if test="@com.ssafy.happyhouse.handler.CommonUtilHandler@empty(categories) == false">
 			AND category IN (
 				<foreach collection="categoryList" item="item" separator=",">
