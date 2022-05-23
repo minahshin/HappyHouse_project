@@ -15,7 +15,7 @@
 		values (#{memberId}, #{memberPw}, #{memberName}, #{memberEmail}, #{memberTel})
 	</insert>
 	
-	<select id="searchPw" parameterType="map" resultType="MemberDto">
+	<select id="searchPw" parameterType="MemberDto" resultType="MemberDto">
 		select memberName, memberId, memberPw, memberEmail,memberTel, isManager
 		from member
 		where memberId = #{memberId} and memberEmail = #{memberEmail}

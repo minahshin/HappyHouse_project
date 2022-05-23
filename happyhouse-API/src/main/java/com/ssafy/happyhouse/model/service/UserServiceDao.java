@@ -1,7 +1,5 @@
 package com.ssafy.happyhouse.model.service;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,9 +13,9 @@ public class UserServiceDao implements UserService{
 	private UserMapper userMapper;
 
 	@Override
-	public MemberDto searchPw(Map<String, String> map) throws Exception {
+	public MemberDto searchPw(MemberDto memberDto) throws Exception {
 
-		return userMapper.searchPw(map);
+		return userMapper.searchPw(memberDto);
 	}
 
 	@Override

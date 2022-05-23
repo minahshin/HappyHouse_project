@@ -31,7 +31,6 @@ import com.ssafy.happyhouse.model.service.UserSha256;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 
-@Api("UserController V1")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -122,31 +121,40 @@ public class UserController {
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 	
-	
 	@PostMapping("/signup")
 	public ResponseEntity<String> signup(@RequestBody MemberDto memberDto) throws Exception {
 		
 		String encryPassword = UserSha256.encrypt(memberDto.getMemberPw());
 		memberDto.setMemberPw(encryPassword);
-		userService.registerMember(memberDto);
-		//아이디 중복 체크가 있어야 할 것 같음-
-		return new ResponseEntity<String>("success", HttpStatus.OK);
-	}
-	
-	@PostMapping("/searchpwd")
-	public ResponseEntity<?> searchPwd(@RequestParam Map<String, String> map,@RequestBody Model model,HttpSession session) throws Exception {
-	
-		MemberDto memberDto = userService.searchPw(map);
-		System.out.println(map.toString());
-		System.out.println(memberDto);
-		if(memberDto == null) {
-			model.addAttribute("msg", "일치하는 사용자가 없습니다!");
-			return new ResponseEntity<String>("잘못된 접근입니다.", HttpStatus.BAD_REQUEST);
+		int idcheck = userService.idCheck(memberDto.getMemberId());
+		if(idcheck ==0) {
+			userService.registerMember(memberDto);
+			return new ResponseEntity<String>("success", HttpStatus.OK);		
+		}else {		
+			return new ResponseEntity<String>("fail", HttpStatus.OK);
 		}
-		
-		session.setAttribute("memberDto", memberDto);
-		
-		return new ResponseEntity<MemberDto>(memberDto, HttpStatus.OK);
+	}
+//	@PostMapping("/idcheck")
+//	public ResponseEntity<String> idCheck(@RequestBody String memberId) throws Exception {
+//		int idcheck = userService.idCheck(memberId);
+//		if(idcheck ==0) {
+//			return new ResponseEntity<String>("success", HttpStatus.OK);
+//		}else {
+//			return new ResponseEntity<String>("중복된 아이디입니다.", HttpStatus.BAD_REQUEST);
+//		}
+//	}
+//	
+	@PostMapping("/searchpwd")
+	public ResponseEntity<?> searchPwd(@RequestBody MemberDto memberDto) throws Exception {
+	
+		MemberDto ismemberDto = userService.searchPw(memberDto);
+		System.out.println(memberDto.toString());
+		System.out.println(ismemberDto);
+		if(ismemberDto != null) {
+			return new ResponseEntity<MemberDto>(ismemberDto, HttpStatus.OK);
+			
+		}
+		return new ResponseEntity<String>("fail", HttpStatus.OK);
 	}
 	
 	
