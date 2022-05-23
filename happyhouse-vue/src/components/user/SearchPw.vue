@@ -10,16 +10,12 @@
       <b-col cols="8">
         <b-card class="text-center mt-3" style="max-width: 40rem" align="left">
           <b-form class="text-left">
-            <b-alert show variant="danger" v-if="isLoginError"
-              >아이디 또는 이메일을 확인하세요.</b-alert
-            >
             <b-form-group label="아이디:" label-for="userid">
               <b-form-input
                 id="userid"
                 v-model="memberDto.memberId"
                 required
                 placeholder="아이디 입력...."
-                @keyup.enter="confirm"
               ></b-form-input>
             </b-form-group>
             <b-form-group label="이메일:" label-for="useremail">
@@ -29,7 +25,6 @@
                 v-model="memberDto.memberEmail"
                 required
                 placeholder="이메일 입력...."
-                @keyup.enter="confirm"
               ></b-form-input>
             </b-form-group>
 
@@ -52,6 +47,7 @@
 </template>
 
 <script>
+import http from "@/api/http";
 import { mapState, mapActions } from "vuex";
 
 const memberStore = "memberStore";
@@ -61,8 +57,11 @@ export default {
   data() {
     return {
       memberDto: {
-        memberId: null,
-        memberEmail: null,
+        memberId: "",
+        memberPw: "",
+        memberName: "",
+        memberEmail: "",
+        memberTel: "",
       },
     };
   },
@@ -70,6 +69,33 @@ export default {
     ...mapState(memberStore, ["isLogin", "isLoginError"]),
   },
   methods: {
+    searchPw() {
+      http
+        .post(`/user/searchpwd`, {
+          memberId: this.memberDto.memberId,
+          memberEmail: this.memberDto.memberEmail,
+        })
+        .then(({ data }) => {
+          let msg = "일치하는 정보가 없습니다.";
+          if (data === "fail") {
+            alert(msg);
+          } else {
+            msg = "새로운 비밀번호를 설정하세요.";
+            alert(msg);
+            this.memberDto = data;
+            //this.$router.push({ name: "searchpwdpage" });
+            this.moveModifyArticle();
+          }
+        });
+    },
+    moveModifyArticle() {
+      this.$router.push({
+        name: "Searchpwdpage",
+        params: { memberId: this.memberDto.memberId },
+      });
+      //   this.$router.push({ path: `/board/modify/${this.article.articleno}` });
+    },
+
     ...mapActions(memberStore, ["userConfirm", "getUserInfo"]),
     async confirm() {
       await this.userConfirm(this.memberDto);
@@ -78,12 +104,6 @@ export default {
         await this.getUserInfo(token);
         this.$router.push({ name: "update" });
       }
-    },
-    movePage() {
-      this.$router.push({ name: "signUp" });
-    },
-    searchPw() {
-      this.$router.push({ name: "searchpwd" });
     },
   },
 };

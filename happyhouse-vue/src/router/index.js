@@ -63,9 +63,15 @@ const routes = [
     component: () => import("@/views/MemberView.vue"),
     children: [
       {
-        path: "/searchpwd",
+        path: "searchpwd",
         name: "searchpwd",
         component: () => import("@/components/user/SearchPw.vue"),
+      },
+      {
+        path: "searchpwdpage",
+        name: "Searchpwdpage",
+        component: () => import("@/components/user/item/SearchPwpage.vue"),
+        props: true,
       },
       {
         path: "mypage",
