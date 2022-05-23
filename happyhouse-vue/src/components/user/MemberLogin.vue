@@ -32,20 +32,35 @@
                 @keyup.enter="confirm"
               ></b-form-input>
             </b-form-group>
-            <b-button
-              type="button"
-              variant="primary"
-              class="m-1"
-              @click="confirm"
-              >로그인</b-button
-            >
-            <b-button
-              type="button"
-              variant="success"
-              class="m-1"
-              @click="movePage"
-              >회원가입</b-button
-            >
+            <b-row>
+              <b-col cols="6" align="left">
+                <b-button
+                  type="button"
+                  variant="primary"
+                  class="m-1"
+                  @click="confirm"
+                  >로그인</b-button
+                >
+                <b-button
+                  type="button"
+                  variant="success"
+                  class="m-1"
+                  @click="movePage"
+                  >회원가입</b-button
+                >
+              </b-col>
+              <b-col cols="6">
+                비밀번호를 잊으셨나요?
+                <b-button
+                  align="right"
+                  type="button"
+                  variant="warning"
+                  class="m-1"
+                  @click="searchPw"
+                  >Pw찾기</b-button
+                >
+              </b-col>
+            </b-row>
             <div>
               <h1>Kakao Login Test</h1>
               <span th:if="${userId==null}">
@@ -99,6 +114,9 @@ export default {
     },
     movePage() {
       this.$router.push({ name: "signUp" });
+    },
+    searchPw() {
+      this.$router.push({ name: "searchpwd" });
     },
   },
 };

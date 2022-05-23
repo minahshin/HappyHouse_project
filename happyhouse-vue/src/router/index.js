@@ -63,6 +63,11 @@ const routes = [
     component: () => import("@/views/MemberView.vue"),
     children: [
       {
+        path: "/searchpwd",
+        name: "searchpwd",
+        component: () => import("@/components/user/SearchPw.vue"),
+      },
+      {
         path: "mypage",
         name: "mypage",
         beforeEnter: onlyAuthUser,

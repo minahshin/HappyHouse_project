@@ -153,12 +153,12 @@ export default {
           memberTel: this.memberDto.memberTel,
         })
         .then(({ data }) => {
-          let msg = "등록 처리시 문제가 발생했습니다.";
+          let msg = "중복된 아이디입니다.";
           if (data === "success") {
             msg = "등록이 완료되었습니다.";
+            this.moveList();
           }
           alert(msg);
-          this.moveList();
         });
     },
     modifyArticle() {
