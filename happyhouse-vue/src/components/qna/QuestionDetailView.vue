@@ -15,9 +15,14 @@
           size="sm"
           @click="moveModifyArticle"
           class="mr-2"
+          v-show="islogin"
           >글 수정</b-button
         >
-        <b-button variant="outline-danger" size="sm" @click="deleteArticle"
+        <b-button
+          variant="outline-danger"
+          size="sm"
+          @click="deleteArticle"
+          v-show="islogin"
           >글 삭제</b-button
         >
       </b-col>
@@ -44,6 +49,9 @@
 <script>
 import http from "@/api/http";
 import AnswerInputItem from "@/components/qna/item/AnswerInputItem.vue";
+import { mapState, mapMutations } from "vuex";
+
+const memberStore = "memberStore";
 
 export default {
   components: { AnswerInputItem },
@@ -51,9 +59,11 @@ export default {
   data() {
     return {
       article: {},
+      islogin: false,
     };
   },
   computed: {
+    ...mapState(memberStore, ["userInfo"]),
     message() {
       if (this.article.content)
         return this.article.content.split("\n").join("<br>");
@@ -63,9 +73,11 @@ export default {
   created() {
     http.get(`/question/${this.$route.params.qno}`).then(({ data }) => {
       this.article = data.question;
+      if (this.article.writer == this.userInfo.memberId) this.islogin = true;
     });
   },
   methods: {
+    ...mapMutations(memberStore, ["SET_USER_INFO"]),
     listArticle() {
       this.$router.push({ name: "questionList" });
     },

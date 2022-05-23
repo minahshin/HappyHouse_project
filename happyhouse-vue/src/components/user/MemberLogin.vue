@@ -46,6 +46,21 @@
               @click="movePage"
               >회원가입</b-button
             >
+            <div>
+              <h1>Kakao Login Test</h1>
+              <span th:if="${userId==null}">
+                <a
+                  href="https://kauth.kakao.com/oauth/authorize?client_id=a6d46d13539efc9ae43e7772448b569c&redirect_uri=http://localhost/login&response_type=code"
+                >
+                  <img src="@/assets/카카오.png" />
+                </a>
+              </span>
+              <span th:if="${userId!=null}">
+                <form name="logout" action="http://localhost/logout">
+                  <input type="submit" value="로그아웃" />
+                </form>
+              </span>
+            </div>
           </b-form>
         </b-card>
       </b-col>
