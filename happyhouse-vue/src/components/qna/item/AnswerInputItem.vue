@@ -11,7 +11,7 @@
 </template>
 
 <script>
-// import http from "@/api/http";
+import http from "@/api/http";
 import { mapState, mapMutations } from "vuex";
 
 const memberStore = "memberStore";
