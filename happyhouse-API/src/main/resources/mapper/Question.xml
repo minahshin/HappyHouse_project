@@ -9,6 +9,7 @@
 		WHERE qno = ${qno}
 	</select>
 	
+	
 	<select id="viewQuestionList" parameterType="com.ssafy.happyhouse.model.search.QuestionSearch" resultType="QuestionDto">
 		SELECT qno, category, subject, writer, regDate,isSecret
 		FROM question 
