@@ -72,10 +72,20 @@ export default {
     },
   },
   created() {
-    http.get(`/question/${this.$route.params.qno}`).then(({ data }) => {
-      this.article = data.question;
-      if (this.article.writer == this.userInfo.memberId) this.islogin = true;
-    });
+    let userInfoCheck = this.userInfo != null;
+    let useridValue = userInfoCheck ? this.userInfo.memberId : "";
+    http
+      .get(`/question/${this.$route.params.qno}?userid=${useridValue}`)
+      .then(({ data }) => {
+        if (data === "fail") {
+          alert("접근 권한이 없습니다.");
+          this.$router.push({ name: "questionList" });
+        } else {
+          this.article = data.question;
+        }
+        if (userInfoCheck && this.article.writer == this.userInfo.memberId)
+          this.islogin = true;
+      });
   },
   methods: {
     ...mapMutations(memberStore, ["SET_USER_INFO"]),

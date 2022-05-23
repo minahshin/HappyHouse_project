@@ -9,12 +9,14 @@ public class QuestionSearch {
 	private List<String> categoryList;
 	private String keyword;
 	private String writer;
+	private boolean isManager;
 	
-	public QuestionSearch(String userid, String categories, String keyword, String writer) {
+	public QuestionSearch(String userid, String categories, String keyword, String writer, String isManager) {
 		this.userid = userid;
 		this.categories = categories;
 		this.keyword = keyword;
 		this.writer = writer;
+		this.isManager = isManager == null ? false : "Y".equals(isManager);
 		
 		if(categories != null) {
 			this.categoryList = Arrays.asList(categories.split(","));
@@ -41,6 +43,14 @@ public class QuestionSearch {
 		return categoryList;
 	}
 	
+	public boolean getIsManager() {
+		return isManager;
+	}
+
+	public void setIsManager(boolean isManager) {
+		this.isManager = isManager;
+	}
+
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}

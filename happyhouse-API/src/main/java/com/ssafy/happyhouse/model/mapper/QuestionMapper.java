@@ -11,7 +11,7 @@ import com.ssafy.happyhouse.model.search.QuestionSearch;
 @Mapper
 public interface QuestionMapper {
 	List<QuestionDto> viewQuestionList(QuestionSearch search) throws Exception;
-	QuestionDto viewQuestion(@Param("qno") String qno, @Param("userid") String userid) throws Exception;
+	QuestionDto viewQuestion(@Param("qno") String qno, @Param("userid") String userid, @Param("isManager") String isManager) throws Exception;
 	void registerQuestion(QuestionDto questionDto) throws Exception;
 	void updateQuestion(QuestionDto questionDto) throws Exception;
 	void deleteQuestion(int qno) throws Exception;

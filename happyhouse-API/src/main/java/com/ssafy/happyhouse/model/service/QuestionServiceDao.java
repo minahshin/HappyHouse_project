@@ -25,8 +25,8 @@ public class QuestionServiceDao implements QuestionService{
 	}
 	
 	@Override
-	public QuestionDto viewQuestion(String qno, String userid) throws Exception {
-		return questionMapper.viewQuestion(qno, userid);
+	public QuestionDto viewQuestion(String qno, String userid, String isManager) throws Exception {
+		return questionMapper.viewQuestion(qno, userid, isManager);
 	}
 	
 	@Override

@@ -13,7 +13,9 @@
 	<select id="viewQuestionList" parameterType="com.ssafy.happyhouse.model.search.QuestionSearch" resultType="QuestionDto">
 		SELECT qno, category, subject, writer, regDate,isSecret
 		FROM question 
-		WHERE writer = #{userid} OR isSecret = 'N' 
+		WHERE 1=1
+			<if test="isManager == false">
+			AND (isSecret = 'N' OR writer = #{userid})</if>
 			<if test="@com.ssafy.happyhouse.handler.CommonUtilHandler@empty(categories) == false">
 			AND category IN (
 				<foreach collection="categoryList" item="item" separator=",">
@@ -30,7 +32,9 @@
 	<select id="viewQuestion" parameterType="String" resultType="QuestionDto">
 		SELECT qno, category, subject, content, writer, regDate, isSecret
 		FROM question
-		WHERE qno = ${qno} <!--AND (isSecret = 'N'  OR writer = #{userid} )-->
+		WHERE qno = ${qno}
+		<if test='isManager.equals("N")'>
+			AND (isSecret = 'N'  OR writer = #{userid} )</if>
 	</select>
 	
 	<insert id="registerQuestion" parameterType="QuestionDto">
