@@ -132,9 +132,13 @@ export default {
   },
   created() {
     if (this.type === "modify") {
-      http.get(`/question/${this.$route.params.qno}`).then(({ data }) => {
-        this.article = data.question;
-      });
+      let userInfoCheck = this.userInfo != null;
+      let useridValue = userInfoCheck ? this.userInfo.memberId : "";
+      http
+        .get(`/question/${this.$route.params.qno}?userid=${useridValue}`)
+        .then(({ data }) => {
+          this.article = data.question;
+        });
     }
     this.article.writer = this.userInfo.memberId;
   },
@@ -172,7 +176,6 @@ export default {
     },
     onReset(event) {
       event.preventDefault();
-      this.article.qno = 0;
       this.article.category = "";
       this.article.subject = "";
       this.article.content = "";
