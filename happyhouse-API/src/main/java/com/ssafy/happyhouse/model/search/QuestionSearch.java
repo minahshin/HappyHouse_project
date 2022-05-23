@@ -1,25 +1,31 @@
 package com.ssafy.happyhouse.model.search;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class QuestionSearch {
 	private String userid;
-	private List<String> categories;
+	private String categories;
+	private List<String> categoryList;
 	private String keyword;
 	private String writer;
 	
-	public QuestionSearch(String userid, List<String> categories, String keyword, String writer) {
+	public QuestionSearch(String userid, String categories, String keyword, String writer) {
 		this.userid = userid;
 		this.categories = categories;
 		this.keyword = keyword;
 		this.writer = writer;
+		
+		if(categories != null) {
+			this.categoryList = Arrays.asList(categories.split(","));
+		}
 	}
 
 	public String getUserid() {
 		return userid;
 	}
 
-	public List<String> getCategories() {
+	public String getCategories() {
 		return categories;
 	}
 
@@ -29,6 +35,30 @@ public class QuestionSearch {
 
 	public String getWriter() {
 		return writer;
+	}
+
+	public List<String> getCategoryList() {
+		return categoryList;
+	}
+	
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public void setCategories(String categories) {
+		this.categories = categories;
+	}
+
+	public void setCategoryList(List<String> categoryList) {
+		this.categoryList = categoryList;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 
 	@Override

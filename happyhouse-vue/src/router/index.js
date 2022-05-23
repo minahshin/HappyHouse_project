@@ -104,6 +104,16 @@ const routes = [
         component: () => import("@/components/qna/QuestionListView.vue"),
       },
       {
+        path: "search",
+        name: "questionSearch",
+        component: () => import("@/components/qna/QuestionSearchView.vue"),
+      },
+      {
+        path: "search_re",
+        name: "questionReSearch",
+        component: () => import("@/components/qna/QuestionReSearchView.vue"),
+      },
+      {
         path: "update",
         name: "questionUpdate",
         component: () => import("@/components/qna/QuestionUpdateView.vue"),
@@ -111,6 +121,7 @@ const routes = [
       {
         path: "regist",
         name: "questionRegist",
+        beforeEnter: onlyAuthUser,
         component: () => import("@/components/qna/QuestionRegistView.vue"),
       },
       {
@@ -144,7 +155,6 @@ const routes = [
       {
         path: "regist",
         name: "noticeRegist",
-        beforeEnter: onlyAuthUser,
         component: () => import("@/components/notice/NoticeRegistView.vue"),
       },
     ],

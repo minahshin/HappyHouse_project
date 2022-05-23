@@ -5,6 +5,11 @@
         <b-alert show><h3>글목록</h3></b-alert>
       </b-col>
     </b-row>
+    <b-row>
+      <b-col>
+        <question-search-item></question-search-item>
+      </b-col>
+    </b-row>
     <b-row class="mb-1">
       <b-col class="text-right">
         <b-button variant="outline-primary" @click="moveWrite()"
@@ -40,21 +45,39 @@
 <script>
 import http from "@/api/http";
 import QuestionListItem from "@/components/qna/item/QuestionListItem";
+import QuestionSearchItem from "@/components/qna/item/QuestionSearchItem.vue";
 
 export default {
   name: "QuestionList",
   components: {
     QuestionListItem,
+    QuestionSearchItem,
   },
   data() {
     return {
       articles: [],
     };
   },
+  props: {
+    type: { type: String },
+  },
   created() {
-    http.get(`/question`).then(({ data }) => {
-      this.articles = data;
-    });
+    http
+      .get(`/question`, {
+        params: {
+          writer: this.$route.params.writer,
+          categories: this.$route.params.categories,
+          keyword: this.$route.params.keyword,
+          userid: this.$route.params.userid, // to be replaced
+        },
+      })
+      .then(({ data }) => {
+        if (data === "no_result") {
+          alert("작성된 글이 없습니다.");
+        } else {
+          this.articles = data;
+        }
+      });
   },
   methods: {
     moveWrite() {
