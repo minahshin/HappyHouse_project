@@ -42,19 +42,20 @@
         </b-card>
       </b-col>
     </b-row>
-    <answer-input-item></answer-input-item>
+    <!--
+    <answer-input-item></answer-input-item> -->
   </b-container>
 </template>
 
 <script>
 import http from "@/api/http";
-import AnswerInputItem from "@/components/qna/item/AnswerInputItem.vue";
+//import AnswerInputItem from "@/components/qna/item/AnswerInputItem.vue";
 import { mapState, mapMutations } from "vuex";
 
 const memberStore = "memberStore";
 
 export default {
-  components: { AnswerInputItem },
+  //  components: { AnswerInputItem },
   name: "QuestionDetail",
   data() {
     return {

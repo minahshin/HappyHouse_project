@@ -116,6 +116,7 @@ const routes = [
       {
         path: "update",
         name: "questionUpdate",
+        beforeEnter: onlyAuthUser,
         component: () => import("@/components/qna/QuestionUpdateView.vue"),
       },
       {
