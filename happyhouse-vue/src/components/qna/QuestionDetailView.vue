@@ -37,14 +37,16 @@
         </b-card>
       </b-col>
     </b-row>
+    <answer-input-item></answer-input-item>
   </b-container>
 </template>
 
 <script>
-// import moment from "moment";
 import http from "@/api/http";
+import AnswerInputItem from "@/components/qna/item/AnswerInputItem.vue";
 
 export default {
+  components: { AnswerInputItem },
   name: "QuestionDetail",
   data() {
     return {
