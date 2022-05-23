@@ -121,6 +121,7 @@ const routes = [
       {
         path: "regist",
         name: "questionRegist",
+        beforeEnter: onlyAuthUser,
         component: () => import("@/components/qna/QuestionRegistView.vue"),
       },
       {
@@ -154,7 +155,6 @@ const routes = [
       {
         path: "regist",
         name: "noticeRegist",
-        beforeEnter: onlyAuthUser,
         component: () => import("@/components/notice/NoticeRegistView.vue"),
       },
     ],
