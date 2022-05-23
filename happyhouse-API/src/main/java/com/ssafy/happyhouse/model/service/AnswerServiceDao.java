@@ -1,5 +1,7 @@
 package com.ssafy.happyhouse.model.service;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,8 +15,14 @@ public class AnswerServiceDao implements AnswerService{
 	@Autowired
 	SqlSession sqlSession;
 	
+	@Autowired
 	private AnswerMapper answerMapper;
 
+	@Override
+	public List<AnswerDto> viewAllAnswers(String qno) {
+		return answerMapper.viewAllAnswers(qno);
+	}
+	
 	@Override
 	public void updateAnswer(AnswerDto answerDto) throws Exception {
 		answerMapper.updateAnswer(answerDto);
@@ -31,6 +39,4 @@ public class AnswerServiceDao implements AnswerService{
 		answerMapper.registerAnswer(answerDto);
 		
 	}
-
-
 }

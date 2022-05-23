@@ -22,4 +22,10 @@ public class AnswerDto {
 	public String getRegDate() {
 		return regDate;
 	}
+	
+	@Override
+	public String toString() {
+		return "AnswerDto [ano=" + ano + ", qno=" + qno + ", content=" + content + ", writer=" + writer + ", regDate="
+				+ regDate + "]";
+	}
 }
