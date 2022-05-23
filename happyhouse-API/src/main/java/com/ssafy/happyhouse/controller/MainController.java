@@ -23,6 +23,8 @@ public class MainController {
 		return mv;
 	}
 	
+	
+	
 	@GetMapping("/aboutUs")
 	public String showAboutUs() {
 		return "/company/aboutus";
