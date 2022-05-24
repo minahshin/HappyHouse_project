@@ -45,7 +45,7 @@ public class QuestionController {
 //		}
 		
 		logger.debug(search.toString());
-		search.setIsManager("Y".equals(userService.showInfo(search.getUserid()).getIsManager()));
+		search.setIsManager(search.getUserid().length() == 0 ? false : "Y".equals(userService.showInfo(search.getUserid()).getIsManager()));
 		
 		List<QuestionDto> questionList = questionService.viewQuestionList(search);
 		
@@ -59,7 +59,9 @@ public class QuestionController {
 	// 열람
 	@GetMapping("/{qno}")
 	public ResponseEntity<?> viewQuestion(@PathVariable String qno, String userid) throws Exception{
-		QNAInfo qna = new QNAInfo(questionService.viewQuestion(qno, userid, userService.showInfo(userid).getIsManager()));
+		String isManager = userid.length() == 0 ? "N" : userService.showInfo(userid).getIsManager();
+		
+		QNAInfo qna = new QNAInfo(questionService.viewQuestion(qno, userid, isManager));
 		
 		logger.debug(qna.toString());
 		

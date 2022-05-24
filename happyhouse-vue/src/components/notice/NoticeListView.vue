@@ -64,7 +64,8 @@ export default {
   created() {
     http.get(`/notice`).then(({ data }) => {
       this.articles = data;
-      if (this.userInfo.isManager == "Y") this.isManager = true;
+      if (this.userInfo != null && this.userInfo.isManager == "Y")
+        this.isManager = true;
     });
   },
   methods: {
