@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="dark" fixed="top">
+    <b-navbar id="nav" toggleable="lg" type="white" fixed="top">
       <b-navbar-brand href="#">
         <router-link to="/">
           <img
@@ -106,10 +106,7 @@
         <div class="row">
           <div
             class="col-lg-6 col-md-7 d-flex justify-content-center flex-column"
-          >
-            <h1 class="text-black mb-4">Happy House</h1>
-            <p class="text-black opacity-8 lead pe-5 me-5">행복한 우리집</p>
-          </div>
+          ></div>
         </div>
       </div>
     </div>
@@ -140,10 +137,15 @@ export default {
 </script>
 
 <style>
+#nav {
+  background-color: #ffffff;
+  background-color: rgba(153, 153, 153, 0.254);
+}
 #box2-1 {
-  width: 100%;
+  padding: 10%;
+  height: 100%;
   height: 300px;
-  background-image: url("@/assets/주택.jpg");
-  background-size: contain;
+  background-image: url("@/assets/오구오구.jpg");
+  background-size: 100% 300px;
 }
 </style>

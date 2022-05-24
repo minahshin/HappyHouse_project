@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <navi-bar />
+    <navi-bar id="no" />
+
     <router-view />
+
     <main-footer />
   </div>
 </template>
@@ -20,6 +22,16 @@ export default {
 </script>
 
 <style>
+#no {
+  padding: 48px;
+}
+#nav {
+  background-color: #ffffff;
+  background-color: rgba(175, 175, 175, 0.331);
+}
+#app {
+}
+
 a {
   text-decoration: none;
 }
@@ -31,6 +43,6 @@ a:hover {
 }
 
 a.router-link-exact-active {
-  color: #ffffff;
+  color: #0c0a0a;
 }
 </style>

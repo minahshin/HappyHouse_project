@@ -78,7 +78,11 @@ export default {
   created() {
     http.get(`/notice/${this.$route.params.nno}`).then(({ data }) => {
       this.article = data;
-      if (this.article.writer == this.userInfo.memberId) this.islogin = true;
+      if (
+        this.article.writer == this.userInfo.memberId ||
+        this.userInfo.isManager == "Y"
+      )
+        this.islogin = true;
     });
   },
   methods: {

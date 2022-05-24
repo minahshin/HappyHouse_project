@@ -28,6 +28,11 @@ const onlyAuthUser = async (to, from, next) => {
 
 const routes = [
   {
+    path: "/login",
+    name: "login",
+    component: HomeView,
+  },
+  {
     path: "/",
     name: "home",
     component: HomeView,
