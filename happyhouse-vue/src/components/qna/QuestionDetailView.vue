@@ -83,7 +83,10 @@ export default {
         } else {
           this.article = data.question;
         }
-        if (userInfoCheck && this.article.writer == this.userInfo.memberId)
+        if (
+          (userInfoCheck && this.article.writer == this.userInfo.memberId) ||
+          this.userInfo.isManager == "Y"
+        )
           this.islogin = true;
       });
   },

@@ -6,8 +6,10 @@
     <br />
     <br />
     <b-row>
-      <b-col> <img src="@/assets/오리.png" /></b-col>
-      <b-col cols="6">
+      <b-col> <img class="img" src="@/assets/오리.png" /></b-col>
+    </b-row>
+    <b-row>
+      <b-col>
         <b-jumbotron
           bg-variant="muted"
           text-variant="dark"
@@ -17,7 +19,6 @@
           <NoticeListView />
         </b-jumbotron>
       </b-col>
-      <b-col></b-col>
     </b-row>
   </b-container>
 </template>
@@ -38,6 +39,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.img {
+  width: 100px;
+  height: 100px;
+}
 h3 {
   margin: 40px 0 0;
 }

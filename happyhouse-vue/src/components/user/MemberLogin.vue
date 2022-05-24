@@ -65,13 +65,14 @@
               <h1>Kakao Login Test</h1>
               <span th:if="${userId==null}">
                 <a
+                  @click="kakao"
                   href="https://kauth.kakao.com/oauth/authorize?client_id=a6d46d13539efc9ae43e7772448b569c&redirect_uri=http://localhost/login&response_type=code"
                 >
                   <img src="@/assets/카카오.png" />
                 </a>
               </span>
               <span th:if="${userId!=null}">
-                <form name="logout" action="http://localhost/logout">
+                <form name="logout" action="http://localhost/login">
                   <input type="submit" value="로그아웃" />
                 </form>
               </span>
@@ -85,6 +86,7 @@
 </template>
 
 <script>
+import http from "@/api/http";
 import { mapState, mapActions } from "vuex";
 
 const memberStore = "memberStore";
@@ -97,11 +99,13 @@ export default {
         memberId: null,
         memberPw: null,
       },
+      token: String,
     };
   },
   computed: {
     ...mapState(memberStore, ["isLogin", "isLoginError"]),
   },
+  created() {},
   methods: {
     ...mapActions(memberStore, ["userConfirm", "getUserInfo"]),
     async confirm() {
@@ -117,6 +121,12 @@ export default {
     },
     searchPw() {
       this.$router.push({ name: "searchpwd" });
+    },
+    kakao() {
+      http.post(`/login/${this.$route.params.code}`).then(({ data }) => {
+        this.token = data;
+        this.$router.push({ name: "home" });
+      });
     },
   },
 };

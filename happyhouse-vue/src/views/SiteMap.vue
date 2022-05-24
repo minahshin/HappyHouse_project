@@ -8,38 +8,54 @@
     <h5>Happy House</h5>
     <hr />
     <div>
-      <b-link href="#" disabled>Home</b-link>
+      <router-link :to="{ name: 'home' }" class="link"> Home</router-link>
     </div>
     <div>
-      <b-link href="#" disabled>시세검색</b-link>
+      <router-link :to="{ name: 'house' }" class="link"> 시세검색</router-link>
+    </div>
+
+    <div>
+      <router-link :to="{ name: 'store' }" class="link"> 상권검색</router-link>
     </div>
     <div>
-      <b-link href="#" disabled>즐겨찾기</b-link>
+      <router-link :to="{ name: 'noticeList' }" class="link">
+        공지사항</router-link
+      >
     </div>
     <div>
-      <b-link href="#" disabled>지역정보</b-link>
+      <router-link :to="{ name: 'questionList' }" class="link">
+        QNA</router-link
+      >
     </div>
+
     <div>
-      <b-link href="#" disabled>상권검색</b-link>
+      <router-link :to="{ name: 'about' }" class="link"> About Us</router-link>
     </div>
-    <div>
-      <b-link href="#" disabled>공지사항</b-link>
-    </div>
-    <div>
-      <b-link href="#" disabled>QNA</b-link>
-    </div>
-    <div>
-      <b-link href="#" disabled>About Us</b-link>
-    </div>
+
     <br />
     <hr />
     <h5>User</h5>
     <hr />
-    <div>
-      <b-link href="#" disabled>Login</b-link>
+    <div v-if="userInfo">
+      <div>
+        <router-link :to="{ name: 'house' }" class="link">
+          즐겨찾기</router-link
+        >
+      </div>
+      <div>
+        <router-link :to="{ name: 'house' }" class="link">
+          내정보보기</router-link
+        >
+      </div>
     </div>
-    <div>
-      <b-link href="#" disabled>Sign Up</b-link>
+
+    <div v-else>
+      <div>
+        <b-link href="#" disabled>Login</b-link>
+      </div>
+      <div>
+        <b-link href="#" disabled>Sign Up</b-link>
+      </div>
     </div>
     <br />
   </b-container>
