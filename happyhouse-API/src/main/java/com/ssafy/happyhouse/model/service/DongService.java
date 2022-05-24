@@ -8,5 +8,6 @@ import com.ssafy.happyhouse.model.DongcodeDto;
 
 @Service
 public interface DongService {
-	List<DongcodeDto> getDongInfo() throws Exception; 
+	List<DongcodeDto> getGuInfo() throws Exception; 
+	List<DongcodeDto> getDongInfo(String guCode) throws Exception; 
 }

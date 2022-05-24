@@ -1,81 +1,82 @@
 <template>
-  <b-row class="mt-4 mb-4 text-center">
-    <!-- <b-col class="sm-3">
-      <b-form-input
-        v-model.trim="dongCode"
-        placeholder="동코드 입력...(예 : 11110)"
-        @keypress.enter="sendKeyword"
-      ></b-form-input>
-    </b-col>
-    <b-col class="sm-3" align="left">
-      <b-button variant="outline-primary" @click="sendKeyword">검색</b-button>
-    </b-col> -->
-    <b-col class="sm-3">
-      <b-form-select
-        v-model="gugunName"
-        :options="sidos"
-        @change="gugunList"
-      ></b-form-select>
-    </b-col>
-    <b-col class="sm-3">
-      <b-form-select
-        v-model="dongName"
-        :options="guguns"
-        @change="searchApt"
-      ></b-form-select>
-    </b-col>
-  </b-row>
+  <div>
+    <b-row>
+      <b-col>
+        <b-alert show variant="dark"><h3>아파트 시세 검색</h3></b-alert>
+      </b-col>
+    </b-row>
+    <b-row class="mt-4 mb-4 text-center">
+      <b-col class="sm-3">
+        <b-form-select
+          id="guInfo"
+          v-model="guCode"
+          :options="gus"
+          @change="dongList"
+        ></b-form-select>
+      </b-col>
+      <b-col class="sm-3">
+        <b-form-select
+          id="dongInfo"
+          v-model="dongCode"
+          :options="dongs"
+        ></b-form-select>
+      </b-col>
+      <b-col>
+        <b-form-input
+          id="aptName"
+          v-model="aptName"
+          type="text"
+          placeholder="아파트 이름에 포함된 단어 입력"
+        ></b-form-input>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col
+        ><b-button block @click="searchApt" variant="primary" class="m-1"
+          >아파트 시세 검색</b-button
+        >
+      </b-col>
+    </b-row>
+  </div>
 </template>
 
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
 
-/*
-  namespaced: true를 사용했기 때문에 선언해줍니다.
-  index.js 에서 modules 객체의 '키' 이름입니다.
-
-  modules: {
-    키: 값
-    memberStore: memberStore,
-    houseStore: houseStore
-  }  
-*/
 const houseStore = "houseStore";
 
 export default {
   name: "HouseSearchBar",
   data() {
     return {
-      sidoCode: null,
-      gugunCode: null,
+      guCode: null,
+      dongCode: null,
+      aptName: "",
     };
   },
   computed: {
-    ...mapState(houseStore, ["sidos", "guguns", "houses"]),
-    // sidos() {
-    //   return this.$store.state.sidos;
-    // },
+    ...mapState(houseStore, ["gus", "dongs", "houses"]),
   },
   created() {
-    // this.$store.dispatch("getSido");
-    // this.sidoList();
-    this.CLEAR_SIDO_LIST();
-    this.getSido();
+    this.CLEAR_GU_LIST();
+    this.getGu();
   },
   methods: {
-    ...mapActions(houseStore, ["getSido", "getGugun", "getHouseList"]),
-    ...mapMutations(houseStore, ["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST"]),
-    // sidoList() {
-    //   this.getSido();
-    // },
-    gugunList() {
-      console.log(this.sidoCode);
-      this.CLEAR_GUGUN_LIST();
-      this.gugunCode = null;
-      if (this.sidoCode) this.getGugun(this.sidoCode);
+    ...mapActions(houseStore, ["getGu", "getDong", "getHouseList"]),
+    ...mapMutations(houseStore, ["CLEAR_GU_LIST", "CLEAR_DONG_LIST"]),
+    dongList() {
+      this.CLEAR_DONG_LIST();
+      this.dongCode = null;
+      if (this.guCode) this.getDong(this.guCode);
     },
     searchApt() {
-      if (this.gugunCode) this.getHouseList(this.gugunCode);
+      if (this.guCode || this.aptName) {
+        this.getHouseList({
+          guCode: this.guCode,
+          dongCode: this.dongCode,
+          keyword: this.aptName,
+        });
+      } else alert("매물을 찾기 위한 정보를 입력해주세요.");
     },
   },
 };

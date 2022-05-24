@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ssafy.happyhouse.model.AptDto;
 import com.ssafy.happyhouse.model.mapper.HousedealMapper;
+import com.ssafy.happyhouse.model.search.AptSearch;
 
 @Repository
 public class HousedealServiceDao implements HousedealService{
@@ -29,6 +30,11 @@ public class HousedealServiceDao implements HousedealService{
 	public List<AptDto> listApt() throws Exception {
 		
 		return housedealMapper.listApt();
+	}
+
+	@Override
+	public List<AptDto> getConditionedApt(AptSearch search) throws Exception {
+		return housedealMapper.getConditionedApt(search);
 	}
 
 }
