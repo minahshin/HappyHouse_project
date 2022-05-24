@@ -38,12 +38,12 @@
     <hr />
     <div v-if="userInfo">
       <div>
-        <router-link :to="{ name: 'house' }" class="link">
+        <router-link :to="{ name: 'favorite' }" class="link">
           즐겨찾기</router-link
         >
       </div>
       <div>
-        <router-link :to="{ name: 'house' }" class="link">
+        <router-link :to="{ name: 'mypage' }" class="link">
           내정보보기</router-link
         >
       </div>
@@ -51,10 +51,12 @@
 
     <div v-else>
       <div>
-        <b-link href="#" disabled>Login</b-link>
+        <router-link :to="{ name: 'signIn' }" class="link"> Login</router-link>
       </div>
       <div>
-        <b-link href="#" disabled>Sign Up</b-link>
+        <router-link :to="{ name: 'signUp' }" class="link">
+          Sign Up</router-link
+        >
       </div>
     </div>
     <br />
@@ -62,8 +64,18 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
+
+const memberStore = "memberStore";
+
 export default {
   name: "AboutView",
+  computed: {
+    ...mapState(memberStore, ["isLogin", "userInfo"]),
+  },
+  methods: {
+    ...mapMutations(memberStore, ["SET_IS_LOGIN", "SET_USER_INFO"]),
+  },
 };
 </script>
 
