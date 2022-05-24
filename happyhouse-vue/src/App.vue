@@ -22,12 +22,9 @@ export default {
 </script>
 
 <style>
-#no {
-  padding: 48px;
-}
 #nav {
   background-color: #ffffff;
-  background-color: rgba(175, 175, 175, 0.331);
+  background-color: rgba(175, 175, 175, 0.791);
 }
 #app {
 }

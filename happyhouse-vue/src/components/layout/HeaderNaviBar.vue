@@ -58,8 +58,8 @@
             ><b-avatar
               variant="primary"
               v-text="userInfo ? userInfo.memberId.charAt(0).toUpperCase() : ''"
-            ></b-avatar
-            >{{ userInfo.memberId }}님 환영합니다.</b-nav-item
+            ></b-avatar>
+            {{ userInfo.memberId }}님 환영합니다.</b-nav-item
           >
           <b-nav-item class="align-self-center"
             ><router-link
