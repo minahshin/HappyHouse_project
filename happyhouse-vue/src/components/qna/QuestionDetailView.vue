@@ -42,25 +42,38 @@
         </b-card>
       </b-col>
     </b-row>
-    <!--
-    <answer-input-item></answer-input-item> -->
+    <answer-list-item
+      v-bind:qno="`${article.qno}`"
+      v-bind:subject="article.subject"
+      v-bind:isManager="isManager"
+      v-for="answer in answers"
+      :key="answer.ano"
+      v-bind="answer"
+    ></answer-list-item>
+    <answer-input-item
+      v-show="isManager"
+      v-bind:qno="`${article.qno}`"
+    ></answer-input-item>
   </b-container>
 </template>
 
 <script>
 import http from "@/api/http";
-//import AnswerInputItem from "@/components/qna/item/AnswerInputItem.vue";
+import AnswerInputItem from "@/components/qna/item/AnswerInputItem.vue";
+import AnswerListItem from "@/components/qna/item/AnswerListItem.vue";
 import { mapState, mapMutations } from "vuex";
 
 const memberStore = "memberStore";
 
 export default {
-  //  components: { AnswerInputItem },
+  components: { AnswerInputItem, AnswerListItem },
   name: "QuestionDetail",
   data() {
     return {
       article: {},
       islogin: false,
+      isManager: false,
+      answers: [],
     };
   },
   computed: {
@@ -88,7 +101,12 @@ export default {
           this.userInfo.isManager == "Y"
         )
           this.islogin = true;
+        if (this.userInfo != null && this.userInfo.isManager === "Y")
+          this.isManager = true;
       });
+    http.get(`/answer/${this.$route.params.qno}`).then(({ data }) => {
+      this.answers = data;
+    });
   },
   methods: {
     ...mapMutations(memberStore, ["SET_USER_INFO"]),

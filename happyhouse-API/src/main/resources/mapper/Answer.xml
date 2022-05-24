@@ -3,10 +3,15 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ssafy.happyhouse.model.mapper.AnswerMapper">
+	<select id="viewAllAnswers" parameterType="String" resultType="AnswerDto">
+		SELECT ano, qno, content, writer, regDate
+		FROM answer
+		WHERE qno = ${qno}
+	</select>
 	
 	<insert id="registerAnswer" parameterType="AnswerDto">
-		insert into answer(content, writer)
-		values ( #{content}, #{writer})
+		insert into answer(content, writer, qno)
+		values ( #{content}, #{writer}, #{qno})
 	</insert>
 	
 	<update id="updateAnswer" parameterType="AnswerDto">
