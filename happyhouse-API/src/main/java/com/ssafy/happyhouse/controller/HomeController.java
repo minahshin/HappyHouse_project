@@ -2,6 +2,7 @@ package com.ssafy.happyhouse.controller;
 
 
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,8 +19,9 @@ public class HomeController {
 
 	KakaoAPI kakaoApi = new KakaoAPI();
 	
-	@RequestMapping(value="/login")
+	@RequestMapping("/login")
 	public ResponseEntity<?> login(@RequestParam("code") String code, HttpSession session) {
+		Map<String, Object> resultMap = new HashMap<>();
 		// 1번 인증코드 요청 전달
 		String accessToken = kakaoApi.getAccessToken(code);
 		// 2번 인증코드로 토큰 전달
@@ -28,23 +30,21 @@ public class HomeController {
 		System.out.println("login info : " + userInfo.toString());
 		
 		if(userInfo.get("email") != null) {
-			session.setAttribute("userId", userInfo.get("email"));
-			session.setAttribute("accessToken", accessToken);
-			return new ResponseEntity<String>("success", HttpStatus.OK);
+//			resultMap.put("userId", userInfo.get("email"));
+			resultMap.put("accessToken", accessToken);
+			resultMap.put("message", "success");
+			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
 		}
 		//mav.addObject("userId", userInfo.get("email"));
 		
-		return new ResponseEntity<String>("fail", HttpStatus.OK);
+		return new ResponseEntity<String>("실패", HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/logout")
 	public ResponseEntity<?> logout(HttpSession session) {
-		ModelAndView mav = new ModelAndView();
-		
 		kakaoApi.kakaoLogout((String)session.getAttribute("accessToken"));
 		session.removeAttribute("accessToken");
 		session.removeAttribute("userId");
-		mav.setViewName("index");
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
 	
