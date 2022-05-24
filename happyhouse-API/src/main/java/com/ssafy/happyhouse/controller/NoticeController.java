@@ -33,32 +33,20 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/{nno}")
-	public ResponseEntity<?> viewNotice(@PathVariable String nno, HttpSession session) throws Exception{
+	public ResponseEntity<?> viewNotice(@PathVariable String nno) throws Exception{
 		
 		return new ResponseEntity<NoticeDto>(noticeService.viewNotice(nno), HttpStatus.OK);	
 	}
 	
 	@PostMapping("/regist")
-	public ResponseEntity<String> registerNotice(@RequestBody NoticeDto article, HttpSession session) throws Exception {
-		
-//		MemberDto loginUser = (MemberDto) session.getAttribute("memberDto");
-//		
-//		if(loginUser == null || loginUser.getIsManager().equals("N")) {
-//			return new ResponseEntity<String>("접근 권한이 없습니다.", HttpStatus.BAD_REQUEST);
-//		}
+	public ResponseEntity<String> registerNotice(@RequestBody NoticeDto article) throws Exception {
 
 		noticeService.registerNotice(article);
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<String> updateNotice(@RequestBody NoticeDto noticeDto, HttpSession session) throws Exception {	
-		
-//		MemberDto loginUser = (MemberDto) session.getAttribute("memberDto");
-//		
-//		if(loginUser == null || loginUser.getIsManager().equals("N")) {
-//			return new ResponseEntity<String>("접근 권한이 없습니다.", HttpStatus.BAD_REQUEST);
-//		}
+	public ResponseEntity<String> updateNotice(@RequestBody NoticeDto noticeDto) throws Exception {	
 		
 		noticeService.updateNotice(noticeDto);
 		
@@ -66,14 +54,7 @@ public class NoticeController {
 	}
 	
 	@DeleteMapping("/delete/{nno}")
-	public ResponseEntity<String> deleteNotice(@PathVariable String nno, HttpSession session) throws Exception {
-		
-//		MemberDto loginUser = (MemberDto) session.getAttribute("memberDto");
-//		
-//		if(loginUser == null || loginUser.getIsManager().equals("N")) {
-//			return new ResponseEntity<String>("접근 권한이 없습니다.", HttpStatus.BAD_REQUEST);
-//		}
-		
+	public ResponseEntity<String> deleteNotice(@PathVariable String nno) throws Exception {
 		noticeService.deleteNotice(Integer.parseInt(nno));
 		
 		return new ResponseEntity<String>("success", HttpStatus.OK);

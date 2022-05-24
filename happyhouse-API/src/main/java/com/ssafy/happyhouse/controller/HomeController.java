@@ -20,7 +20,6 @@ public class HomeController {
 	
 	@RequestMapping(value="/login")
 	public ResponseEntity<?> login(@RequestParam("code") String code, HttpSession session) {
-		ModelAndView mav = new ModelAndView();
 		// 1번 인증코드 요청 전달
 		String accessToken = kakaoApi.getAccessToken(code);
 		// 2번 인증코드로 토큰 전달
@@ -35,7 +34,7 @@ public class HomeController {
 		}
 		//mav.addObject("userId", userInfo.get("email"));
 		
-		return new ResponseEntity<String>("실패", HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<String>("fail", HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/logout")

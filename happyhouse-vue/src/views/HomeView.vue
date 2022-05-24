@@ -16,7 +16,7 @@
           border-variant="dark"
         >
           <template #header>공지사항</template>
-          <NoticeListView />
+          <notice-list-view />
         </b-jumbotron>
       </b-col>
     </b-row>
