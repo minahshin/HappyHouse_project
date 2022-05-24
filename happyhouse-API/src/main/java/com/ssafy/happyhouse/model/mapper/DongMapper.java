@@ -8,5 +8,6 @@ import com.ssafy.happyhouse.model.DongcodeDto;
 
 @Mapper
 public interface DongMapper {
-	List<DongcodeDto> getDongInfo() throws Exception; 
+	List<DongcodeDto> getGuInfo() throws Exception; 
+	List<DongcodeDto> getDongInfo(String guCode) throws Exception; 
 }

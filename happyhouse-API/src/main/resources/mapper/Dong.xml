@@ -3,8 +3,17 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ssafy.happyhouse.model.mapper.DongMapper">
-	<select id="getDongInfo" resultType="DongcodeDto">
-		select dongCode, gugunName, dongName
+	<select id="getGuInfo" resultType="DongcodeDto">
+		select CONCAT(SUBSTR(dongCode, 1, 5), '00000') as guCode, gugunName
 		from dongcode
+		group by gugunName
+		order by guCode
+	</select>
+	
+	<select id="getDongInfo" resultType="DongcodeDto" parameterType="String">
+		select dongCode, gugunName, dongName 
+		from dongcode
+		where dongcode like CONCAT(#{guCode}, '_____')
+		order by dongCode
 	</select>
 </mapper>
