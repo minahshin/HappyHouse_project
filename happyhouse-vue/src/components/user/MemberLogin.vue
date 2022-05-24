@@ -125,7 +125,7 @@ export default {
     kakao() {
       http.post(`/login/${this.$route.params.code}`).then(({ data }) => {
         this.token = data;
-        this.$router.push({ name: "home" });
+        this.$router.go({ name: "home" });
       });
     },
   },
