@@ -40,10 +40,6 @@ public class QuestionController {
 	@GetMapping
 	public ResponseEntity<?> viewQuestionSearchList(@ModelAttribute QuestionSearch search) throws Exception {	
 		
-//		if(member == null) {
-//			return new ResponseEntity<String>("no_result", HttpStatus.OK);
-//		}
-		
 		logger.debug(search.toString());
 		search.setIsManager(search.getUserid().length() == 0 ? false : "Y".equals(userService.showInfo(search.getUserid()).getIsManager()));
 		
@@ -74,41 +70,21 @@ public class QuestionController {
 	}
 	
 	@PostMapping("/regist")
-	public ResponseEntity<String> registerQuestion(@RequestBody QuestionDto article, HttpSession session) throws Exception {
-		
-//		if(session.getAttribute("memberDto") == null) {
-//			return new ResponseEntity<String>("로그인 후 이용해주세요", HttpStatus.BAD_REQUEST);
-//		}
+	public ResponseEntity<String> registerQuestion(@RequestBody QuestionDto article) throws Exception {
 		logger.debug(article.toString());
 		questionService.registerQuestion(article);
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<String> updateQuestion(@RequestBody QuestionDto questionDto, HttpSession session) throws Exception {	
-		
-//		MemberDto loginUser = (MemberDto) session.getAttribute("memberDto");
-//		
-//		if(loginUser == null || !loginUser.getMemberId().equals(questionDto.getWriter())) {
-//			return new ResponseEntity<String>("접근 권한이 없습니다.", HttpStatus.BAD_REQUEST);
-//		}
-		
+	public ResponseEntity<String> updateQuestion(@RequestBody QuestionDto questionDto) throws Exception {	
 		questionService.updateQuestion(questionDto);
 		
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/delete/{qno}")
-	public ResponseEntity<String> deleteQuestion(@PathVariable String qno, HttpSession session) throws Exception {
-		
-//		MemberDto loginUser = (MemberDto) session.getAttribute("memberDto");
-//		
-//		String writer = questionService.getWriter(qno);
-//		
-//		if(loginUser == null || !loginUser.getMemberId().equals(writer)) {
-//			return new ResponseEntity<String>("접근 권한이 없습니다.", HttpStatus.BAD_REQUEST);
-//		}
-		
+	public ResponseEntity<String> deleteQuestion(@PathVariable String qno) throws Exception {
 		questionService.deleteQuestion(Integer.parseInt(qno));
 		
 		return new ResponseEntity<String>("success", HttpStatus.OK);
