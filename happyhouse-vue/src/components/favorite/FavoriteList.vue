@@ -1,6 +1,6 @@
 <template>
   <b-container v-if="favorites.length" class="bv-example-row mt-3">
-    <b-row>
+    <b-row @click="selectHouse">
       <b-col cols="6">
         <b-table-simple hover responsive>
           <b-thead head-variant="dark">
