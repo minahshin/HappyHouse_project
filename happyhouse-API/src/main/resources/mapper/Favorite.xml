@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.mapper.FavoriteMapper">
+	
+	<select id="showFavoriteList" parameterType="string" resultType="FavoriteDto">
+		SELECT i.aptName, i.aptCode
+		FROM houseinfo i INNER JOIN favorite f
+		ON i.aptCode = f.aptCode
+		WHERE f.memberId = #{memberId}
+			
+	</select>
+	
+	<select id="viewFavorite" parameterType="string" resultType="AptDto">
+		SELECT aptName, dongName, jibun, buildYear, lat, lng
+		FROM houseinfo
+		WHERE aptName = #{aptName} 
+	</select>
+	
+	<insert id="registerFavorite" parameterType="FavoriteDto">
+		insert into favorite(memberId,aptCode)
+		values (#{memberId}, #{aptCode})
+	</insert>
+	
+	
+	<delete id="deleteFavorite" parameterType="favoriteDto">
+		delete from favorite
+		where aptCode = ${aptCode} and memberId = ${memberId} 
+	</delete>
+</mapper>
