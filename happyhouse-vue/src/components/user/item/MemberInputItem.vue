@@ -89,7 +89,7 @@ export default {
     };
   },
   props: {
-    type: { type: String },
+    type: { type: String, memberId: String },
   },
   computed: {
     ...mapState(memberStore, ["userInfo"]),

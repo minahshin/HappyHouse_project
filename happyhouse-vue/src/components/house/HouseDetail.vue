@@ -6,9 +6,7 @@
       >
     </b-row>
     <b-row class="mb-2 mt-1">
-      <b-col
-        ><b-img :src="require('@/assets/주택.jpg')" fluid-grow></b-img
-      ></b-col>
+      <b-col> <kakao-map /> </b-col>
     </b-row>
     <b-row>
       <b-col>
@@ -62,12 +60,16 @@
 <script>
 import { mapState, mapMutations } from "vuex";
 import http from "@/api/http";
+import KakaoMap from "@/components/KakaoMap.vue";
 
 const houseStore = "houseStore";
 const memberStore = "memberStore";
 
 export default {
   name: "HouseDetail",
+  components: {
+    KakaoMap,
+  },
   computed: {
     ...mapState(houseStore, ["house"]),
     ...mapState(memberStore, ["userInfo"]),
