@@ -15,10 +15,26 @@
 		)
 		<if test="@com.ssafy.happyhouse.handler.CommonUtilHandler@empty(keyword) == false">
 			AND storeName LIKE '%${keyword}%'</if>
-		<if test="@com.ssafy.happyhouse.handler.CommonUtilHandler@empty(isKidsSafe) == false">
+		<if test="isKidsSafe == true">
 			AND mediumType NOT IN ('경마/경륜/성인오락', '유흥주점', '모텔/여관/여인숙')
 			AND storeType NOT IN('나이트클럽', '무도유흥주점-종합', '무도장', '극장식유흥주점', '한국식유흥주점')</if>
 		HAVING distance <![CDATA[ <= ]]> #{distance}
 		ORDER BY distance ASC;
+    </select>
+    
+    <select id="getShopByAddress" parameterType="com.ssafy.happyhouse.model.search.StoreAddrSearch" resultType="StoreDtoDistance">
+    	select storeId, storeName, bigType, mediumType, storeType, dongCode, jibunAddress, doroAddress, zipCode
+    	from store
+    	where dongCode = #{dongCode}
+    		AND bigType IN (
+			<foreach collection="categories" item="item" separator=",">
+				#{item}
+			</foreach>
+			)
+			<if test="@com.ssafy.happyhouse.handler.CommonUtilHandler@empty(keyword) == false">
+				AND storeName LIKE '%${keyword}%'</if>
+			<if test="isKidsSafe == true">
+				AND mediumType NOT IN ('경마/경륜/성인오락', '유흥주점', '모텔/여관/여인숙')
+				AND storeType NOT IN('나이트클럽', '무도유흥주점-종합', '무도장', '극장식유흥주점', '한국식유흥주점')</if>
     </select>
 </mapper>

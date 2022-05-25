@@ -8,16 +8,21 @@ public class StoreSearch {
 	private double lng;
 	private double distance;
 	private String keyword;
+	private String categoryStr;
 	private List<String> categories;
-	private List<String> isKidsSafe;
+	private boolean isKidsSafe;
 
-	public StoreSearch(double lat, double lng, double distance, String keyword, List<String> categories, List<String> isKidsSafe) {
+	public StoreSearch(double lat, double lng, double distance, String keyword, String categoryStr, boolean isKidsSafe) {
 		this.lat = lat;
 		this.lng = lng;
 		this.distance = distance;
 		this.keyword = keyword;
-		this.categories = categories;
+		this.categoryStr = categoryStr;
 		this.isKidsSafe = isKidsSafe;
+		
+		if(categoryStr != null) {
+			this.categories = Arrays.asList(categoryStr.split(","));
+		}
 	}
 
 	public double getLat() {
@@ -40,8 +45,12 @@ public class StoreSearch {
 		return categories;
 	}
 	
-	public List<String> getIsKidsSafe() {
+	public boolean getIsKidsSafe() {
 		return isKidsSafe;
+	}
+
+	public String getCategoryStr() {
+		return categoryStr;
 	}
 
 	public void setDistance(double distance) {

@@ -1,11 +1,18 @@
 package com.ssafy.happyhouse.controller;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
+import com.ssafy.happyhouse.model.StoreDtoDistance;
+import com.ssafy.happyhouse.model.search.StoreAddrSearch;
 import com.ssafy.happyhouse.model.search.StoreSearch;
 import com.ssafy.happyhouse.model.service.StoreService;
 
@@ -15,39 +22,28 @@ public class StoreController {
 	@Autowired
 	StoreService store;
 	
-	@GetMapping("/shop")
-	public String getShopList(String address) {
-		
-		if(address != null && address.trim().length() > 0) {
-			
-		}
-		
-		return "/shop/shopInfo";
-	}
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@GetMapping("/shop/around")
-	public ModelAndView viewAroundShopSearch(String aptName, String lat, String lng) {
-		
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/shop/aroundShop");
-		
-		return mv;
-	}
-	
-	@PostMapping("/shop/around")
-	public ModelAndView getShopList(StoreSearch search) throws Exception {
-		
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/shop/aroundShop");
+	public ResponseEntity<?> getShopList(@ModelAttribute StoreSearch search) throws Exception {
 		
 		if(search.getCategories() == null || search.getCategories().size() == 0)
 			search.setCategories();
 			
 		search.setDistance(search.getDistance() / 1000);
 		
-		mv.addObject("shoplist", store.getAroundShop(search));
+		return new ResponseEntity<List<StoreDtoDistance>>(store.getAroundShop(search), HttpStatus.OK);
+	}
+	
+	@GetMapping("/shop/address")
+	public ResponseEntity<?> getShopByAddr(@ModelAttribute StoreAddrSearch search) throws Exception{
 		
-		return mv;
+		logger.debug(search.toString());
+		
+		if(search.getCategories() == null || search.getCategories().size() == 0)
+			search.setCategories();
+		
+		return new ResponseEntity<List<StoreDtoDistance>>(store.getShopByAddress(search), HttpStatus.OK);
 	}
 	
 }

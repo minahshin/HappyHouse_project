@@ -7,7 +7,7 @@
     </b-row>
     <b-row class="mb-2 mt-1">
       <b-col
-        ><b-img :src="require('@/assets/류피.png')" fluid-grow></b-img
+        ><b-img :src="require('@/assets/주택.jpg')" fluid-grow></b-img
       ></b-col>
     </b-row>
     <b-row>
@@ -42,6 +42,13 @@
         >
       </b-col>
     </b-row>
+    <b-row>
+      <b-col>
+        <b-button block @click="searchMarket" variant="info" class="m-1"
+          >주변 상권 검색
+        </b-button>
+      </b-col>
+    </b-row>
   </b-container>
 </template>
 
@@ -59,6 +66,18 @@ export default {
     price(value) {
       if (!value) return value;
       return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+  },
+  methods: {
+    searchMarket() {
+      this.$router.push({
+        name: "store",
+        params: {
+          lat: this.house.lat,
+          lng: this.house.lng,
+          aptName: this.house.aptName,
+        },
+      });
     },
   },
 };
