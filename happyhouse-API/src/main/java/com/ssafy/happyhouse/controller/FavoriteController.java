@@ -42,11 +42,11 @@ public class FavoriteController {
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/delete/{favoriteDto}")
-	public ResponseEntity<String> deleteFavorite(@PathVariable FavoriteDto favoriteDto ) throws Exception {
+	@DeleteMapping("/delete")
+	public ResponseEntity<String> deleteFavorite( String memberId, String aptCode ) throws Exception {
 		
 		
-		favoriteService.deleteFavorite(favoriteDto);
+		favoriteService.deleteFavorite(memberId,aptCode);
 		
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}

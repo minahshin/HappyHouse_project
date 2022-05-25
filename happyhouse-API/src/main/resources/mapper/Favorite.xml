@@ -25,8 +25,8 @@
 	</insert>
 	
 	
-	<delete id="deleteFavorite" parameterType="favoriteDto">
+	<delete id="deleteFavorite" parameterType="String">
 		delete from favorite
-		where aptCode = ${aptCode} and memberId = ${memberId} 
+		where aptCode = #{aptCode} and memberId = #{memberId} 
 	</delete>
 </mapper>
