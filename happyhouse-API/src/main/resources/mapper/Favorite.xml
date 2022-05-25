@@ -6,7 +6,7 @@
 <mapper namespace="com.ssafy.happyhouse.model.mapper.FavoriteMapper">
 	
 	<select id="showFavoriteList" parameterType="string" resultType="FavoriteDto">
-		SELECT i.aptName, i.aptCode
+		SELECT i.aptName, i.aptCode, i.lat, i.lng
 		FROM houseinfo i INNER JOIN favorite f
 		ON i.aptCode = f.aptCode
 		WHERE f.memberId = #{memberId}

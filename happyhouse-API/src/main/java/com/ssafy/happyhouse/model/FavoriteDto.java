@@ -5,7 +5,8 @@ public class FavoriteDto {
 	private String aptName;
 	private String memberId;
 	private int aptCode;
-	
+	private String lat;
+	private String lng;
 	
 	
 	
