@@ -138,10 +138,6 @@ export default {
 
 <style>
 #box2-1 {
-  padding: 10%;
-  height: 100%;
-  height: 300px;
-  background-image: url("@/assets/오구오구.jpg");
-  background-size: 100% 300px;
+  padding: 50px;
 }
 </style>
