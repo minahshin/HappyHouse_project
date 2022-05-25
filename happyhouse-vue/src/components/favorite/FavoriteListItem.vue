@@ -25,31 +25,31 @@ export default {
   },
   data() {
     return {
-      favoriteDto: {
-        memberId: this.usesrInfo.memberId,
-        aptCode: this.aptCode,
-      },
+      memberId: this.usesrInfo.memberId,
+      useraptCode: this.aptCode,
     };
-  },
-  created() {
-    // let apt;
-    // apt = this.aptCode;
   },
 
   props: {
     aptName: String,
     aptCode: String,
   },
+  created() {
+    // let reaptCode = "";
+    // reaptCode = this.useraptCode;
+  },
   methods: {
     ...mapMutations(memberStore, ["SET_IS_LOGIN", "SET_USER_INFO"]),
     deleteFavorite() {
       if (confirm("삭제하시겠습니까?")) {
-        this.favoriteDto.aptCode = this.aptCode;
-        this.favoriteDto.memberId = this.usesrInfo.memberId;
-
-        http.delete(`/favorite/delete/${this.favoriteDto}`);
+        http.delete(`/favorite/delete`, {
+          params: {
+            memberId: this.userInfo.memberId,
+            aptCode: this.aptCode,
+          },
+        });
         alert("삭제되었습니다.");
-        this.$router.push({ name: "favoriteList" });
+        this.$router.go({ name: "favorite" });
       }
     },
   },
