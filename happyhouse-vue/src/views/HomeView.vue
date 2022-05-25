@@ -5,21 +5,85 @@
     </h3>
     <br />
     <br />
-    <b-row>
-      <b-col> <img class="img" src="@/assets/오리.png" /></b-col>
-    </b-row>
-    <b-row>
-      <b-col>
-        <b-jumbotron
-          bg-variant="muted"
-          text-variant="dark"
-          border-variant="dark"
-        >
-          <template #header>공지사항</template>
-          <notice-list-view />
-        </b-jumbotron>
-      </b-col>
-    </b-row>
+    <div id="slide">
+      <b-carousel
+        id="carousel-1"
+        v-model="slide"
+        :interval="4000"
+        controls
+        indicators
+        background="#ababab"
+        style="text-shadow: 1px 1px 2px #333"
+        @sliding-start="onSlideStart"
+        @sliding-end="onSlideEnd"
+      >
+        <b-carousel-slide>
+          <template #img>
+            <img
+              class="d-block img-fluid w-100"
+              src="@/assets/집5.jpg"
+              alt="image slot"
+            />
+          </template>
+        </b-carousel-slide>
+
+        <b-carousel-slide>
+          <template #img>
+            <img
+              class="d-block img-fluid w-100"
+              src="@/assets/집1.jpg"
+              alt="image slot"
+            />
+          </template>
+        </b-carousel-slide>
+        <b-carousel-slide>
+          <template #img>
+            <img
+              class="d-block img-fluid w-100"
+              src="@/assets/7.jpg"
+              alt="image slot"
+            />
+          </template>
+        </b-carousel-slide>
+        <b-carousel-slide>
+          <template #img>
+            <img
+              class="d-block img-fluid w-100"
+              src="@/assets/2.jpg"
+              alt="image slot"
+            />
+          </template>
+        </b-carousel-slide>
+        <b-carousel-slide>
+          <template #img>
+            <img
+              class="d-block img-fluid w-100"
+              src="@/assets/집.jpg"
+              alt="image slot"
+            />
+          </template>
+        </b-carousel-slide>
+        <b-carousel-slide>
+          <template #img>
+            <img
+              class="d-block img-fluid w-100"
+              src="@/assets/5.jpg"
+              alt="image slot"
+            />
+          </template>
+        </b-carousel-slide>
+
+        <!-- Slide with blank fluid image to maintain slide aspect ratio -->
+      </b-carousel>
+    </div>
+    <br />
+
+    <b-col>
+      <b-jumbotron bg-variant="muted" text-variant="dark" border-variant="dark">
+        <template #header>공지사항</template>
+        <notice-list-view />
+      </b-jumbotron>
+    </b-col>
   </b-container>
 </template>
 
@@ -28,6 +92,7 @@ import NoticeListView from "@/components/notice/NoticeListView.vue";
 
 export default {
   name: "HelloWorld",
+
   props: {
     msg: String,
   },
@@ -39,10 +104,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.img {
-  width: 100px;
-  height: 100px;
-}
 h3 {
   margin: 40px 0 0;
 }
