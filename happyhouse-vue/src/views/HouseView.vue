@@ -1,8 +1,10 @@
 <template>
   <b-container class="bv-example-row mt-3 text-center">
     <h3 class="underline-orange">
-      <b-icon icon="house-fill"></b-icon> House Info
+      <b-icon icon="house-fill"></b-icon> 시세 검색
     </h3>
+    <br />
+    열람하고 싶은 매물의 시세를 주소 또는 키워드로 검색하실 수 있습니다.
     <hr />
     <b-row>
       <b-col>
@@ -15,10 +17,11 @@
       </b-col>
       <b-col cols="6">
         <house-detail />
-      </b-col>
-      <b-col cols="6">
+        <br />
         <kakao-map />
       </b-col>
+
+      <b-col cols="6"> </b-col>
     </b-row>
   </b-container>
 </template>
@@ -46,5 +49,6 @@ export default {
     rgba(255, 255, 255, 0) 70%,
     rgba(231, 149, 27, 0.3) 30%
   );
+  font-size: 40px;
 }
 </style>
