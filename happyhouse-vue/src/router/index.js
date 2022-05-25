@@ -78,6 +78,11 @@ const routes = [
     component: () => import("@/views/MemberView.vue"),
     children: [
       {
+        path: "manager",
+        name: "manager",
+        component: () => import("@/components/user/ManagerListView.vue"),
+      },
+      {
         path: "searchpwd",
         name: "searchpwd",
         component: () => import("@/components/user/SearchPw.vue"),

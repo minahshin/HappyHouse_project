@@ -3,12 +3,7 @@
     <b-navbar id="nav" toggleable="lg" variant="dark" type="dark" fixed="top">
       <b-navbar-brand href="#">
         <router-link to="/">
-          <img
-            src="@/assets/류피.png"
-            class="d-inline-block align-middle"
-            width="70px"
-            alt="ssafy"
-          />
+          <b-icon icon="house" font-scale="3"></b-icon>
         </router-link>
       </b-navbar-brand>
 
@@ -17,8 +12,8 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item href="#"
-            ><router-link :to="{ name: 'home' }" class="link"
-              ><b-icon icon="house" font-scale="1.5"></b-icon> Home
+            ><router-link :to="{ name: 'home' }" class="link">
+              Home
             </router-link></b-nav-item
           >
           <b-nav-item href="#"
@@ -66,6 +61,13 @@
               :to="{ name: 'favorite' }"
               class="link align-self-center"
               >즐겨찾기</router-link
+            ></b-nav-item
+          >
+          <b-nav-item class="align-self-center" v-if="userInfo.isManager == 'Y'"
+            ><router-link
+              :to="{ name: 'manager' }"
+              class="link align-self-center"
+              >회원관리</router-link
             ></b-nav-item
           >
           <b-nav-item class="align-self-center"

@@ -22,9 +22,6 @@ export default {
 </script>
 
 <style>
-#app {
-}
-
 a {
   text-decoration: none;
 }
