@@ -19,7 +19,7 @@
 		select AVG(score) as average, aptName, aptCode 
 		from apt_score
 		group by aptCode
-		order by average DESC, aptName
+		order by average DESC, count(*) DESC
 		limit 10
 	</select>
 	
