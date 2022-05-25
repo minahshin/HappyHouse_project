@@ -22,10 +22,6 @@ export default {
 </script>
 
 <style>
-#nav {
-  background-color: #ffffff;
-  background-color: rgba(175, 175, 175, 0.331);
-}
 #app {
 }
 
@@ -40,6 +36,6 @@ a:hover {
 }
 
 a.router-link-exact-active {
-  color: #0c0a0a;
+  color: #ffffff;
 }
 </style>
