@@ -69,10 +69,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
 import http from "@/api/http";
-
-const memberStore = "memberStore";
 
 export default {
   name: "MemberInputItem",
@@ -89,22 +86,17 @@ export default {
     };
   },
   props: {
-    type: { type: String, memberId: String },
+    type: { memberId: String },
   },
-  computed: {
-    ...mapState(memberStore, ["userInfo"]),
-  },
+
   created() {
-    if (this.type === "modify") {
-      http.get(`/user/${this.userInfo.memberId}`).then(({ data }) => {
-        this.memberDto = data;
-        this.memberDto.memberPw = "";
-      });
-      this.isWriter = true;
-    }
+    http.get(`/user/${this.memberId}`).then(({ data }) => {
+      this.memberDto = data;
+      this.memberDto.memberPw = "";
+    });
+    this.isWriter = true;
   },
   methods: {
-    ...mapMutations(memberStore, ["SET_IS_LOGIN", "SET_USER_INFO"]),
     onSubmit(event) {
       event.preventDefault();
 
