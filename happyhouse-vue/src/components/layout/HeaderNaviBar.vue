@@ -68,6 +68,13 @@
               >즐겨찾기</router-link
             ></b-nav-item
           >
+          <b-nav-item class="align-self-center" v-if="userInfo.isManager == 'Y'"
+            ><router-link
+              :to="{ name: 'manager' }"
+              class="link align-self-center"
+              >회원관리</router-link
+            ></b-nav-item
+          >
           <b-nav-item class="align-self-center"
             ><router-link
               :to="{ name: 'mypage' }"
