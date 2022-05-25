@@ -49,18 +49,28 @@
         </b-button>
       </b-col>
     </b-row>
+    <b-row>
+      <b-col>
+        <b-button block @click="registMarket" variant="warning" class="m-1"
+          >즐겨찾기 추가
+        </b-button>
+      </b-col>
+    </b-row>
   </b-container>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
+import http from "@/api/http";
 
 const houseStore = "houseStore";
+const memberStore = "memberStore";
 
 export default {
   name: "HouseDetail",
   computed: {
     ...mapState(houseStore, ["house"]),
+    ...mapState(memberStore, ["userInfo"]),
   },
   filters: {
     price(value) {
@@ -69,6 +79,7 @@ export default {
     },
   },
   methods: {
+    ...mapMutations(memberStore, ["SET_USER_INFO"]),
     searchMarket() {
       this.$router.push({
         name: "store",
@@ -78,6 +89,21 @@ export default {
           aptName: this.house.aptName,
         },
       });
+    },
+    registMarket() {
+      http
+        .post(`/favorite/regist`, {
+          aptCode: this.house.aptCode,
+          memberId: this.userInfo.memberId,
+        })
+        .then(({ data }) => {
+          let msg = "이미 등록된 매물입니다.";
+          if (data === "success") {
+            msg = "등록이 완료되었습니다.";
+          }
+          alert(msg);
+          this.$router.go({ name: "store" });
+        });
     },
   },
 };
