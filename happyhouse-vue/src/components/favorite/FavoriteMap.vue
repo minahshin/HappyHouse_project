@@ -21,7 +21,7 @@ export default {
     }
 
     var mapContainer = document.getElementById("map"), // 지도를 표시할 div
-      mapCenter = new kakao.maps.LatLng(this.house.lat, this.house.lng), // 지도의 중심 좌표
+      mapCenter = new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심 좌표
       mapOption = {
         center: mapCenter, // 지도의 중심 좌표
         level: 4, // 지도의 확대 레벨
@@ -56,7 +56,7 @@ export default {
     initMap() {
       const container = document.getElementById("map");
       const options = {
-        center: new kakao.maps.LatLng(this.house.lat, this.house.lng),
+        center: new kakao.maps.LatLng(33.450701, 126.570667),
         level: 5,
       };
 
