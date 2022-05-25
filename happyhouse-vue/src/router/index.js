@@ -46,11 +46,6 @@ const routes = [
     component: () => import("@/views/SiteMap.vue"),
   },
   {
-    path: "/favorite",
-    name: "favorite",
-    component: () => import("@/views/FavoriteView.vue"),
-  },
-  {
     path: "/store",
     name: "store",
     component: () => import("@/views/StoreView.vue"),
@@ -59,6 +54,24 @@ const routes = [
     path: "/house",
     name: "house",
     component: () => import("@/views/HouseView.vue"),
+  },
+  {
+    path: "/favorite",
+    name: "favorite",
+    component: () => import("@/views/FavoriteView.vue"),
+    redirect: "/favorite/list",
+    children: [
+      {
+        path: "list",
+        name: "favoriteList",
+        component: () => import("@/components/favorite/FavoriteList.vue"),
+      },
+      {
+        path: "info",
+        name: "favoriteInfo",
+        redirect: "/favorite/list",
+      },
+    ],
   },
   {
     path: "/user",

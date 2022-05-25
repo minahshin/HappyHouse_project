@@ -61,6 +61,7 @@
                 >
               </b-col>
             </b-row>
+            <!-- 카카오로그인
             <div>
               <h1>Kakao Login Test</h1>
               <span th:if="${userId==null}">
@@ -76,12 +77,13 @@
                   <input type="submit" value="로그아웃" />
                 </form>
               </span>
-            </div>
+            </div> -->
           </b-form>
         </b-card>
       </b-col>
       <b-col></b-col>
     </b-row>
+    <br />
   </b-container>
 </template>
 

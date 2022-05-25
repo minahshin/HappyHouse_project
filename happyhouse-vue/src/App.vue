@@ -24,7 +24,7 @@ export default {
 <style>
 #nav {
   background-color: #ffffff;
-  background-color: rgba(175, 175, 175, 0.791);
+  background-color: rgba(175, 175, 175, 0.331);
 }
 #app {
 }
