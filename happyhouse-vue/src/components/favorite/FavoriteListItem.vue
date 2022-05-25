@@ -1,5 +1,5 @@
 <template>
-  <b-tr>
+  <b-tr @click="selectHouse">
     <b-th class="text-left">
       <router-link
         :to="{ name: 'favoriteInfo', params: { aptName: aptName } }"
@@ -14,19 +14,22 @@
 
 <script>
 import http from "@/api/http";
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 
 const memberStore = "memberStore";
+const houseStore = "houseStore";
 
 export default {
   name: "FavoriteListItem",
   computed: {
     ...mapState(memberStore, ["userInfo"]),
+    ...mapState(houseStore, ["gus", "dongs", "houses"]),
   },
   data() {
     return {
       memberId: this.usesrInfo.memberId,
       useraptCode: this.aptCode,
+      house: [],
     };
   },
 
@@ -34,12 +37,13 @@ export default {
     aptName: String,
     aptCode: String,
   },
-  created() {
-    // let reaptCode = "";
-    // reaptCode = this.useraptCode;
-  },
+  created() {},
   methods: {
     ...mapMutations(memberStore, ["SET_IS_LOGIN", "SET_USER_INFO"]),
+    ...mapActions(houseStore, ["detailHouse"]),
+    selectHouse() {
+      this.detailHouse(this.house);
+    },
     deleteFavorite() {
       if (confirm("삭제하시겠습니까?")) {
         http.delete(`/favorite/delete`, {
