@@ -12,7 +12,7 @@
       </b-col>
     </b-row>
     <b-row>
-      <b-col cols="6" align="left">
+      <b-col cols="6">
         <house-list />
       </b-col>
       <b-col cols="6">

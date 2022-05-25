@@ -20,8 +20,9 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState, mapMutations } from "vuex";
 
+const memberStore = "memberStore";
 const houseStore = "houseStore";
 
 export default {
@@ -34,10 +35,14 @@ export default {
   props: {
     house: Object,
   },
+  computed: {
+    ...mapState(memberStore, ["userInfo"]),
+  },
   methods: {
     ...mapActions(houseStore, ["detailHouse"]),
+    ...mapMutations(memberStore, ["SET_USER_INFO"]),
     selectHouse() {
-      this.detailHouse(this.house);
+      this.detailHouse({ house: this.house, userInfo: this.userInfo });
     },
     colorChange(flag) {
       this.isColor = flag;

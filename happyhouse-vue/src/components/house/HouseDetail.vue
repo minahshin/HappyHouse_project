@@ -42,6 +42,32 @@
     </b-row>
     <b-row>
       <b-col>
+        <b-alert show variant="success"
+          ><b-form-rating
+            v-model="scoreInfo.score"
+            variant="warning"
+            readonly
+            show-value
+            show-value-max
+          ></b-form-rating>
+          <br />
+          <div>
+            <b-input-group>
+              <b-form-rating
+                v-model="scoreInfo.userScore"
+                variant="warning"
+                no-border
+              ></b-form-rating>
+              <b-input-group-append>
+                <b-button @click="updateScore">평가하기!</b-button>
+              </b-input-group-append>
+            </b-input-group>
+          </div>
+        </b-alert>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
         <b-button block @click="searchMarket" variant="info" class="m-1"
           >주변 상권 검색
         </b-button>
@@ -49,7 +75,7 @@
     </b-row>
     <b-row>
       <b-col>
-        <b-button block @click="registMarket" variant="warning" class="m-1"
+        <b-button block @click="registFavorite" variant="warning" class="m-1"
           >즐겨찾기 추가
         </b-button>
       </b-col>
@@ -71,7 +97,7 @@ export default {
     KakaoMap,
   },
   computed: {
-    ...mapState(houseStore, ["house"]),
+    ...mapState(houseStore, ["house", "scoreInfo"]),
     ...mapState(memberStore, ["userInfo"]),
   },
   filters: {
@@ -92,7 +118,7 @@ export default {
         },
       });
     },
-    registMarket() {
+    registFavorite() {
       http
         .post(`/favorite/regist`, {
           aptCode: this.house.aptCode,
@@ -104,8 +130,24 @@ export default {
             msg = "등록이 완료되었습니다.";
           }
           alert(msg);
-          this.$router.go({ name: "store" });
+          this.$router.go({ name: "house" });
         });
+    },
+    updateScore() {
+      if (this.userInfo) {
+        http.post(`/score/add`, {
+          memberId: this.userInfo.memberId,
+          aptCode: this.house.aptCode,
+          aptName: this.house.aptName,
+          score: this.scoreInfo.userScore,
+        });
+        alert("별점이 등록되었습니다.");
+        http.get(`/score?aptCode=${this.house.aptCode}`).then(({ data }) => {
+          this.scoreInfo.score = data.aptScore;
+        });
+      } else {
+        alert("로그인 후 이용 가능합니다.");
+      }
     },
   },
 };

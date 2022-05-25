@@ -1,14 +1,13 @@
 <template>
-  <b-tr @click="selectHouse">
+  <b-tr>
     <b-th class="text-left">
-      <router-link
-        :to="{ name: 'favoriteInfo', params: { aptName: aptName } }"
-        >{{ aptName }}</router-link
+      <b-link @click="moveToHouseList">{{ aptName }}</b-link>
+    </b-th>
+    <b-th>
+      <b-button variant="outline-danger" size="sm" @click="deleteFavorite"
+        >삭제</b-button
       >
     </b-th>
-    <b-button variant="outline-danger" size="sm" @click="deleteFavorite"
-      >삭제</b-button
-    >
   </b-tr>
 </template>
 
@@ -40,10 +39,7 @@ export default {
   created() {},
   methods: {
     ...mapMutations(memberStore, ["SET_IS_LOGIN", "SET_USER_INFO"]),
-    ...mapActions(houseStore, ["detailHouse"]),
-    selectHouse() {
-      this.detailHouse(this.house);
-    },
+    ...mapActions(houseStore, ["getHouseList"]),
     deleteFavorite() {
       if (confirm("삭제하시겠습니까?")) {
         http.delete(`/favorite/delete`, {
@@ -55,6 +51,14 @@ export default {
         alert("삭제되었습니다.");
         this.$router.go({ name: "favorite" });
       }
+    },
+    moveToHouseList() {
+      this.getHouseList({
+        guCode: "",
+        dongCode: "",
+        keyword: this.aptName,
+      });
+      this.$router.push({ name: "house" });
     },
   },
 };

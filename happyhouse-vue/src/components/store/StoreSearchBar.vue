@@ -117,6 +117,7 @@
 <script>
 import http from "@/api/http";
 import { mapState, mapActions, mapMutations } from "vuex";
+import { eventBus } from "@/main";
 
 const houseStore = "houseStore";
 
@@ -154,35 +155,38 @@ export default {
       if (this.guCode) this.getDong(this.guCode);
     },
     searchStore() {
+      eventBus.isAptDefined(this.aptNameDefined);
       if (this.aptNameDefined) {
-        http.get(`/shop/around`, {
-          params: {
-            lat: this.lat,
-            lng: this.lng,
-            categoryStr: this.category.join(","),
-            distance: this.distance,
-            keyword: this.keyword,
-            isKidsSafe: this.isKidsSafe,
-          },
-        });
-        //   .then(({ data }) => {
-        //     this.$emit("sendStore", data);
-        //   });
+        http
+          .get(`/shop/around`, {
+            params: {
+              lat: this.lat,
+              lng: this.lng,
+              categoryStr: this.category.join(","),
+              distance: this.distance,
+              keyword: this.keyword,
+              isKidsSafe: this.isKidsSafe,
+            },
+          })
+          .then(({ data }) => {
+            eventBus.getStores(data);
+          });
       } else {
         if (!this.dongCode) {
           alert("상권을 검색하실 동을 선택해주세요.");
         } else {
-          http.get(`/shop/address`, {
-            params: {
-              dongCode: this.dongCode,
-              categoryStr: this.category.join(","),
-              keyword: this.keyword,
-              isKidsSafe: this.isKidsSafe,
-            },
-          });
-          // .then(({ data }) => {
-          //   this.$emit("sendStore", data);
-          // });
+          http
+            .get(`/shop/address`, {
+              params: {
+                dongCode: this.dongCode,
+                categoryStr: this.category.join(","),
+                keyword: this.keyword,
+                isKidsSafe: this.isKidsSafe,
+              },
+            })
+            .then(({ data }) => {
+              eventBus.getStores(data);
+            });
         }
       }
     },

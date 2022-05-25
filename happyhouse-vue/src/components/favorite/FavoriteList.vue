@@ -1,10 +1,11 @@
 <template>
   <b-container v-if="favorites.length" class="bv-example-row mt-3">
-    <b-row @click="selectHouse">
+    <b-row>
       <b-col cols="6">
         <b-table-simple hover responsive>
           <b-thead head-variant="dark">
             <b-th>즐겨찾은 아파트 목록</b-th>
+            <b-th></b-th>
           </b-thead>
           <tbody>
             <favorite-list-item
@@ -50,10 +51,6 @@ export default {
     ...mapState(memberStore, ["userInfo"]),
   },
   created() {
-    // let memberId = "";
-    // if (this.userInfo != null) {
-    //   memberId = this.userInfo.memberId;
-    // }
     http.get(`/favorite/list/${this.userInfo.memberId}`).then(({ data }) => {
       this.favorites = data;
     });

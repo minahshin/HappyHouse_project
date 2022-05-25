@@ -5,6 +5,10 @@
     </h3>
     <br />
     <br />
+    <div style="font-size: 20px">당신의 보금자리를 찾아드립니다!</div>
+    <br />
+    <hr />
+    <br />
     <div id="slide">
       <b-carousel
         id="carousel-1"
@@ -78,17 +82,42 @@
     </div>
     <br />
 
-    <b-col>
-      <b-jumbotron bg-variant="muted" text-variant="dark" border-variant="dark">
-        <template #header>공지사항</template>
-        <notice-list-view />
-      </b-jumbotron>
-    </b-col>
+    <b-row>
+      <b-col col="6"></b-col>
+      <b-col col="6">
+        <b-jumbotron
+          bg-variant="light"
+          text-variant="dark"
+          border-variant="warning"
+        >
+          <div style="font-size: 40px">
+            <img src="@/assets/trophy.png" /> 인기 매물
+            <img src="@/assets/trophy.png" />
+          </div>
+          <br />
+          <best-house-list-view></best-house-list-view
+        ></b-jumbotron>
+      </b-col>
+    </b-row>
+
+    <b-row>
+      <b-col>
+        <b-jumbotron
+          bg-variant="muted"
+          text-variant="dark"
+          border-variant="dark"
+        >
+          <template #header>공지사항</template>
+          <notice-list-view />
+        </b-jumbotron>
+      </b-col>
+    </b-row>
   </b-container>
 </template>
 
 <script>
 import NoticeListView from "@/components/notice/NoticeListView.vue";
+import BestHouseListView from "@/components/house/BestHouseListView.vue";
 
 export default {
   name: "HelloWorld",
@@ -98,10 +127,11 @@ export default {
   },
   components: {
     NoticeListView,
+    BestHouseListView,
   },
 };
 </script>
-
+, BestHouseList
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
@@ -125,5 +155,6 @@ a {
     rgba(255, 255, 255, 0) 70%,
     rgba(72, 190, 233, 0.3) 30%
   );
+  font-size: 40px;
 }
 </style>
