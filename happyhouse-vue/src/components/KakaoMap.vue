@@ -5,8 +5,14 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+const houseStore = "houseStore";
+
 export default {
   name: "KakaoMap",
+  computed: {
+    ...mapState(houseStore, ["house"]),
+  },
 
   mounted() {
     if (window.kakao && window.kakao.maps) {
@@ -66,8 +72,10 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #map {
-  width: 1000px;
-  height: 1000px;
+  width: 500px;
+  height: 500px;
+
+  margin: 20px;
 }
 
 .button-group {
