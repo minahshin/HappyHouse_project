@@ -13,5 +13,5 @@ public interface FavoriteService {
 	FavoriteDto viewFavorite(String aptName) throws Exception;
 	List<FavoriteDto> showFavoriteList(String memberId) throws Exception;
 	void registerFavorite(FavoriteDto favoriteDto) throws Exception;
-	void deleteFavorite(FavoriteDto favoriteDto) throws Exception;
+	void deleteFavorite(String memberId,String aptCode) throws Exception;
 }

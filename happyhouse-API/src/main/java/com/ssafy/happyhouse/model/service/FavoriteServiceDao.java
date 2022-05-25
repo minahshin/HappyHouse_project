@@ -31,9 +31,9 @@ public class FavoriteServiceDao implements FavoriteService{
 	}
 
 	@Override
-	public void deleteFavorite(FavoriteDto favoriteDto) throws Exception {
+	public void deleteFavorite(String memberId,String aptCode) throws Exception {
 		
-		favoriteMapper.deleteFavorite(favoriteDto);
+		favoriteMapper.deleteFavorite(memberId,aptCode);
 	}
 
 	@Override
