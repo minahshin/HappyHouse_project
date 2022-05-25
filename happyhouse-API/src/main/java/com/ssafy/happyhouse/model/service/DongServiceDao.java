@@ -17,9 +17,15 @@ public class DongServiceDao implements DongService{
 	
 	
 	@Override
-	public List<DongcodeDto> getDongInfo() throws Exception {
+	public List<DongcodeDto> getGuInfo() throws Exception {
 		DongMapper mapper = sqlSession.getMapper(DongMapper.class);
-		return mapper.getDongInfo();
+		return mapper.getGuInfo();
+	}
+
+	@Override
+	public List<DongcodeDto> getDongInfo(String guCode) throws Exception {
+		DongMapper mapper = sqlSession.getMapper(DongMapper.class);
+		return mapper.getDongInfo(guCode);
 	}
 
 }
