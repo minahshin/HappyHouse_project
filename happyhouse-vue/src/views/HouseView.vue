@@ -15,10 +15,11 @@
       </b-col>
       <b-col cols="6">
         <house-detail />
-      </b-col>
-      <b-col cols="6">
+        <br />
         <kakao-map />
       </b-col>
+
+      <b-col cols="6"> </b-col>
     </b-row>
   </b-container>
 </template>
