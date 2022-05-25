@@ -1,6 +1,6 @@
 <template>
   <b-container class="bv-example-row mt-3 text-center">
-    <div class="underline-hotpink">Q & A</div>
+    <h3 class="underline-hotpink">Q & A</h3>
     <br />
     HappyHouse 이용에 관한 질문을 자유롭게 남기실 수 있습니다.
     <hr />

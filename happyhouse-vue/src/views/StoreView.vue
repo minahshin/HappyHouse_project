@@ -1,6 +1,8 @@
 <template>
   <b-container class="bv-example-row mt-3 text-center">
-    <div class="underline-hotpink">상권정보</div>
+    <h3 class="underline-hotpink">상권 정보</h3>
+    <br />
+    매물 근처의 상권 또는 특정 지역의 상권을 검색할 수 있습니다.
     <hr />
     <store-search-bar
       :lat="`${this.$route.params.lat}`"
