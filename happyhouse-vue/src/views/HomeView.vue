@@ -91,7 +91,7 @@
           border-variant="warning"
         >
           <div style="font-size: 40px">
-            <img src="@/assets/trophy.png" /> 인기 매물
+            <img src="@/assets/trophy.png" /> 매물 랭킹
             <img src="@/assets/trophy.png" />
           </div>
           <br />
