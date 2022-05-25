@@ -9,7 +9,6 @@ Vue.use(VueRouter);
 
 // https://router.vuejs.org/kr/guide/advanced/navigation-guards.html
 const onlyAuthUser = async (to, from, next) => {
-  // console.log(store);
   const checkUserInfo = store.getters["memberStore/checkUserInfo"];
   const getUserInfo = store._actions["memberStore/getUserInfo"];
   let token = sessionStorage.getItem("access-token");

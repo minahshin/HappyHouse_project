@@ -3,7 +3,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ssafy.happyhouse.model.mapper.HousedealMapper">
-<!-- 	검색 -->
+
 	<select id="searchByDong" parameterType="String" resultType="AptDto">
 		select d.no, d.aptCode, i.aptName, i.dongName, i.jibun, i.buildYear,
 			   d.dealAmount, d.dealYear, d.dealMonth, d.dealDay, d.area, d.aptCode,
@@ -12,6 +12,7 @@
 		where i.dongName like CONCAT('%',#{dongName},'%')
 		
 	</select>
+	
 	<select id="searchByAptName" parameterType="String" resultType="AptDto">
 		select d.no, d.aptCode, i.aptName, i.dongName, i.jibun, i.buildYear,
 			   d.dealAmount, d.dealYear, d.dealMonth, d.dealDay, d.area, d.aptCode,
@@ -20,7 +21,7 @@
 		where i.aptName like CONCAT('%',#{aptName},'%')
 		
 	</select>
-<!-- 	아파트 목록 전체 받기 -->
+	
 	<select id="listApt" resultType="AptDto">
 		select d.no, d.aptCode, i.aptName, i.dongName, i.jibun, i.buildYear,
 			   d.dealAmount, d.dealYear, d.dealMonth, d.dealDay, d.area, d.aptCode,
@@ -28,6 +29,20 @@
 		from houseinfo i join housedeal d on i.aptCode = d.aptCode
 		limit 100		
 	</select>
-
+	
+	<select id="getConditionedApt" resultType="AptDto" parameterType="com.ssafy.happyhouse.model.search.AptSearch">
+		select d.no, d.aptCode, i.aptName, i.dongName, d.dealAmount, d.floor, i.lat, i.lng
+		from houseinfo i join housedeal d on i.aptCode = d.aptCode
+		where 1=1
+		<if test="@com.ssafy.happyhouse.handler.CommonUtilHandler@empty(keyword) == false">
+			and i.aptName like '%${keyword}%'</if>
+		<if test="@com.ssafy.happyhouse.handler.CommonUtilHandler@empty(dongCode) == false">
+			and i.dongCode = #{dongCode}
+		</if>
+		<if test="@com.ssafy.happyhouse.handler.CommonUtilHandler@empty(guCode) == false
+					and @com.ssafy.happyhouse.handler.CommonUtilHandler@empty(dongCode) == true">
+			and i.dongCode like CONCAT(SUBSTR(#{guCode}, 1, 5), '_____')
+		</if>
+	</select>
 
 </mapper>
