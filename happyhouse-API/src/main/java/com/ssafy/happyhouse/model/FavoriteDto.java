@@ -9,6 +9,7 @@ public class FavoriteDto {
 	private String lng;
 	
 	
+	
 
 
 	public String getAptName() {
