@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.mapper.ScoreMapper">
+	<select id="checkScored" parameterType="ScoreDto" resultType="_int">
+		select IFNULL(score, 0)
+		from apt_score
+		where memberId = #{memberId} and aptCode = #{aptCode}
+	</select>
+	
+	<select id="showScores" parameterType="String" resultType="ScoreDto">
+		select memberId, aptCode, aptName, score
+		from apt_score
+		where memberId = #{memberId}
+	</select>
+	
+	<select id="getBestScored" resultType="AptScore">
+		select AVG(score) as average, aptName, aptCode 
+		from apt_score
+		group by aptCode
+		order by average DESC, aptName
+		limit 10
+	</select>
+	
+	<select id="getAptScore" resultType="AptScore" parameterType="String">
+		select AVG(score) as average, aptName, aptCode 
+		from apt_score
+		where aptCode = #{aptCode}
+	</select>
+	
+	<insert id="addScore" parameterType="ScoreDto">
+		insert into apt_score(memberId, aptCode, aptName, score)
+		values (#{memberId}, ${aptCode}, #{aptName}, ${score})
+	</insert>
+	
+	<update id="updateScore" parameterType="ScoreDto">
+		update apt_score
+		set score = ${score}
+		where memberId = #{memberId} and aptCode = #{aptCode}
+	</update>
+	
+	<delete id="deleteScore" parameterType="ScoreDto">
+		delete from apt_score
+		where memberId = #{memberId} and aptCode = #{aptCode}
+	</delete>
+</mapper>

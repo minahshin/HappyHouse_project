@@ -21,3 +21,14 @@ new Vue({
   store,
   render: (h) => h(App),
 }).$mount("#app");
+
+export const eventBus = new Vue({
+  methods: {
+    getStores(data) {
+      this.$emit("getStores", data);
+    },
+    isAptDefined(data) {
+      this.$emit("isAptDefined", data);
+    },
+  },
+});

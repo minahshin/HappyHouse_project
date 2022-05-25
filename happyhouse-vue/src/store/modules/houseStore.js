@@ -1,4 +1,4 @@
-import { guList, dongList, houseList } from "@/api/house.js";
+import { guList, dongList, houseList, scoreStatus } from "@/api/house.js";
 
 const houseStore = {
   namespaced: true,
@@ -7,6 +7,7 @@ const houseStore = {
     dongs: [{ value: null, text: "검색할 구를 먼저 선택하세요" }],
     houses: [],
     house: null,
+    scoreInfo: { score: 0.0, userScore: 0 },
   },
 
   getters: {},
@@ -31,8 +32,10 @@ const houseStore = {
     SET_HOUSE_LIST: (state, houses) => {
       state.houses = houses;
     },
-    SET_DETAIL_HOUSE: (state, house) => {
-      state.house = house;
+    SET_DETAIL_HOUSE: (state, params) => {
+      state.house = params.house;
+      state.scoreInfo.score = params.score;
+      state.scoreInfo.userScore = params.userScore;
     },
   },
 
@@ -70,7 +73,6 @@ const houseStore = {
       houseList(
         params,
         (response) => {
-          console.log(commit);
           commit("SET_HOUSE_LIST", response.data);
         },
         (error) => {
@@ -78,8 +80,25 @@ const houseStore = {
         },
       );
     },
-    detailHouse: ({ commit }, house) => {
-      commit("SET_DETAIL_HOUSE", house);
+    detailHouse: ({ commit }, { house, userInfo }) => {
+      let id = "";
+      if (userInfo) {
+        id = userInfo.memberId;
+      }
+      console.log(id);
+      scoreStatus(
+        { aptCode: house.aptCode, memberId: id },
+        (response) => {
+          commit("SET_DETAIL_HOUSE", {
+            house: house,
+            score: response.data.aptScore,
+            userScore: response.data.userScore,
+          });
+        },
+        (error) => {
+          console.log(error);
+        },
+      );
     },
   },
 };

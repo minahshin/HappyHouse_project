@@ -50,6 +50,9 @@
             </b-row>
           </b-container>
           <hr class="my-4" />
+          <b-button variant="success" class="mr-1" @click="moveScore">
+            평가한 별점 보기
+          </b-button>
           <b-button
             variant="primary"
             href="#"
@@ -96,6 +99,9 @@ export default {
         sessionStorage.removeItem("access-token");
         this.$router.push({ name: "home" });
       }
+    },
+    moveScore() {
+      this.$router.push({ name: "userScore" });
     },
   },
 };

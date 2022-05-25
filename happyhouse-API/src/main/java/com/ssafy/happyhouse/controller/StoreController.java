@@ -26,22 +26,22 @@ public class StoreController {
 	
 	@GetMapping("/shop/around")
 	public ResponseEntity<?> getShopList(@ModelAttribute StoreSearch search) throws Exception {
+		logger.debug(search.toString());
 		
-		if(search.getCategories() == null || search.getCategories().size() == 0)
-			search.setCategories();
+		search.setCategories();
 			
 		search.setDistance(search.getDistance() / 1000);
+		
+		logger.debug(search.toString());
 		
 		return new ResponseEntity<List<StoreDtoDistance>>(store.getAroundShop(search), HttpStatus.OK);
 	}
 	
 	@GetMapping("/shop/address")
 	public ResponseEntity<?> getShopByAddr(@ModelAttribute StoreAddrSearch search) throws Exception{
+		search.setCategories();
 		
 		logger.debug(search.toString());
-		
-		if(search.getCategories() == null || search.getCategories().size() == 0)
-			search.setCategories();
 		
 		return new ResponseEntity<List<StoreDtoDistance>>(store.getShopByAddress(search), HttpStatus.OK);
 	}

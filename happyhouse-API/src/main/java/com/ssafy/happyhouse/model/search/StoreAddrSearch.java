@@ -15,10 +15,6 @@ public class StoreAddrSearch {
 		this.keyword = keyword;
 		this.categoryStr = categoryStr;
 		this.isKidsSafe = isKidsSafe;
-		
-		if(categories != null) {
-			this.categories = Arrays.asList(categoryStr.split(","));
-		}
 	}
 	public String getDongCode() {
 		return dongCode;
@@ -41,7 +37,10 @@ public class StoreAddrSearch {
 	}
 	
 	public void setCategories() {
-		this.categories = Arrays.asList(new String[] { "음식", "소매", "생활서비스", "부동산", "스포츠", "숙박", "학문/교육", "관광/여가/오락" });
+		if(categoryStr == null || categoryStr.trim().length() == 0)
+			categories = Arrays.asList(new String[] { "음식", "소매", "생활서비스", "부동산", "스포츠", "숙박", "학문/교육", "관광/여가/오락" });
+		else
+			categories = Arrays.asList(categoryStr.split(","));
 	}
 	
 	@Override

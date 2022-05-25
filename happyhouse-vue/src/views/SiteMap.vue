@@ -43,6 +43,11 @@
         >
       </div>
       <div>
+        <router-link :to="{ name: 'userScore' }" class="link">
+          별점 관리</router-link
+        >
+      </div>
+      <div>
         <router-link :to="{ name: 'mypage' }" class="link">
           내정보보기</router-link
         >

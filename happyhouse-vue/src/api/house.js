@@ -14,4 +14,8 @@ function houseList(params, success, fail) {
   api.get(`/house/search`, { params: params }).then(success).catch(fail);
 }
 
-export { guList, dongList, houseList };
+function scoreStatus(params, success, fail) {
+  api.get(`/score`, { params: params }).then(success).catch(fail);
+}
+
+export { guList, dongList, houseList, scoreStatus };

@@ -121,6 +121,12 @@ const routes = [
         beforeEnter: onlyAuthUser,
         component: () => import("@/components/user/MemberUpdate.vue"),
       },
+      {
+        path: "score",
+        name: "userScore",
+        beforeEnter: onlyAuthUser,
+        component: () => import("@/components/user/ScoreList.vue"),
+      },
     ],
   },
   {
