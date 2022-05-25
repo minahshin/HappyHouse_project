@@ -1,10 +1,12 @@
 package com.ssafy.happyhouse.model.service;
 
+import java.util.List;
+
 import com.ssafy.happyhouse.model.MemberDto;
 
 public interface UserService {
 	
-	
+	List<MemberDto> viewMemberList() throws Exception;
 	MemberDto searchPw(MemberDto memberDto) throws Exception;
 	int idCheck(String memberId) throws Exception;
 	void registerMember(MemberDto memberDto) throws Exception;
