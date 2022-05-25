@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,6 +47,11 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@GetMapping
+	public ResponseEntity<?> viewMemberList() throws Exception{	
+		return new ResponseEntity<List<MemberDto>>(userService.viewMemberList(), HttpStatus.OK);	
+	}
 	
 	@GetMapping("/{userid}")
 	public ResponseEntity<?> showinfo(@PathVariable String userid, HttpSession session) throws Exception{

@@ -1,5 +1,7 @@
 package com.ssafy.happyhouse.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -51,6 +53,12 @@ public class UserServiceDao implements UserService{
 	public MemberDto showInfo(String memberId) throws Exception {
 		
 		return userMapper.showInfo(memberId);
+	}
+
+	@Override
+	public List<MemberDto> viewMemberList() throws Exception {
+		
+		return userMapper.viewMemberList();
 	}
 
 }
