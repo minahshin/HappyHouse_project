@@ -79,7 +79,6 @@ export default {
 #map {
   width: 500px;
   height: 500px;
-  margin: 0px;
 }
 
 .button-group {
