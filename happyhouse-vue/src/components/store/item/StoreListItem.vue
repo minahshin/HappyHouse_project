@@ -38,11 +38,7 @@ export default {
     moveLink() {
       let jibunArray = this.jibunAddress.split(" ");
       let nameLink =
-        "https://map.naver.com/v5/search/" +
-        this.name +
-        " " +
-        jibunArray[2] +
-        "?c=";
+        "https://map.naver.com/v5/search/" + this.name + " " + jibunArray[2];
       window.open(nameLink, "_blank");
     },
   },
