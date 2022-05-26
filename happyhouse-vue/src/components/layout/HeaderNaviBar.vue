@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar id="nav" toggleable="lg" type="dark" fixed="top">
+    <b-navbar id="nav" toggleable="lg" type="light" fixed="top">
       <b-navbar-brand href="#">
         <router-link to="/">
           <b-icon icon="house" font-scale="3"></b-icon>
@@ -51,7 +51,7 @@
         <b-navbar-nav class="ml-auto" v-if="userInfo">
           <b-nav-item class="align-self-center"
             ><b-avatar
-              variant="primary"
+              variant="info"
               v-text="userInfo ? userInfo.memberId.charAt(0).toUpperCase() : ''"
             ></b-avatar>
             {{ userInfo.memberId }}님 환영합니다.</b-nav-item
@@ -151,6 +151,6 @@ export default {
 }
 
 #nav {
-  background-color: rgba(204, 204, 255, 0.9);
+  background-color: rgba(204, 229, 255, 0.9);
 }
 </style>
