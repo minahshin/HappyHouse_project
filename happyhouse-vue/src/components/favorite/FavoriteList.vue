@@ -23,7 +23,7 @@
           align="center"
         ></b-pagination>
       </b-col>
-      <b-col cols="6"> <favorite-map /></b-col>
+      <b-col cols="6"> <favorite-map :favorites="favorites" /></b-col>
     </b-row>
   </b-container>
   <b-container v-else class="bv-example-row mt-3">

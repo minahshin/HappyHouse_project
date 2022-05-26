@@ -68,15 +68,6 @@ export default {
         content: this.house.aptName, // 인포윈도우 내부에 들어갈 컨텐츠 입니다.
       });
       mLabel.open(map, mMarker); // 지도에 올리면서, 두번째 인자로 들어간 마커 위에 올라가도록 설정합니다.
-
-      var rvContainer = document.getElementById("roadview"); // 로드뷰를 표시할 div
-      var rv = new kakao.maps.Roadview(rvContainer); // 로드뷰 객체 생성
-      var rc = new kakao.maps.RoadviewClient(); // 좌표를 통한 로드뷰의 panoid를 추출하기 위한 로드뷰 help객체 생성
-      var rvResetValue = {}; //로드뷰의 초기화 값을 저장할 변수
-      rc.getNearestPanoId(mapCenter, 50, function (panoId) {
-        rv.setPanoId(panoId, mapCenter); //좌표에 근접한 panoId를 통해 로드뷰를 실행합니다.
-        rvResetValue.panoId = panoId;
-      });
     },
   },
 };
