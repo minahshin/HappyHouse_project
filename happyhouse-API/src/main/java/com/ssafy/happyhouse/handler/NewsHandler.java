@@ -22,7 +22,8 @@ public class NewsHandler {
 		
 		for(int i=0;i<res.getItems().size();i++) {
 			res.getItems().get(i).setTitle(res.getItems().get(i).getTitle()
-											.replace("<b>", " ").replace("</b>", "").replace("&quot;", "\"").replace("&lt;", "<").replace("&gt;", ">"));
+											.replace("<b>", " ").replace("</b>", "").replace("&quot;", "\"")
+											.replace("&lt;", "<").replace("&gt;", ">").replace("&amp;", "&"));
 		}
 		
 		return res.getItems();
