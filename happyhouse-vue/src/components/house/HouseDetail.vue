@@ -132,19 +132,24 @@ export default {
       });
     },
     registFavorite() {
-      http
-        .post(`/favorite/regist`, {
-          aptCode: this.house.aptCode,
-          memberId: this.userInfo.memberId,
-        })
-        .then(({ data }) => {
-          let msg = "이미 등록된 매물입니다.";
-          if (data === "success") {
-            msg = "등록이 완료되었습니다.";
-          }
-          alert(msg);
-        });
-      this.isFavCheck = true;
+      if (this.userInfo) {
+        http
+          .post(`/favorite/regist`, {
+            aptCode: this.house.aptCode,
+            memberId: this.userInfo.memberId,
+          })
+          .then(({ data }) => {
+            let msg = "이미 등록된 매물입니다.";
+            if (data === "success") {
+              msg = "등록이 완료되었습니다.";
+            }
+            alert(msg);
+          });
+        this.isFavCheck = true;
+      } else {
+        alert("로그인 후 이용해주세요.");
+        this.$router.replace({ name: "login" });
+      }
     },
     deleteFavorite() {
       http

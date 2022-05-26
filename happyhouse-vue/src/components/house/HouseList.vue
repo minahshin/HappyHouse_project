@@ -26,7 +26,7 @@
 
 <script>
 import HouseListItem from "@/components/house/HouseListItem.vue";
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 const houseStore = "houseStore";
 
@@ -50,6 +50,7 @@ export default {
   },
   created() {
     this.setPage();
+    this.CLEAR_HOUSE();
   },
   watch: {
     currentPage() {
@@ -60,6 +61,7 @@ export default {
     },
   },
   methods: {
+    ...mapMutations(houseStore, ["CLEAR_HOUSE"]),
     setPage() {
       const { currentPage, perPage } = this;
       const start = (currentPage - 1) * perPage;
