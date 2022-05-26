@@ -20,7 +20,7 @@
         <br />
       </b-col>
 
-      <b-col cols="6"> </b-col>
+      <real-estate-news-list-view></real-estate-news-list-view>
     </b-row>
   </b-container>
 </template>
@@ -28,6 +28,7 @@
 import HouseSearchBar from "@/components/house/HouseSearchBar.vue";
 import HouseList from "@/components/house/HouseList.vue";
 import HouseDetail from "@/components/house/HouseDetail.vue";
+import RealEstateNewsListView from "@/components/house/RealEstateNewsListView.vue";
 
 export default {
   name: "HouseView",
@@ -35,6 +36,7 @@ export default {
     HouseSearchBar,
     HouseList,
     HouseDetail,
+    RealEstateNewsListView,
   },
 };
 </script>

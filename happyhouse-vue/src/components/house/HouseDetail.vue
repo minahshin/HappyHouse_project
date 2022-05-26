@@ -87,6 +87,7 @@
 import { mapState, mapMutations } from "vuex";
 import http from "@/api/http";
 import KakaoMap from "@/components/KakaoMap.vue";
+// import { eventBus } from "@/main";
 
 const houseStore = "houseStore";
 const memberStore = "memberStore";
@@ -106,6 +107,11 @@ export default {
       return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
   },
+  // watch: {
+  //   house() {
+  //     eventBus.getNewsKeyword(this.house.dongName);
+  //   },
+  // },
   methods: {
     ...mapMutations(memberStore, ["SET_USER_INFO"]),
     searchMarket() {

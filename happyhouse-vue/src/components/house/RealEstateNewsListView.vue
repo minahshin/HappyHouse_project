@@ -27,6 +27,7 @@
 <script>
 import http from "@/api/http";
 import RealEstateNewsListItemView from "./item/RealEstateNewsListItemView.vue";
+import { eventBus } from "@/main";
 
 export default {
   components: { RealEstateNewsListItemView },
@@ -36,13 +37,20 @@ export default {
       currentPage: 1,
       perPage: 5,
       pageItems: [],
+      newKeyword: "",
     };
   },
   props: {
     keywords: String,
   },
   created() {
-    http.get(`/news?keywords=${this.keywords}`).then(({ data }) => {
+    this.newKeyword = this.keywords;
+    if (!this.keywords) {
+      eventBus.$on("getNewsKeyword", (data) => {
+        this.newKeyword = data;
+      });
+    }
+    http.get(`/news?keywords=${this.newKeyword}`).then(({ data }) => {
       this.newses = data;
       this.setPage();
     });
@@ -55,6 +63,15 @@ export default {
   watch: {
     currentPage() {
       this.setPage();
+    },
+    news() {
+      this.setPage();
+    },
+    newKeyword() {
+      http.get(`/news?keywords=${this.newKeyword}`).then(({ data }) => {
+        this.newses = data;
+        this.setPage();
+      });
     },
   },
   methods: {

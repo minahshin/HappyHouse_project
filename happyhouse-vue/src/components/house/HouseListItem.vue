@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import { eventBus } from "@/main";
 import { mapActions, mapState, mapMutations } from "vuex";
 
 const memberStore = "memberStore";
@@ -42,6 +43,7 @@ export default {
     ...mapActions(houseStore, ["detailHouse"]),
     ...mapMutations(memberStore, ["SET_USER_INFO"]),
     selectHouse() {
+      eventBus.getNewsKeyword(this.house.dongName);
       this.detailHouse({ house: this.house, userInfo: this.userInfo });
     },
     colorChange(flag) {

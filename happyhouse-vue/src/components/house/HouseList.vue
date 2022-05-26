@@ -5,8 +5,8 @@
     id="house-list"
   >
     <house-list-item
-      v-for="(house, index) in pageItems"
-      :key="index"
+      v-for="house in pageItems"
+      :key="house.no"
       :house="house"
     />
     <b-pagination
