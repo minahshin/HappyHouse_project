@@ -145,6 +145,10 @@ export default {
   },
   created() {
     if (this.aptName !== "undefined") this.aptNameDefined = true;
+    else {
+      this.CLEAR_GU_LIST();
+      this.getGu();
+    }
   },
   methods: {
     ...mapActions(houseStore, ["getGu", "getDong", "getHouseList"]),
