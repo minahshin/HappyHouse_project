@@ -8,20 +8,13 @@ public class FavoriteDto {
 	private String lat;
 	private String lng;
 	
-	
-	
-
-
 	public String getAptName() {
 		return aptName;
 	}
 
-
-
 	public void setAptName(String aptName) {
 		this.aptName = aptName;
 	}
-
 
 	public String getMemberId() {
 		return memberId;
@@ -37,25 +30,13 @@ public class FavoriteDto {
 		return aptCode;
 	}
 
-
-
-
-
 	public void setAptCode(int aptCode) {
 		this.aptCode = aptCode;
 	}
-
-
-
-
 
 	@Override
 	public String toString() {
 		return "FavoriteDto [memberId=" + memberId + ", aptCode=" + aptCode + "]";
 	}
-	
-	
-	
-	
 
 }

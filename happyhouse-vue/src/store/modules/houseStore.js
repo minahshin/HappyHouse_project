@@ -1,4 +1,5 @@
 import { guList, dongList, houseList, scoreStatus } from "@/api/house.js";
+import http from "@/api/http";
 
 const houseStore = {
   namespaced: true,
@@ -8,6 +9,7 @@ const houseStore = {
     houses: [],
     house: null,
     scoreInfo: { score: 0.0, userScore: 0 },
+    isFavCheck: false,
   },
 
   getters: {},
@@ -36,6 +38,7 @@ const houseStore = {
       state.house = params.house;
       state.scoreInfo.score = params.score;
       state.scoreInfo.userScore = params.userScore;
+      state.isFavCheck = params.isFavCheck;
     },
   },
 
@@ -86,19 +89,32 @@ const houseStore = {
         id = userInfo.memberId;
       }
       console.log(id);
-      scoreStatus(
-        { aptCode: house.aptCode, memberId: id },
-        (response) => {
-          commit("SET_DETAIL_HOUSE", {
-            house: house,
-            score: response.data.aptScore,
-            userScore: response.data.userScore,
-          });
-        },
-        (error) => {
-          console.log(error);
-        },
-      );
+
+      let fav = false;
+      http
+        .get(
+          `/favorite/check?memberId=${userInfo.memberId}&aptCode=${house.aptCode}`,
+        )
+        .then(({ data }) => {
+          fav = data;
+          scoreStatus(
+            { aptCode: house.aptCode, memberId: id },
+            (response) => {
+              console.log(house);
+              console.log(response.data);
+              console.log(fav);
+              commit("SET_DETAIL_HOUSE", {
+                house: house,
+                score: response.data.aptScore,
+                userScore: response.data.userScore,
+                isFavCheck: fav,
+              });
+            },
+            (error) => {
+              console.log(error);
+            },
+          );
+        });
     },
   },
 };

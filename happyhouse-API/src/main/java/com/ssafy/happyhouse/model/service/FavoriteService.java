@@ -12,6 +12,7 @@ import com.ssafy.happyhouse.model.FavoriteDto;
 public interface FavoriteService {
 	FavoriteDto viewFavorite(String aptName) throws Exception;
 	List<FavoriteDto> showFavoriteList(String memberId) throws Exception;
+	int checkFavorite(String memberId, String aptCode) throws Exception;
 	void registerFavorite(FavoriteDto favoriteDto) throws Exception;
 	void deleteFavorite(String memberId,String aptCode) throws Exception;
 }

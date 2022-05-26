@@ -45,6 +45,7 @@ export default {
   },
   created() {
     this.newKeyword = this.keywords;
+    console.log("keyword : " + this.keywords);
     if (!this.keywords) {
       eventBus.$on("getNewsKeyword", (data) => {
         this.newKeyword = data;
@@ -68,6 +69,7 @@ export default {
       this.setPage();
     },
     newKeyword() {
+      console.log(this.newKeyword);
       http.get(`/news?keywords=${this.newKeyword}`).then(({ data }) => {
         this.newses = data;
         this.setPage();
