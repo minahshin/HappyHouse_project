@@ -40,6 +40,9 @@ const houseStore = {
       state.scoreInfo.userScore = params.userScore;
       state.isFavCheck = params.isFavCheck;
     },
+    CLEAR_HOUSE: (state) => {
+      state.house = null;
+    },
   },
 
   actions: {
