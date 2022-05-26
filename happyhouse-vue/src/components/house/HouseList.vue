@@ -42,17 +42,20 @@ export default {
       pageItems: [],
     };
   },
-  created() {
-    this.setPage();
-  },
   computed: {
     ...mapState(houseStore, ["houses"]),
     rows() {
       return this.houses.length;
     },
   },
+  created() {
+    this.setPage();
+  },
   watch: {
     currentPage() {
+      this.setPage();
+    },
+    houses() {
       this.setPage();
     },
   },

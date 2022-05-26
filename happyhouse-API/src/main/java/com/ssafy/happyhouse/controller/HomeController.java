@@ -59,7 +59,9 @@ public class HomeController {
 	
 	@GetMapping("/news")
 	public ResponseEntity<?> getNews(String keywords) throws JsonMappingException, JsonProcessingException {
-		List<Items> result = new NewsHandler().getNewsItems(keywords + "부동산");
+		logger.debug("[keyword] " + keywords);
+		
+		List<Items> result = new NewsHandler().getNewsItems(keywords.replace("undefined", "") + "부동산");
 		
 		logger.debug(result.toString());
 		

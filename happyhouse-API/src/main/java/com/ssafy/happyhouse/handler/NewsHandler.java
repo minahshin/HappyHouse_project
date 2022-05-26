@@ -21,7 +21,8 @@ public class NewsHandler {
 		NewsObject res = objectMapper.readValue(response, NewsObject.class);
 		
 		for(int i=0;i<res.getItems().size();i++) {
-			res.getItems().get(i).setTitle(res.getItems().get(i).getTitle().replace("<b>", " ").replace("</b>", "").replace("&quot;", "\""));
+			res.getItems().get(i).setTitle(res.getItems().get(i).getTitle()
+											.replace("<b>", " ").replace("</b>", "").replace("&quot;", "\"").replace("&lt;", "<").replace("&gt;", ">"));
 		}
 		
 		return res.getItems();
