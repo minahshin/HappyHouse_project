@@ -117,9 +117,9 @@
     <b-row>
       <b-col>
         <b-jumbotron
-          bg-variant="muted"
+          bg-variant="light"
           text-variant="dark"
-          border-variant="dark"
+          border-variant="secondary"
         >
           <template #header>공지사항</template>
           <notice-list-view :pag="home" />

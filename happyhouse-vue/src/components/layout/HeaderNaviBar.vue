@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar id="nav" toggleable="lg" variant="dark" type="dark" fixed="top">
+    <b-navbar id="nav" toggleable="lg" type="dark" fixed="top">
       <b-navbar-brand href="#">
         <router-link to="/">
           <b-icon icon="house" font-scale="3"></b-icon>
@@ -148,5 +148,9 @@ export default {
 <style>
 #box2-1 {
   padding: 50px;
+}
+
+#nav {
+  background-color: rgba(204, 204, 255, 0.9);
 }
 </style>
