@@ -23,7 +23,7 @@
           align="center"
         ></b-pagination>
       </b-col>
-      <b-col cols="6"> <kakao-map /></b-col>
+      <b-col cols="6"> <favorite-map /></b-col>
     </b-row>
   </b-container>
   <b-container v-else class="bv-example-row mt-3">
@@ -36,7 +36,7 @@
 <script>
 import http from "@/api/http";
 import FavoriteListItem from "@/components/favorite/FavoriteListItem";
-import KakaoMap from "@/components/KakaoMap";
+import FavoriteMap from "@/components/favorite/FavoriteMap";
 import { mapState, mapMutations } from "vuex";
 
 const memberStore = "memberStore";
@@ -45,7 +45,7 @@ export default {
   name: "FavoriteList",
   components: {
     FavoriteListItem,
-    KakaoMap,
+    FavoriteMap,
   },
 
   data() {
