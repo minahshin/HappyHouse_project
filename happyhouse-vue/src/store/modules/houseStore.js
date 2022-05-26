@@ -91,10 +91,9 @@ const houseStore = {
       console.log(id);
 
       let fav = false;
+      let user = userInfo ? userInfo.memberId : "";
       http
-        .get(
-          `/favorite/check?memberId=${userInfo.memberId}&aptCode=${house.aptCode}`,
-        )
+        .get(`/favorite/check?memberId=${user}&aptCode=${house.aptCode}`)
         .then(({ data }) => {
           fav = data;
           scoreStatus(
