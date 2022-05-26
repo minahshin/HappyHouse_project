@@ -75,7 +75,20 @@
     </b-row>
     <b-row>
       <b-col>
-        <b-button block @click="registFavorite" variant="warning" class="m-1"
+        <b-button
+          block
+          v-if="isFavCheck"
+          @click="deleteFavorite"
+          variant="danger"
+          class="m-1"
+          >즐겨찾기 삭제
+        </b-button>
+        <b-button
+          block
+          v-else
+          @click="registFavorite"
+          variant="warning"
+          class="m-1"
           >즐겨찾기 추가
         </b-button>
       </b-col>
@@ -87,7 +100,6 @@
 import { mapState, mapMutations } from "vuex";
 import http from "@/api/http";
 import KakaoMap from "@/components/KakaoMap.vue";
-// import { eventBus } from "@/main";
 
 const houseStore = "houseStore";
 const memberStore = "memberStore";
@@ -98,7 +110,7 @@ export default {
     KakaoMap,
   },
   computed: {
-    ...mapState(houseStore, ["house", "scoreInfo"]),
+    ...mapState(houseStore, ["house", "scoreInfo", "isFavCheck"]),
     ...mapState(memberStore, ["userInfo"]),
   },
   filters: {
@@ -131,8 +143,22 @@ export default {
             msg = "등록이 완료되었습니다.";
           }
           alert(msg);
-          this.$router.go({ name: "house" });
         });
+      this.isFavCheck = true;
+    },
+    deleteFavorite() {
+      http
+        .delete(
+          `/favorite/delete?memberId=${this.userInfo.memberId}&aptCode=${this.house.aptCode}`,
+        )
+        .then(({ data }) => {
+          let msg = "즐겨찾기에 등록되어있지 않은 매물입니다.";
+          if (data === "success") {
+            msg = "삭제가 완료되었습니다.";
+          }
+          alert(msg);
+        });
+      this.isFavCheck = false;
     },
     updateScore() {
       if (this.userInfo) {
