@@ -6,9 +6,15 @@
     <hr />
 
     <b-row>
-      <b-col>
-        <img src="@/assets/류피.png" />
-      </b-col>
+      <b-row>
+        <div class="box" style="background: #bdbdbd">
+          <img class="profile" src="@/assets/민아님.png" />
+        </div>
+        <div class="box" style="background: #bdbdbd">
+          <img class="profile" src="@/assets/양소정.jpg" />
+        </div>
+      </b-row>
+
       <b-col align-self="stretch">
         <h5>Happy House는 좋은 집을 소개해드립니다.</h5>
         <hr />
@@ -18,7 +24,7 @@
         <br />많은 이용 부탁드립니다. <br /><br /><br />
         <h5>Happy House 정보</h5>
         <hr />
-        대표 : 루싸피 <br />
+        공동대표 : 신민아,양소정 <br />
         위치 : 서울특별시 동대문구 싸피동 123-1 <br />
         Tel : 02-1234-5678<br />
         Email : ssafy@happyhouse.com
@@ -43,5 +49,16 @@ export default {
     rgba(231, 27, 139, 0.3) 30%
   );
   font-size: 40px;
+}
+.box {
+  width: 180px;
+  height: 180px;
+  border-radius: 70%;
+  overflow: hidden;
+}
+.profile {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 </style>
