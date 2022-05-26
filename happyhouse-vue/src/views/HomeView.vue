@@ -21,70 +21,84 @@
         @sliding-start="onSlideStart"
         @sliding-end="onSlideEnd"
       >
-        <b-carousel-slide>
+        <b-carousel-slide caption="아파트 시세 확인">
           <template #img>
-            <img
-              class="d-block img-fluid w-100"
-              src="@/assets/집5.jpg"
-              alt="image slot"
-            />
+            <router-link to="house">
+              <img
+                class="d-block img-fluid w-100"
+                src="@/assets/집5.jpg"
+                alt="image slot"
+            /></router-link>
           </template>
         </b-carousel-slide>
 
-        <b-carousel-slide>
+        <b-carousel-slide caption="주변 상권 검색">
           <template #img>
-            <img
-              class="d-block img-fluid w-100"
-              src="@/assets/집1.jpg"
-              alt="image slot"
-            />
+            <router-link to="store">
+              <img
+                class="d-block img-fluid w-100"
+                src="@/assets/집1.jpg"
+                alt="image slot"
+            /></router-link>
           </template>
         </b-carousel-slide>
-        <b-carousel-slide>
+        <b-carousel-slide caption="공지사항">
           <template #img>
-            <img
-              class="d-block img-fluid w-100"
-              src="@/assets/7.jpg"
-              alt="image slot"
-            />
+            <router-link to="notice/list">
+              <img
+                class="d-block img-fluid w-100"
+                src="@/assets/7.jpg"
+                alt="image slot"
+            /></router-link>
           </template>
         </b-carousel-slide>
-        <b-carousel-slide>
+        <b-carousel-slide caption="Q & A">
           <template #img>
-            <img
-              class="d-block img-fluid w-100"
-              src="@/assets/2.jpg"
-              alt="image slot"
-            />
+            <router-link to="qna/list">
+              <img
+                class="d-block img-fluid w-100"
+                src="@/assets/2.jpg"
+                alt="image slot"
+            /></router-link>
           </template>
         </b-carousel-slide>
-        <b-carousel-slide>
+        <b-carousel-slide caption="회사 소개">
           <template #img>
-            <img
-              class="d-block img-fluid w-100"
-              src="@/assets/집.jpg"
-              alt="image slot"
-            />
+            <router-link to="aboutUs">
+              <img
+                class="d-block img-fluid w-100"
+                src="@/assets/집.jpg"
+                alt="image slot"
+            /></router-link>
           </template>
         </b-carousel-slide>
-        <b-carousel-slide>
+        <b-carousel-slide caption="사이트 맵">
           <template #img>
-            <img
-              class="d-block img-fluid w-100"
-              src="@/assets/5.jpg"
-              alt="image slot"
-            />
+            <router-link to="siteMap">
+              <img
+                class="d-block img-fluid w-100"
+                src="@/assets/5.jpg"
+                alt="image slot"
+            /></router-link>
           </template>
         </b-carousel-slide>
-
-        <!-- Slide with blank fluid image to maintain slide aspect ratio -->
       </b-carousel>
     </div>
     <br />
 
     <b-row>
-      <b-col col="6"></b-col>
-      <b-col col="6">
+      <b-col
+        ><b-jumbotron
+          bg-variant="light"
+          text-variant="dark"
+          border-variant="info"
+        >
+          <div style="font-size: 40px">부동산 NEWS</div>
+          <br /><real-estate-news-list-view
+            :keywords="keywords"
+          ></real-estate-news-list-view> </b-jumbotron
+      ></b-col>
+      <b-col>
         <b-jumbotron
           bg-variant="light"
           text-variant="dark"
@@ -108,7 +122,7 @@
           border-variant="dark"
         >
           <template #header>공지사항</template>
-          <notice-list-view />
+          <notice-list-view :pag="home" />
         </b-jumbotron>
       </b-col>
     </b-row>
@@ -118,20 +132,36 @@
 <script>
 import NoticeListView from "@/components/notice/NoticeListView.vue";
 import BestHouseListView from "@/components/house/BestHouseListView.vue";
+import RealEstateNewsListView from "@/components/house/RealEstateNewsListView.vue";
+import { mapState, mapMutations } from "vuex";
+
+const memberStore = "memberStore";
 
 export default {
   name: "HelloWorld",
-
+  data() {
+    return {
+      keywords: "",
+      home: 5,
+    };
+  },
   props: {
     msg: String,
   },
   components: {
     NoticeListView,
     BestHouseListView,
+    RealEstateNewsListView,
+  },
+  computed: {
+    ...mapState(memberStore, ["userInfo"]),
+  },
+  methods: {
+    ...mapMutations(memberStore, ["SET_USER_INFO"]),
   },
 };
 </script>
-, BestHouseList
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {

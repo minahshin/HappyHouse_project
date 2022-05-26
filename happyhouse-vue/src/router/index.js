@@ -197,6 +197,11 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/:word",
+    name: "notFound",
+    redirect: "/",
+  },
 ];
 
 const router = new VueRouter({

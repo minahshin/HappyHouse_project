@@ -4,9 +4,10 @@
     <b-td>{{ memberName }}</b-td>
     <b-td>{{ memberEmail }}</b-td>
     <b-td>{{ memberTel }}</b-td>
-
-    <b-button variant="outline-danger" size="sm" @click="deleteArticle"
-      >탈퇴</b-button
+    <b-td>
+      <b-button variant="outline-danger" size="sm" @click="deleteArticle"
+        >탈퇴</b-button
+      ></b-td
     >
   </b-tr>
 </template>

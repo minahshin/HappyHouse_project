@@ -41,9 +41,8 @@ export default {
         "https://map.naver.com/v5/search/" +
         this.name +
         " " +
-        jibunArray[1] +
-        " " +
-        jibunArray[2];
+        jibunArray[2] +
+        "?c=";
       window.open(nameLink, "_blank");
     },
   },

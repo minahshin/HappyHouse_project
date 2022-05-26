@@ -7,7 +7,7 @@
     </b-row>
     <b-row>
       <b-col>
-        <b-table-simple hover responsive>
+        <b-table-simple hover responsive id="score-table">
           <b-thead>
             <b-th>아파트</b-th>
             <b-th>내가 준 평점</b-th>
@@ -15,7 +15,7 @@
           </b-thead>
           <tbody>
             <score-list-item
-              v-for="scoreInfo in scores"
+              v-for="scoreInfo in pageItems"
               :key="scoreInfo.aptCode"
               v-bind="scoreInfo"
             />
@@ -23,6 +23,13 @@
         </b-table-simple>
       </b-col>
     </b-row>
+    <b-pagination
+      v-model="currentPage"
+      :total-rows="rows"
+      :per-page="perPage"
+      aria-controls="score-table"
+      align="center"
+    ></b-pagination>
   </b-container>
   <b-container v-else class="bv-example-row mt-3">
     <b-row>
@@ -47,21 +54,39 @@ export default {
   data() {
     return {
       scores: [],
+      currentPage: 1,
+      perPage: 10,
+      pageItems: [],
     };
   },
 
   computed: {
     ...mapState(memberStore, ["userInfo"]),
+    rows() {
+      return this.scores.length;
+    },
+  },
+  watch: {
+    currentPage() {
+      this.setPage();
+    },
   },
   created() {
     http
       .get(`/score/list?memberId=${this.userInfo.memberId}`)
       .then(({ data }) => {
         this.scores = data;
+        this.setPage();
       });
   },
   methods: {
     ...mapMutations(memberStore, ["SET_USER_INFO"]),
+    setPage() {
+      const { currentPage, perPage } = this;
+      const start = (currentPage - 1) * perPage;
+      const end = currentPage * perPage;
+      this.pageItems = this.scores.slice(start, end);
+    },
   },
 };
 </script>
