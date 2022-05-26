@@ -17,7 +17,7 @@
     </b-row>
     <b-row>
       <b-col v-if="articles.length">
-        <b-table-simple hover responsive>
+        <b-table-simple hover responsive id="notice-table">
           <b-thead head-variant="dark">
             <b-tr>
               <b-th>글번호</b-th>
@@ -29,7 +29,7 @@
           </b-thead>
           <tbody>
             <notice-list-item
-              v-for="article in articles"
+              v-for="article in pageItems"
               :key="article.nno"
               v-bind="article"
             />
@@ -37,6 +37,14 @@
         </b-table-simple>
       </b-col>
     </b-row>
+
+    <b-pagination
+      v-model="currentPage"
+      :total-rows="rows"
+      :per-page="perPage"
+      aria-controls="notice-table"
+      align="center"
+    ></b-pagination>
   </b-container>
 </template>
 
@@ -54,24 +62,46 @@ export default {
   },
   computed: {
     ...mapState(memberStore, ["userInfo"]),
+    rows() {
+      return this.articles.length;
+    },
   },
   data() {
     return {
       articles: [],
       isManager: false,
+      currentPage: 1,
+      perPage: 10,
+      pageItems: [],
     };
   },
+  props: {
+    pag: Number,
+  },
   created() {
+    if (this.pag === 5) this.perPage = 5;
     http.get(`/notice`).then(({ data }) => {
       this.articles = data;
+      this.setPage();
       if (this.userInfo != null && this.userInfo.isManager == "Y")
         this.isManager = true;
     });
+  },
+  watch: {
+    currentPage() {
+      this.setPage();
+    },
   },
   methods: {
     ...mapMutations(memberStore, ["SET_USER_INFO"]),
     moveWrite() {
       this.$router.push({ name: "noticeRegist" });
+    },
+    setPage() {
+      const { currentPage, perPage } = this;
+      const start = (currentPage - 1) * perPage;
+      const end = currentPage * perPage;
+      this.pageItems = this.articles.slice(start, end);
     },
   },
 };

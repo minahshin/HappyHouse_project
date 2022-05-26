@@ -2,19 +2,26 @@
   <b-container v-if="favorites.length" class="bv-example-row mt-3">
     <b-row>
       <b-col cols="6">
-        <b-table-simple hover responsive>
+        <b-table-simple hover responsive id="fav-table">
           <b-thead head-variant="dark">
             <b-th>즐겨찾은 아파트 목록</b-th>
             <b-th></b-th>
           </b-thead>
           <tbody>
             <favorite-list-item
-              v-for="favorite in favorites"
+              v-for="favorite in pageItems"
               :key="favorite.aptName"
               v-bind="favorite"
             />
           </tbody>
         </b-table-simple>
+        <b-pagination
+          v-model="currentPage"
+          :total-rows="rows"
+          :per-page="perPage"
+          aria-controls="fav-table"
+          align="center"
+        ></b-pagination>
       </b-col>
       <b-col cols="6"> <kakao-map /></b-col>
     </b-row>
@@ -44,19 +51,37 @@ export default {
   data() {
     return {
       favorites: [],
+      currentPage: 1,
+      perPage: 7,
+      pageItems: [],
     };
   },
 
   computed: {
     ...mapState(memberStore, ["userInfo"]),
+    rows() {
+      return this.favorites.length;
+    },
   },
   created() {
     http.get(`/favorite/list/${this.userInfo.memberId}`).then(({ data }) => {
       this.favorites = data;
+      this.setPage();
     });
+  },
+  watch: {
+    currentPage() {
+      this.setPage();
+    },
   },
   methods: {
     ...mapMutations(memberStore, ["SET_USER_INFO"]),
+    setPage() {
+      const { currentPage, perPage } = this;
+      const start = (currentPage - 1) * perPage;
+      const end = currentPage * perPage;
+      this.pageItems = this.favorites.slice(start, end);
+    },
   },
 };
 </script>

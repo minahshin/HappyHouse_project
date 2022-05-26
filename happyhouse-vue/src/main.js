@@ -30,5 +30,8 @@ export const eventBus = new Vue({
     isAptDefined(data) {
       this.$emit("isAptDefined", data);
     },
+    getNewsKeyword(data) {
+      this.$emit("getNewsKeyword", data);
+    },
   },
 });

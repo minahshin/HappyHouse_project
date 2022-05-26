@@ -8,7 +8,7 @@
       </b-row>
       <b-row>
         <b-col>
-          <b-table-simple hover responsive>
+          <b-table-simple hover responsive id="manager-table">
             <b-thead head-variant="dark">
               <b-tr>
                 <b-th>아이디</b-th>
@@ -20,7 +20,7 @@
             </b-thead>
             <tbody>
               <member-list-item
-                v-for="member in members"
+                v-for="member in pageItems"
                 :key="member.nno"
                 v-bind="member"
               />
@@ -28,6 +28,13 @@
           </b-table-simple>
         </b-col>
       </b-row>
+      <b-pagination
+        v-model="currentPage"
+        :total-rows="rows"
+        :per-page="perPage"
+        aria-controls="manager-table"
+        align="center"
+      ></b-pagination>
     </b-container>
     <b-container v-else class="bv-example-row mt-3">
       <b-row>
@@ -58,18 +65,36 @@ export default {
   data() {
     return {
       members: [],
+      currentPage: 1,
+      perPage: 20,
+      pageItems: [],
     };
   },
   computed: {
     ...mapState(memberStore, ["userInfo"]),
+    rows() {
+      return this.members.length;
+    },
   },
   created() {
     http.get(`/user`).then(({ data }) => {
       this.members = data;
+      this.setPage();
     });
+  },
+  watch: {
+    currentPage() {
+      this.setPage();
+    },
   },
   methods: {
     ...mapMutations(memberStore, ["SET_USER_INFO"]),
+    setPage() {
+      const { currentPage, perPage } = this;
+      const start = (currentPage - 1) * perPage;
+      const end = currentPage * perPage;
+      this.pageItems = this.members.slice(start, end);
+    },
   },
 };
 </script>
