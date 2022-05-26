@@ -92,7 +92,10 @@
           text-variant="dark"
           border-variant="info"
         >
-          <div style="font-size: 40px">부동산 NEWS</div>
+          <div style="font-size: 40px">
+            <b-icon icon="newspaper" font-scale="1"></b-icon> 부동산 NEWS
+            <b-icon icon="newspaper" font-scale="1"></b-icon>
+          </div>
           <br /><real-estate-news-list-view
             :keywords="keywords"
           ></real-estate-news-list-view> </b-jumbotron
