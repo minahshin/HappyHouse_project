@@ -1,12 +1,11 @@
 <template>
-  <b-container class="bv-example-row mt-3 text-center">
-    <h3 class="underline-steelblue">
+  <b-container class="text-center">
+    <h1 class="underline-steelblue">
       <b-icon icon="house"></b-icon> Happy House
-    </h3>
+    </h1>
     <br />
-    <br />
+
     <div style="font-size: 20px">당신의 보금자리를 찾아드립니다!</div>
-    <br />
     <hr />
     <br />
     <div id="slide">
