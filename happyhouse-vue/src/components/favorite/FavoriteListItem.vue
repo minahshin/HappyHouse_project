@@ -26,17 +26,19 @@ export default {
   },
   data() {
     return {
-      memberId: this.usesrInfo.memberId,
-      useraptCode: this.aptCode,
+      memberId: "",
+      useraptCode: "",
       house: [],
     };
   },
-
   props: {
     aptName: String,
-    aptCode: String,
+    aptCode: Number,
   },
-  created() {},
+  created() {
+    this.memberId = this.userInfo.memberId;
+    this.useraptCode = this.aptCode;
+  },
   methods: {
     ...mapMutations(memberStore, ["SET_IS_LOGIN", "SET_USER_INFO"]),
     ...mapActions(houseStore, ["getHouseList"]),

@@ -42,4 +42,9 @@ public class FavoriteServiceDao implements FavoriteService{
 		return favoriteMapper.viewFavorite(aptName);
 	}
 
+	@Override
+	public int checkFavorite(String memberId, String aptCode) throws Exception {
+		return favoriteMapper.checkFavorite(memberId, aptCode);
+	}
+
 }

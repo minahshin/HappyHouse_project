@@ -19,6 +19,12 @@
 		WHERE aptName = #{aptName} 
 	</select>
 	
+	<select id="checkFavorite" parameterType="String" resultType="_int">
+		select count(*)
+		from favorite
+		where memberId = #{memberId} and aptCode = #{aptCode}
+	</select>
+	
 	<insert id="registerFavorite" parameterType="FavoriteDto">
 		insert into favorite(memberId,aptCode)
 		values (#{memberId}, #{aptCode})

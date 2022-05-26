@@ -141,7 +141,7 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      keywords: "",
+      keywords: " ",
       home: 5,
     };
   },

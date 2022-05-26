@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ssafy.happyhouse.model.FavoriteDto;
-import com.ssafy.happyhouse.model.NoticeDto;
 import com.ssafy.happyhouse.model.service.FavoriteService;
 
 @Controller
@@ -38,6 +37,10 @@ public class FavoriteController {
 	
 	@PostMapping("/regist")
 	public ResponseEntity<String> registerFavorite(@RequestBody FavoriteDto favoriteDto) throws Exception {
+		if(favoriteService.checkFavorite(favoriteDto.getMemberId(), String.valueOf(favoriteDto.getAptCode())) == 1) {
+			return new ResponseEntity<String>("fail", HttpStatus.OK);
+		}
+		
 		favoriteService.registerFavorite(favoriteDto);
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
@@ -45,14 +48,21 @@ public class FavoriteController {
 	@DeleteMapping("/delete")
 	public ResponseEntity<String> deleteFavorite( String memberId, String aptCode ) throws Exception {
 		
+		if(favoriteService.checkFavorite(memberId, aptCode) == 0) {
+			return new ResponseEntity<String>("fail", HttpStatus.OK);
+		}
 		
 		favoriteService.deleteFavorite(memberId,aptCode);
 		
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
 	
-	
-
-	
+	@GetMapping("/check")
+	public ResponseEntity<Boolean> checkFavoriteRegistered(String memberId, String aptCode) throws Exception {
+		int checkCount = favoriteService.checkFavorite(memberId, aptCode);
+		
+		// 등록 안되어있을 시 false, 되어있을 시 true
+		return new ResponseEntity<Boolean>(checkCount == 0 ? false : true, HttpStatus.OK);
+	}
 
 }
