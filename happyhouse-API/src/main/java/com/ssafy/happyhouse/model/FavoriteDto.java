@@ -8,30 +8,30 @@ public class FavoriteDto {
 	private String lat;
 	private String lng;
 	
+	public FavoriteDto(String aptName, int aptCode, String lat, String lng) {
+		this.aptName = aptName;
+		this.aptCode = aptCode;
+		this.lat = lat;
+		this.lng = lng;
+	}
+	
 	public String getAptName() {
 		return aptName;
 	}
-
-	public void setAptName(String aptName) {
-		this.aptName = aptName;
-	}
-
 	public String getMemberId() {
 		return memberId;
 	}
-
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-
 
 	public int getAptCode() {
 		return aptCode;
 	}
 
-	public void setAptCode(int aptCode) {
-		this.aptCode = aptCode;
+	public String getLat() {
+		return lat;
+	}
+
+	public String getLng() {
+		return lng;
 	}
 
 	@Override
