@@ -1,2 +1,2 @@
 # happyhouse-vue
-- Happyhouse's Frontend
+- Happyhouse's Frontend via Vue.js
