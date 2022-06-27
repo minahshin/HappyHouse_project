@@ -13,3 +13,5 @@
 2. OS : Deploy on Linux & works on WEB
 3. Deployment : AWS EC2 + RDS + Nginx
 ```
+
+### Previews
